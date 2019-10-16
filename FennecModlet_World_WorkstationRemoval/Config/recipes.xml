@@ -1,0 +1,22 @@
+<configs>
+
+<!-- Add recipes for the workstation removal tool and removal kit -->
+<append xpath="/recipes">
+
+<recipe name="meleeToolWorkstationRemovalToolFM" count="1" craft_area="workbench" tags="learnable">
+	<ingredient name="resourceForgedSteel" count="10" />
+	<ingredient name="resourceForgedIron" count="3" />
+	<ingredient name="resourceWood" count="5" />
+</recipe>
+
+<recipe name="resourceWorkstationRemovalKitFM" count="1" craft_area="workbench" tags="learnable">
+	<ingredient name="resourceForgedSteel" count="3" />
+	<ingredient name="resourceMechanicalParts" count="2" />
+	<ingredient name="resourceOil" count="1" />
+	<ingredient name="resourceAcid" count="1" />
+</recipe>
+
+
+</append>
+
+</configs>

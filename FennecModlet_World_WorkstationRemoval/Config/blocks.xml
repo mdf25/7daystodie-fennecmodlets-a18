@@ -1,0 +1,177 @@
+<configs>
+
+<!-- Containers -->
+<append xpath="/blocks">
+
+<!-- Master container -->
+<block name="cntWorkstationBoxMasterFM">
+	<property name="CreativeMode" value="None" />
+	<property name="CustomIcon" value="cntGarageStorage"/>
+	<property name="Material" value="MCardboardLoot"/>
+	<property name="Path" value="solid"/>
+	<property name="Shape" value="New"/>
+	<property name="Model" value="cube_no_cull"/> <!-- will not hide adjacent faces (if rotated) -->
+	<property name="AllowAllRotations" value="true"/>
+	<property name="Texture" value="276,276,270,270,270,270"/>
+	<property class="RepairItems"> 
+		<property name="resourcePaper" value="10"/> 
+		<property name="resourceWood" value="4"/> 
+	</property>
+	<drop event="Destroy" name="resourcePaper" count="0" />
+	<property name="FilterTags" value="floot"/>
+</block>
+
+
+<!-- Workbench container - pick this up to get a workbench -->
+<block name="cntWorkbenchBoxFM">
+	<property name="Extends" value="cntWorkstationBoxMasterFM" />
+	<property name="CanPickup" value="true" param1="workbench"/>
+	<drop event="Destroy" name="workbench" count="1" />
+</block>
+
+<!-- Forge container - pick this up to get a forge -->
+<block name="cntForgeBoxFM">
+	<property name="Extends" value="cntWorkstationBoxMasterFM" />
+	<property name="CanPickup" value="true" param1="forge"/>
+	<drop event="Destroy" name="forge" count="1" />
+</block>
+
+<!-- Table saw container - pick this up to get a table saw -->
+<block name="cntTableSawBoxFM">
+	<property name="Extends" value="cntWorkstationBoxMasterFM" />
+	<property name="CanPickup" value="true" param1="tableSaw"/>
+	<drop event="Destroy" name="tableSaw" count="1" />
+</block>
+
+<!-- Cement mixer container - pick this up to get a cement mixer -->
+<block name="cntCementMixerBoxFM">
+	<property name="Extends" value="cntWorkstationBoxMasterFM" />
+	<property name="CanPickup" value="true" param1="cementMixer"/>
+	<drop event="Destroy" name="cementMixer" count="1" />
+</block>
+
+<!-- Chemistry station container - pick this up to get a chemistry station -->
+<block name="cntChemistryStationBoxFM">
+	<property name="Extends" value="cntWorkstationBoxMasterFM" />
+	<property name="CanPickup" value="true" param1="chemistryStation"/>
+	<drop event="Destroy" name="chemistryStation" count="1" />
+</block>
+
+</append>
+
+<!-- Make changes to existing workstations to upgrade them into containers -->
+<append xpath="/blocks/block[@name='workbench']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="cntWorkbenchBoxFM"/>
+		<property name="Item" value="resourceWorkstationRemovalKitFM"/>
+		<property name="ItemCount" value="1"/>
+		<property name="UpgradeHitCount" value="5"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='forge']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="cntForgeBoxFM"/>
+		<property name="Item" value="resourceWorkstationRemovalKitFM"/>
+		<property name="ItemCount" value="1"/>
+		<property name="UpgradeHitCount" value="5"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='tableSaw']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="cntTableSawBoxFM"/>
+		<property name="Item" value="resourceWorkstationRemovalKitFM"/>
+		<property name="ItemCount" value="1"/>
+		<property name="UpgradeHitCount" value="5"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='cementMixer']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="cntCementMixerBoxFM"/>
+		<property name="Item" value="resourceWorkstationRemovalKitFM"/>
+		<property name="ItemCount" value="1"/>
+		<property name="UpgradeHitCount" value="5"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='chemistryStation']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="cntChemistryStationBoxFM"/>
+		<property name="Item" value="resourceWorkstationRemovalKitFM"/>
+		<property name="ItemCount" value="1"/>
+		<property name="UpgradeHitCount" value="5"/>
+	</property>
+</append>
+
+
+<!-- Adds salvaged parts as drops to destroyed workstations of the associated type -->
+<insertAfter xpath="/blocks/block[@name='cntCollapsedWorkbench']/drop[last()]">
+	<drop event="Harvest"	name="resourceWorkbenchPartsFM"	count="3" tag="salvageHarvest" />
+</insertAfter>
+
+<insertAfter xpath="/blocks/block[@name='cntCollapsedForge']/drop[last()]">
+	<drop event="Harvest"	name="resourceForgePartsFM"	count="3" tag="salvageHarvest" />
+</insertAfter>
+
+<insertAfter xpath="/blocks/block[@name='cntCollapsedCementMixer']/drop[last()]">
+	<drop event="Harvest"	name="resourceCementMixerPartsFM"	count="3" tag="salvageHarvest" />
+</insertAfter>
+
+<insertAfter xpath="/blocks/block[@name='cntCollapsedChemistryStation']/drop[last()]">
+	<drop event="Harvest"	name="resourceChemistryStationPartsFM"	count="3" tag="salvageHarvest" />
+</insertAfter>
+
+
+<!-- Allow the salvaged parts to be used to upgrade a workstation of the same type -->
+<append xpath="/blocks/block[@name='cntCollapsedWorkbench']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="workbench"/>
+		<property name="Item" value="resourceWorkbenchPartsFM"/>
+		<property name="ItemCount" value="6"/>
+		<property name="UpgradeHitCount" value="12"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='cntCollapsedForge']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="forge"/>
+		<property name="Item" value="resourceForgePartsFM"/>
+		<property name="ItemCount" value="6"/>
+		<property name="UpgradeHitCount" value="12"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='cntCollapsedCementMixer']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="cementMixer"/>
+		<property name="Item" value="resourceCementMixerPartsFM"/>
+		<property name="ItemCount" value="6"/>
+		<property name="UpgradeHitCount" value="12"/>
+	</property>
+</append>
+
+<append xpath="/blocks/block[@name='cntCollapsedChemistryStation']">
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value="chemistryStation"/>
+		<property name="Item" value="resourceChemistryStationPartsFM"/>
+		<property name="ItemCount" value="6"/>
+		<property name="UpgradeHitCount" value="12"/>
+	</property>
+</append>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</configs>

@@ -1,0 +1,32 @@
+Key,Source,Context,Changes,English,French,German,Klingon,Spanish,Polish
+meleeToolWorkstationRemovalToolFM,items,Tools,New,"Workstation Removal Tool",,,,,
+meleeToolWorkstationRemovalToolFMDesc,items,Tools,New,"This tool will allow you to pick up any functional workstations in the world. To use it, equip on your hotbar and right-click on the workstation whilst having a workstation removal kit in your backpack.",,,,,
+resourceWorkstationRemovalKitFM,items,Resources,New,"Workstation Removal Kit",,,,,
+resourceWorkstationRemovalKitFMDesc,items,Resources,New,"This will allow you to remove any workstation in the world and then pick it up. Right-click on the workstation using a workstation removal tool whilst this is in your backpack.",,,,,
+
+resourceWorkbenchPartsFM,items,Resources,New,"Salvaged Workbench Parts",,,,,
+resourceForgePartsFM,items,Resources,New,"Salvaged Forge Parts",,,,,
+resourceCementMixerPartsFM,items,Resources,New,"Salvaged Cement Mixer Parts",,,,,
+resourceChemistryStationPartsFM,items,Resources,New,"Salvaged Chemistry Station Parts",,,,,
+salvagedPartsGroupDesc,items,Resources,New,"Salvaged workstation parts can be used to upgrade any destroyed workstation of the same name into a fully working one.",,,,,
+
+
+
+meleeToolWorkstationRemovalToolFMSchematic,items,Schematic,New,"Workstation Removal Tool Schematic",,,,,
+resourceWorkstationRemovalKitFMSchematic,items,Schematic,New,"Workstation Removal Kit Schematic",,,,,
+
+cntWorkbenchBoxFM,blocks,Container,New,"Boxed Workbench",,,,,
+cntWorkbenchBoxFMDesc,blocks,Container,New,"This is a workbench in a box. You can pick this up to retrieve a workbench, or destroy the box to pick up the workbench.",,,,,
+cntForgeBoxFM,blocks,Container,New,"Boxed Forge",,,,,
+cntForgeBoxFMDesc,blocks,Container,New,"This is a forge in a box. You can pick this up to retrieve a forge, or destroy the box to pick up the forge.",,,,,
+cntTableSawBoxFM,blocks,Container,New,"Boxed Table Saw",,,,,
+cntTableSawBoxFMDesc,blocks,Container,New,"This is a table saw in a box. You can pick this up to retrieve a table saw, or destroy the box to pick up the table saw.",,,,,
+cntCementMixerBoxFM,blocks,Container,New,"Boxed Cement Mixer",,,,,
+cntCementMixerBoxFMDesc,blocks,Container,New,"This is a cement mixer in a box. You can pick this up to retrieve a cement mixer, or destroy the box to pick up the cement mixer.",,,,,
+cntChemistryStationBoxFM,blocks,Container,New,"Boxed Chemistry Station",,,,,
+cntChemistryStationBoxFMDesc,blocks,Container,New,"This is a chemistry station in a box. You can pick this up to retrieve a chemistry station, or destroy the box to pick up the chemistry station.",,,,,
+
+
+
+perkSalvageOperationsRank3LongDescFM,progression,Perk,New,"You seem to have a knack for salvaging more useful parts than the average scrapper. Craft fair quality wrenches. Deal 30% more damage, harvest 60% faster and gains 60% more resources when salvaging with wrenches.
+Unlocks crafting of Workstation Removal Tool and Workstation Removal Kit.",,,,,

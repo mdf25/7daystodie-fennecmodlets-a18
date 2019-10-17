@@ -1,12 +1,16 @@
 <configs>
 
-<!-- Add an unlock for the workstation removal tools under the Salvage Operations perk. -->
-<append xpath="/progression/perks/perk[@name='perkSalvageOperations']/effect_group[1]">
-	<passive_effect name="RecipeTagUnlocked" operation="base_set" level="3,5" value="1" tags="meleeToolWorkstationRemovalToolFM,resourceWorkstationRemovalKitFM"/>
-</append>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - World - Workstation Removal -->
+	</insertBefore>
 
+	<!-- Add an unlock for the workstation removal tools under the Salvage Operations perk. -->
+	<append xpath="/progression/perks/perk[@name='perkSalvageOperations']/effect_group[1]">
+		<passive_effect name="RecipeTagUnlocked" operation="base_set" level="3,5" value="1" tags="meleeToolWorkstationRemovalToolFM,resourceWorkstationRemovalKitFM"/>
+	</append>
 
-<!-- Change the description of level 3 salvage ops to include workstation removal crafting -->
-<setattribute xpath="/progression/perks/perk[@name='perkSalvageOperations']/effect_group[2]/effect_description[@level='3']" name="long_desc_key">perkSalvageOperationsRank3LongDescFM</setattribute>
+	<!-- Change the description of level 3 salvage ops to include workstation removal crafting -->
+	<setattribute xpath="/progression/perks/perk[@name='perkSalvageOperations']/effect_group[2]/effect_description[@level='3']" name="long_desc_key">perkSalvageOperationsRank3LongDescFM</setattribute>
 
 </configs>

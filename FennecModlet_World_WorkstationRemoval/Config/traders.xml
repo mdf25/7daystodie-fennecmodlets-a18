@@ -1,27 +1,25 @@
 <configs>
 
-<!-- Adds the workstation removal tool to the rareTools trader item group -->
-<append xpath="/traders/trader_item_groups/trader_item_group[@name='rareTools']">
-	<item name="meleeToolWorkstationRemovalToolFM" prob="0.5" />
-</append>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - World - Workstation Removal -->
+	</insertBefore>
 
-<!-- Adds the workstation removal kit to the tools trader item group -->
-<append xpath="/traders/trader_item_groups/trader_item_group[@name='tools']">
-	<item name="resourceWorkstationRemovalKitFM" count="1,3" prob="0.4" />
-</append>
+	<!-- Adds the workstation removal tool to the rareTools trader item group -->
+	<append xpath="/traders/trader_item_groups/trader_item_group[@name='rareTools']">
+		<item name="meleeToolWorkstationRemovalToolFM" prob="0.5" />
+	</append>
 
-
-<!-- Adds the workstation removal schematics to the rareBooks trader item group -->
-<append xpath="/traders/trader_item_groups/trader_item_group[@name='rareBooks']">
-	<item name="meleeToolWorkstationRemovalToolFMSchematic" />
-	<item name="resourceWorkstationRemovalKitFMSchematic" />
-</append>
+	<!-- Adds the workstation removal kit to the tools trader item group -->
+	<append xpath="/traders/trader_item_groups/trader_item_group[@name='tools']">
+		<item name="resourceWorkstationRemovalKitFM" count="1,3" prob="0.4" />
+	</append>
 
 
-<!-- FOR UNFORGIVEN -->
-<!-- Make the vending machine restock every 2 days -->
-<!--
-<setattribute xpath="/traders/trader_info[@id='4']" name="reset_interval">2</setattribute>
--->
+	<!-- Adds the workstation removal schematics to the rareBooks trader item group -->
+	<append xpath="/traders/trader_item_groups/trader_item_group[@name='rareBooks']">
+		<item name="meleeToolWorkstationRemovalToolFMSchematic" />
+		<item name="resourceWorkstationRemovalKitFMSchematic" />
+	</append>
 
 </configs>

@@ -1,172 +1,165 @@
 <configs>
+	
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - World - Workstation Removal -->
+	</insertBefore>
 
-<!-- New Items -->
-<append xpath="/items">
+	<!-- New Items -->
+	<append xpath="/items">
 
-<!-- Workstation Removal Tool -->
-<item name="meleeToolWorkstationRemovalToolFM"> <!-- T2 Tools -->
-	<property name="Tags" value="melee,light,tool,attStrength,perkMiner69r,perkMotherLode,canHaveCosmetic"/>
-	<property name="CustomIcon" value="meleeToolClawHammer"/>
-	<property name="CustomIconTint" value="a6801f" />
-	<property name="DisplayType" value="meleeRepairTool"/>
-	<property name="HoldType" value="32"/>
-	<property name="Meshfile" value="#Other/Items?Tools/hammerPrefab.prefab"/>
-	<property name="Material" value="Mmetal"/>
-	<property name="RepairTools" value="resourceRepairKit"/>
-	<property name="DegradationBreaksAfter" value="false"/>
-	<property name="SoundJammed" value="ItemNeedsRepair"/>
-	<property name="SoundDestroy" value="wooddestroy1"/>
-	<property name="FuelValue" value="150"/>
-	<property name="EconomicValue" value="1500"/>
-	<property name="ShowQuality" value="true"/>
-	<property name="UnlockedBy" value="meleeToolWorkstationRemovalToolFMSchematic,perkSalvageOperations" />
-	<property class="Action0">
-		<property name="Class" value="DynamicMelee"/>
-		<property name="Sphere" value=".1"/>
-		<property name="Sound_start" value="swoosh"/>
-		<property name="ToolCategory.harvestingTools" value="1" param1="1"/>
-		<property name="GrazeStart" value=".12"/>
-		<property name="GrazeEnd" value=".3"/>
-		<property name="SwingDegrees" value="45"/>
-		<property name="SwingAngle" value="135"/>
-		<property name="UseGrazingHits" value="true"/>
-	</property>
-	<property class="Action1"> <!-- UseAction -->
-		<property name="Class" value="Repair"/>
-		<property name="Delay" value=".64"/> <!-- Repair actions still need the delay amount -->
-		<property name="Repair_amount" value="400"/>
-		<property name="Upgrade_hit_offset" value="0"/>
-		<property name="Sound_start" value="repair_block"/>
-		<property name="Allowed_upgrade_items" value="resourceWorkstationRemovalKitFM"/>
-		<property name="UsePowerAttackAnimation" value="false"/>
-	</property>
-	<effect_group name="meleeToolClawHammer">
-		<passive_effect name="MaxRange" operation="base_set" value="2.2"/>
-		<passive_effect name="BlockRange" operation="base_set" value="2.5"/>
-		<passive_effect name="EntityDamage" operation="base_set" value="12"/> <!-- meleeToolClawHammer -->
-		<passive_effect name="EntityDamage" operation="perc_add" value="-.15,.15"/> <!-- random rng -->
-		<passive_effect name="EntityDamage" operation="perc_add" value=".1,.5" tier="2,6"/> <!-- tier bonus -->
+		<!-- Workstation Removal Tool -->
+		<item name="meleeToolWorkstationRemovalToolFM"> <!-- T2 Tools -->
+			<property name="Tags" value="melee,light,tool,attStrength,perkMiner69r,perkMotherLode,canHaveCosmetic"/>
+			<property name="CustomIcon" value="meleeToolClawHammer"/>
+			<property name="CustomIconTint" value="a6801f" />
+			<property name="DisplayType" value="meleeRepairTool"/>
+			<property name="HoldType" value="32"/>
+			<property name="Meshfile" value="#Other/Items?Tools/hammerPrefab.prefab"/>
+			<property name="Material" value="Mmetal"/>
+			<property name="RepairTools" value="resourceRepairKit"/>
+			<property name="DegradationBreaksAfter" value="false"/>
+			<property name="SoundJammed" value="ItemNeedsRepair"/>
+			<property name="SoundDestroy" value="wooddestroy1"/>
+			<property name="FuelValue" value="150"/>
+			<property name="EconomicValue" value="1500"/>
+			<property name="ShowQuality" value="true"/>
+			<property name="UnlockedBy" value="meleeToolWorkstationRemovalToolFMSchematic,perkSalvageOperations" />
+			<property class="Action0">
+				<property name="Class" value="DynamicMelee"/>
+				<property name="Sphere" value=".1"/>
+				<property name="Sound_start" value="swoosh"/>
+				<property name="ToolCategory.harvestingTools" value="1" param1="1"/>
+				<property name="GrazeStart" value=".12"/>
+				<property name="GrazeEnd" value=".3"/>
+				<property name="SwingDegrees" value="45"/>
+				<property name="SwingAngle" value="135"/>
+				<property name="UseGrazingHits" value="true"/>
+			</property>
+			<property class="Action1"> <!-- UseAction -->
+				<property name="Class" value="Repair"/>
+				<property name="Delay" value=".64"/> <!-- Repair actions still need the delay amount -->
+				<property name="Repair_amount" value="400"/>
+				<property name="Upgrade_hit_offset" value="0"/>
+				<property name="Sound_start" value="repair_block"/>
+				<property name="Allowed_upgrade_items" value="resourceWorkstationRemovalKitFM"/>
+				<property name="UsePowerAttackAnimation" value="false"/>
+			</property>
+			<effect_group name="meleeToolClawHammer">
+				<passive_effect name="MaxRange" operation="base_set" value="2.2"/>
+				<passive_effect name="BlockRange" operation="base_set" value="2.5"/>
+				<passive_effect name="EntityDamage" operation="base_set" value="12"/> <!-- meleeToolClawHammer -->
+				<passive_effect name="EntityDamage" operation="perc_add" value="-.15,.15"/> <!-- random rng -->
+				<passive_effect name="EntityDamage" operation="perc_add" value=".1,.5" tier="2,6"/> <!-- tier bonus -->
 
-		<passive_effect name="BlockDamage" operation="base_set" value="22"/>
-		<passive_effect name="BlockDamage" operation="perc_add" value="-.15,.15"/> <!-- random BlockDmg -->
-		<passive_effect name="BlockDamage" operation="perc_add" value=".1,.5" tier="2,6"/> <!-- tier bonus -->
+				<passive_effect name="BlockDamage" operation="base_set" value="22"/>
+				<passive_effect name="BlockDamage" operation="perc_add" value="-.15,.15"/> <!-- random BlockDmg -->
+				<passive_effect name="BlockDamage" operation="perc_add" value=".1,.5" tier="2,6"/> <!-- tier bonus -->
 
-		<passive_effect name="DegradationMax" operation="perc_add" value="-.15,.15" tags="perkMiner69r"/> <!-- random DegMax -->
-		<passive_effect name="AttacksPerMinute" operation="perc_add" value="-.05,.05"/> <!-- random APM -->
-		<passive_effect name="StaminaLoss" operation="perc_add" value="-.05,.05"/> <!-- random StamLoss -->
+				<passive_effect name="DegradationMax" operation="perc_add" value="-.15,.15" tags="perkMiner69r"/> <!-- random DegMax -->
+				<passive_effect name="AttacksPerMinute" operation="perc_add" value="-.05,.05"/> <!-- random APM -->
+				<passive_effect name="StaminaLoss" operation="perc_add" value="-.05,.05"/> <!-- random StamLoss -->
 
-		<display_value name="dBlockRepairAmount" value="400"/>
-		<passive_effect name="DamageModifier" operation="perc_add" value="-.5" tags="wood"/>
-		<passive_effect name="DamageModifier" operation="perc_add" value="-.75" tags="earth"/>
-		<passive_effect name="AttacksPerMinute" operation="base_set" value="70"/>
-		<passive_effect name="StaminaLoss" operation="base_set" value="12.0" tags="primary"/>
-		<passive_effect name="DegradationMax" operation="base_set" value="2000,8000" tier="1,6" tags="perkMiner69r"/>
-		<passive_effect name="DegradationPerUse" operation="base_set" value="10" tags="perkMiner69r"/>
-		<passive_effect name="ModSlots" operation="base_set" value="0" tier="1,6"/>
-		<passive_effect name="ModPowerBonus" operation="perc_add" value=".10" tags="EntityDamage,BlockDamage"/>
-		<passive_effect name="ModPowerBonus" operation="base_add" value="200" tags="EconomicValue"/>
-	</effect_group>
-	<property name="Group" value="Tools/Traps"/>
-	<property name="RepairExpMultiplier" value="5.5"/>
-</item>
-
-
-<!-- Workstation Removal Kit -->
-<item name="resourceWorkstationRemovalKitFM">
-	<property name="HoldType" value="45"/>
-	<property name="Meshfile" value="#Other/Items?Misc/sackPrefab.prefab"/>
-	<property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
-	<property name="Material" value="MresourceIronFragment"/>
-	<property name="Weight" value="25"/>
-	<property name="Stacknumber" value="5"/> <!-- STK resource -->
-	<property name="SellableToTrader" value="true"/>
-	<property name="EconomicValue" value="300"/>
-	<property name="UnlockedBy" value="perkSalvageOperations" />
-	<property name="Group" value="Resources"/>
-</item>
+				<display_value name="dBlockRepairAmount" value="400"/>
+				<passive_effect name="DamageModifier" operation="perc_add" value="-.5" tags="wood"/>
+				<passive_effect name="DamageModifier" operation="perc_add" value="-.75" tags="earth"/>
+				<passive_effect name="AttacksPerMinute" operation="base_set" value="70"/>
+				<passive_effect name="StaminaLoss" operation="base_set" value="12.0" tags="primary"/>
+				<passive_effect name="DegradationMax" operation="base_set" value="2000,8000" tier="1,6" tags="perkMiner69r"/>
+				<passive_effect name="DegradationPerUse" operation="base_set" value="10" tags="perkMiner69r"/>
+				<passive_effect name="ModSlots" operation="base_set" value="0" tier="1,6"/>
+				<passive_effect name="ModPowerBonus" operation="perc_add" value=".10" tags="EntityDamage,BlockDamage"/>
+				<passive_effect name="ModPowerBonus" operation="base_add" value="200" tags="EconomicValue"/>
+			</effect_group>
+			<property name="Group" value="Tools/Traps"/>
+			<property name="RepairExpMultiplier" value="5.5"/>
+		</item>
 
 
-<!-- Workstation Upgrade Items - these will drop from destroyed workstations, and allow you to upgrade other ones -->
-<item name="resourceWorkstationSalvagedPartsMasterFM">
-	<property name="CreativeMode" value="None" />
-	<property name="ItemTypeIcon" value="scrap"/>
-	<property name="CustomIconTint" value="a90000" />
-	<property name="DescriptionKey" value="salvagedPartsGroupDesc" />
-	<property name="HoldType" value="45"/>
-	<property name="Meshfile" value="#Other/Items?Misc/sackPrefab.prefab"/>
-	<property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
-	<property name="Material" value="MresourceIronFragment"/>
-	<property name="Weight" value="25"/>
-	<property name="Stacknumber" value="50"/> <!-- STK resource -->
-	<property name="SellableToTrader" value="true"/>
-	<property name="EconomicValue" value="50"/>
-	<property name="Group" value="Resources"/>
-</item>
-
-<item name="resourceWorkbenchPartsFM">
-	<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />
-	<property name="CustomIcon" value="workbench" />
-</item>
-
-<item name="resourceForgePartsFM">
-	<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />#
-	<property name="CustomIcon"	value="forge" />
-</item>
-
-<item name="resourceCementMixerPartsFM">
-	<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />
-	<property name="CustomIcon" value="cementMixer" />
-</item>
-
-<item name="resourceChemistryStationPartsFM">
-	<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />
-	<property name="CustomIcon" value="chemistryStation" />
-</item>
+		<!-- Workstation Removal Kit -->
+		<item name="resourceWorkstationRemovalKitFM">
+			<property name="HoldType" value="45"/>
+			<property name="Meshfile" value="#Other/Items?Misc/sackPrefab.prefab"/>
+			<property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
+			<property name="Material" value="MresourceIronFragment"/>
+			<property name="Weight" value="25"/>
+			<property name="Stacknumber" value="5"/> <!-- STK resource -->
+			<property name="SellableToTrader" value="true"/>
+			<property name="EconomicValue" value="300"/>
+			<property name="UnlockedBy" value="perkSalvageOperations" />
+			<property name="Group" value="Resources"/>
+		</item>
 
 
-<!-- New schematics to unlock workstation removal tools and kits -->
-<item name="meleeToolWorkstationRemovalToolFMSchematic">
-	<property name="Extends" value="schematicNoQualityMaster"/>
-	<property name="CreativeMode" value="Player"/>
-	<property name="CustomIcon" value="meleeToolClawHammer"/>
-	<property name="CustomIconTint" value="a6801f" />
-	<property name="Unlocks" value="meleeToolWorkstationRemovalToolFM"/>
-	<effect_group tiered="false">
-		<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="meleeToolWorkstationRemovalToolFM" operation="set" value="1"/>
-		<triggered_effect trigger="onSelfPrimaryActionEnd" action="GiveExp" exp="50"/>
-	</effect_group>
-</item>
+		<!-- Workstation Upgrade Items - these will drop from destroyed workstations, and allow you to upgrade other ones -->
+		<item name="resourceWorkstationSalvagedPartsMasterFM">
+			<property name="CreativeMode" value="None" />
+			<property name="ItemTypeIcon" value="scrap"/>
+			<property name="CustomIconTint" value="a90000" />
+			<property name="DescriptionKey" value="salvagedPartsGroupDesc" />
+			<property name="HoldType" value="45"/>
+			<property name="Meshfile" value="#Other/Items?Misc/sackPrefab.prefab"/>
+			<property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
+			<property name="Material" value="MresourceIronFragment"/>
+			<property name="Weight" value="25"/>
+			<property name="Stacknumber" value="50"/> <!-- STK resource -->
+			<property name="SellableToTrader" value="true"/>
+			<property name="EconomicValue" value="50"/>
+			<property name="Group" value="Resources"/>
+		</item>
 
-<item name="resourceWorkstationRemovalKitFMSchematic">
-	<property name="Extends" value="schematicNoQualityMaster"/>
-	<property name="CreativeMode" value="Player"/>
-	<property name="CustomIcon" value="resourceWorkstationRemovalKitFM"/>
-	<property name="Unlocks" value="meleeToolWorkstationRemovalToolFM"/>
-	<effect_group tiered="false">
-		<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="resourceWorkstationRemovalKitFM" operation="set" value="1"/>
-		<triggered_effect trigger="onSelfPrimaryActionEnd" action="GiveExp" exp="50"/>
-	</effect_group>
-</item>
+		<item name="resourceWorkbenchPartsFM">
+			<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />
+			<property name="CustomIcon" value="workbench" />
+		</item>
 
-</append>
+		<item name="resourceForgePartsFM">
+			<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />#
+			<property name="CustomIcon"	value="forge" />
+		</item>
 
+		<item name="resourceCementMixerPartsFM">
+			<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />
+			<property name="CustomIcon" value="cementMixer" />
+		</item>
 
-<!-- Allow the stone axe, claw hammer, and nailgun to upgrade destroyed workstations -->
-<append xpath="/items/item[@name='meleeToolStoneAxe' 
-or @name='meleeToolStoneAxeTazas' 
-or @name='meleeToolClawHammer' 
-or @name='gunToolNailgun']/property[@class='Action1']/property[@name='Allowed_upgrade_items']/@value">,resourceWorkbenchPartsFM,resourceForgePartsFM,resourceCementMixerPartsFM,resourceChemistryStationPartsFM</append>
-
-
-
-
-
-
+		<item name="resourceChemistryStationPartsFM">
+			<property name="Extends" value="resourceWorkstationSalvagedPartsMasterFM" />
+			<property name="CustomIcon" value="chemistryStation" />
+		</item>
 
 
+		<!-- New schematics to unlock workstation removal tools and kits -->
+		<item name="meleeToolWorkstationRemovalToolFMSchematic">
+			<property name="Extends" value="schematicNoQualityMaster"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="CustomIcon" value="meleeToolClawHammer"/>
+			<property name="CustomIconTint" value="a6801f" />
+			<property name="Unlocks" value="meleeToolWorkstationRemovalToolFM"/>
+			<effect_group tiered="false">
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="meleeToolWorkstationRemovalToolFM" operation="set" value="1"/>
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="GiveExp" exp="50"/>
+			</effect_group>
+		</item>
+
+		<item name="resourceWorkstationRemovalKitFMSchematic">
+			<property name="Extends" value="schematicNoQualityMaster"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="CustomIcon" value="resourceWorkstationRemovalKitFM"/>
+			<property name="Unlocks" value="meleeToolWorkstationRemovalToolFM"/>
+			<effect_group tiered="false">
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="resourceWorkstationRemovalKitFM" operation="set" value="1"/>
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="GiveExp" exp="50"/>
+			</effect_group>
+		</item>
+
+	</append>
 
 
-
-
+	<!-- Allow the stone axe, claw hammer, and nailgun to upgrade destroyed workstations -->
+	<append xpath="/items/item[@name='meleeToolStoneAxe' 
+	or @name='meleeToolStoneAxeTazas' 
+	or @name='meleeToolClawHammer' 
+	or @name='gunToolNailgun']/property[@class='Action1']/property[@name='Allowed_upgrade_items']/@value">,resourceWorkbenchPartsFM,resourceForgePartsFM,resourceCementMixerPartsFM,resourceChemistryStationPartsFM</append>
 
 </configs>

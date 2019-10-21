@@ -1,0 +1,5 @@
+<configs>
+	
+	<setattribute xpath="/spawning/biome/spawn[@maxcount='1' and contains(@entitygroup, 'Zombies')]" name="maxcount">4</setattribute>
+	
+</configs>

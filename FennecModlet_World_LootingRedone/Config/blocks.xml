@@ -55,6 +55,7 @@
 		<!-- Store shelves that can be looted -->
 		<block name="storeShelfGeneric1FM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfGeneric1"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="183" />
@@ -63,6 +64,7 @@
 		
 		<block name="storeShelfGeneric2FM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfGeneric2"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="183" />
@@ -71,6 +73,7 @@
 		
 		<block name="storeShelfGeneric3FM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfGeneric3"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="183" />
@@ -79,6 +82,7 @@
 		
 		<block name="storeShelfFood1FM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfFood1"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="184" />
@@ -87,6 +91,7 @@
 		
 		<block name="storeShelfFood2FM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfFood2"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="184" />
@@ -95,6 +100,7 @@
 		
 		<block name="storeShelfToolsFM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfTools"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="185" />
@@ -103,6 +109,7 @@
 		
 		<block name="storeShelfMedicalFM">
 			<property name="Extends"					value="storeShelfEmptyFM" />
+			<property name="CustomIcon"					value="storeShelfEmptyFM" />
 			<property name="Model" 						value="#@modfolder:Resources/Blocks.unity3d?ShelfMedical"/>
 			<property name="Class"						value="Loot" />
 			<property name="LootList"					value="186" />

@@ -1,0 +1,475 @@
+<configs>
+	
+	<!-- Reduces the amount of good loot crates at the end of POIs. -->
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntStoreCratesRandomLootHelper']/block[@name='cntShippingCrateShamway']" name="prob">1.5</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntStoreCratesRandomLootHelper']/block[@name='cntShippingCrateShotgunMessiah']" name="prob">0.5</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntStoreCratesRandomLootHelper']/block[@name='cntShippingCrateWorkingStiffs']" name="prob">1</setattribute>
+	
+	<append xpath="/blockplaceholders/placeholder[@name='cntStoreCratesRandomLootHelper']">
+		<block name="cntGarageStorage" 					prob="0.075" />
+		<block name="cntLootCrateConstructionSupplies" 	prob="0.075" />
+		<block name="palletBrownBoxesBase" 				prob="0.25" />
+		<block name="palletBricksBase"					prob="0.25" />
+		<block name="cntLootCrateBookstore"				prob="0.05" />
+		<block name="cntCardboardBox"					prob="0.25" />
+		<block name="cntLootCrateLabEquipment"			prob="0.05" />
+	</append>
+	
+	
+	<!-- Add car wreckage to appropriate placeholders -->
+	<append xpath="/blockplaceholders/placeholder[@name='carWrecksRandomHelper']">
+		<block name="decoCarBackBumperUpright" 			prob="1" />
+		<block name="decoCarBackBumperFlipped" 			prob="1" />
+		<block name="decoCarBackDoorFlat" 				prob="1" />
+		<block name="decoCarBackDoorFlipped" 			prob="1" />
+		<block name="decoCarRadiatorFlat" 				prob="1" />
+		<block name="decoCarRadiatorFlipped" 			prob="1" />
+		<block name="decoCarSeatUpright" 				prob="1" />
+		<block name="decoCarSeatFlipped" 				prob="1" />
+		<block name="decoCarFenderFlat" 				prob="1" />
+		<block name="decoCarFenderFlipped" 				prob="1" />
+		<block name="decoCarFrontBumperFlat" 			prob="1" />
+		<block name="decoCarFrontBumperFlipped" 		prob="1" />
+		<block name="decoCarFrontDoorFlat" 				prob="1" />
+		<block name="decoCarFrontDoorFlipped" 			prob="1" />
+		<block name="decoCarHoodFlat" 					prob="1" />
+		<block name="decoCarHoodFlipped" 				prob="1" />
+		<block name="decoCarMotorFlat" 					prob="1" />
+		<block name="decoCarMotorFlipped" 				prob="1" />
+		<block name="decoCarTrunkLidFlat" 				prob="1" />
+		<block name="decoCarTrunkLidFlipped" 			prob="1" />
+		<block name="decoCarPartsRamp" 					prob="1" />
+	</append>
+	
+	<append xpath="/blockplaceholders/placeholder[@name='cntStreetRandomLootHelper']">
+		<block name="decoCarBackBumperUpright" 			prob="0.2" />
+		<block name="decoCarBackBumperFlipped" 			prob="0.2" />
+		<block name="decoCarBackDoorFlat" 				prob="0.2" />
+		<block name="decoCarBackDoorFlipped" 			prob="0.2" />
+		<block name="decoCarRadiatorFlat" 				prob="0.2" />
+		<block name="decoCarRadiatorFlipped" 			prob="0.2" />
+		<block name="decoCarSeatUpright" 				prob="0.2" />
+		<block name="decoCarSeatFlipped" 				prob="0.2" />
+		<block name="decoCarFenderFlat" 				prob="0.2" />
+		<block name="decoCarFenderFlipped" 				prob="0.2" />
+		<block name="decoCarFrontBumperFlat" 			prob="0.2" />
+		<block name="decoCarFrontBumperFlipped" 		prob="0.2" />
+		<block name="decoCarFrontDoorFlat" 				prob="0.2" />
+		<block name="decoCarFrontDoorFlipped" 			prob="0.2" />
+		<block name="decoCarHoodFlat" 					prob="0.2" />
+		<block name="decoCarHoodFlipped" 				prob="0.2" />
+		<block name="decoCarMotorFlat" 					prob="0.2" />
+		<block name="decoCarMotorFlipped" 				prob="0.2" />
+		<block name="decoCarTrunkLidFlat" 				prob="0.2" />
+		<block name="decoCarTrunkLidFlipped" 			prob="0.2" />
+		<block name="decoCarPartsRamp" 					prob="0.2" />
+	</append>
+	
+	
+	<!-- Reduce the chances of finding medical and ammo piles in random places in POIs -->
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']/block[@name='cntMedicalPileSmall']" name="prob">0.08</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']/block[@name='cntMedicalPileMedium']" name="prob">0.02</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']/block[@name='cntAmmoPileSmall']" name="prob">0.08</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']/block[@name='cntAmmoPileMedium']" name="prob">0.02</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']/block[@name='cntFoodPileSmall']" name="prob">0.04</setattribute>
+	<setattribute xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']/block[@name='cntFoodPileMedium']" name="prob">0.01</setattribute>
+	
+	<append xpath="/blockplaceholders/placeholder[@name='cntQuestRandomLootHelper']">
+		<block name="air"	prob="3" />
+	</append>
+	
+	
+	
+	<!-- Name changes to support double unwraps -->
+	<!-- Shipping crate remaming -->
+	<setattribute xpath="//block[@name='cntShippingCrateShamway']" name="name">cntShippingCrateShamwayLoot</setattribute>
+	<setattribute xpath="//block[@name='cntShippingCrateShotgunMessiah']" name="name">cntShippingCrateShotgunMessiahLoot</setattribute>
+	<setattribute xpath="//block[@name='cntShippingCrateWorkingStiffs']" name="name">cntShippingCrateWorkingStiffsLoot</setattribute>
+	<!-- CURRENTLY NOT NEEDED FOR NAME CHANGE -->
+	<!--
+	<setattribute xpath="//block[@name='cntShippingCrateBookstore']" name="name">cntShippingCrateBookstoreLoot</setattribute>
+	<setattribute xpath="//block[@name='cntShippingCrateLabEquipment']" name="name">cntShippingCrateLabEquipmentLoot</setattribute>
+	-->
+	
+	<!-- Piles of food, meds, ammo renaming -->
+	<setattribute xpath="//block[@name='cntAmmoPileSmall']" name="name">cntAmmoPileSmallLoot</setattribute>
+	<setattribute xpath="//block[@name='cntAmmoPileMedium']" name="name">cntAmmoPileMediumLoot</setattribute>
+	<setattribute xpath="//block[@name='cntMedicalPileSmall']" name="name">cntMedicalPileSmallLoot</setattribute>
+	<setattribute xpath="//block[@name='cntMedicalPileMedium']" name="name">cntMedicalPileMediumLoot</setattribute>
+	<setattribute xpath="//block[@name='cntFoodPileSmall']" name="name">cntFoodPileSmallLoot</setattribute>
+	<setattribute xpath="//block[@name='cntFoodPileMedium']" name="name">cntFoodPileMediumLoot</setattribute>
+	<!-- CURRENTLY NOT NEEDED FOR NAME CHANGE -->
+	<!--
+	<setattribute xpath="//block[@name='cntAmmoPileLarge']" name="name">cntAmmoPileLargeLoot</setattribute>
+	<setattribute xpath="//block[@name='cntMedicalPileLarge']" name="name">cntMedicalPileLargeLoot</setattribute>
+	<setattribute xpath="//block[@name='cntFoodPileLarge']" name="name">cntFoodPileLargeLoot</setattribute>
+	-->
+	
+	
+	<!-- Add new placeholders so that weapons bags, hardened chests and gun safes don't always generate. -->
+	<append xpath="/blockplaceholders">
+		<!-- Weapons bags, end of dungeon chests loot -->
+		<placeholder name="cntWeaponsBagSmall">
+			<block name="cntWeaponsBagSmallLoot" 				prob="0.1" />
+			<block name="cntBackpack01" 						prob="0.1" />
+			<block name="cntBackpack03" 						prob="0.1" />
+			<block name="cntDuffle01" 							prob="0.1" />
+			<block name="cntSportsBag01" 						prob="0.1" />
+			<block name="cntSportsBag02" 						prob="0.1" />
+			<block name="cntPurse01" 							prob="0.1" />
+			<block name="air"									prob="0.3" />
+		</placeholder>
+		
+		<placeholder name="cntWeaponsBagLarge">
+			<block name="cntWeaponsBagLargeLoot" 				prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.1" />
+			<block name="cntBackpack03" 						prob="0.1" />
+			<block name="cntDuffle01" 							prob="0.1" />
+			<block name="cntSportsBag01" 						prob="0.1" />
+			<block name="cntSportsBag02" 						prob="0.1" />
+			<block name="cntPurse01" 							prob="0.1" />
+			<block name="air"									prob="0.35" />
+		</placeholder>
+		
+		<placeholder name="cntLootChestHero">
+			<block name="cntLootChestHeroLoot" 					prob="0.05" />
+			<block name="cntShippingCrateBookstoreLoot"			prob="0.025" />
+			<block name="cntShippingCrateLabEquipmentLoot"		prob="0.025" />
+			<block name="cntShippingCrateWorkingStiffsLoot"		prob="0.025" />
+			<block name="cntShippingCrateShotgunMessiahLoot"	prob="0.025" />
+			<block name="cntCoolerOpen"							prob="0.2" />
+			<block name="cntCoolerClosed"						prob="0.2" />
+			<block name="cntDeskSafe"							prob="0.15" />
+			<block name="air"									prob="0.3" />
+		</placeholder>
+		
+		<placeholder name="cntLootChestHeroInsecure">
+			<block name="cntLootChestHeroInsecureLoot" 			prob="0.05" />
+			<block name="cntShippingCrateBookstoreLoot"			prob="0.025" />
+			<block name="cntShippingCrateLabEquipmentLoot"		prob="0.025" />
+			<block name="cntShippingCrateWorkingStiffsLoot"		prob="0.025" />
+			<block name="cntShippingCrateShotgunMessiahLoot"	prob="0.025" />
+			<block name="cntCoolerOpen"							prob="0.2" />
+			<block name="cntCoolerClosed"						prob="0.2" />
+			<block name="cntDeskSafe"							prob="0.15" />
+			<block name="air"									prob="0.3" />
+		</placeholder>
+		
+		<!-- Shipping crates: TODO test double unwrap on POIs -->
+		<placeholder name="cntShippingCrateShamway">
+			<block name="cntShippingCrateShamwayLoot" 			prob="0.2" />
+			<block name="cntCardboardBox"						prob="0.6" />
+			<block name="palletBrownBoxesBase"					prob="0.2" />
+		</placeholder>
+		
+		<placeholder name="cntShippingCrateLabEquipment">
+			<block name="cntShippingCrateLabEquipmentLoot" 		prob="0.2" />
+			<block name="cntCardboardBox"						prob="0.6" />
+			<block name="palletBrownBoxesBase"					prob="0.2" />
+		</placeholder>
+		
+		<placeholder name="cntShippingCrateBookstore">
+			<block name="cntShippingCrateBookstoreLoot" 		prob="0.2" />
+			<block name="cntCardboardBox"						prob="0.6" />
+			<block name="palletBrownBoxesBase"					prob="0.2" />
+		</placeholder>
+		
+		<placeholder name="cntShippingCrateCarParts">
+			<block name="cntShippingCrateCarPartsLoot" 			prob="0.2" />
+			<block name="cntCardboardBox"						prob="0.6" />
+			<block name="palletBrownBoxesBase"					prob="0.2" />
+		</placeholder>
+		
+		<placeholder name="cntShippingCrateShotgunMessiah">
+			<block name="cntShippingCrateShotgunMessiahLoot" 	prob="0.2" />
+			<block name="cntCardboardBox"						prob="0.6" />
+			<block name="palletBrownBoxesBase"					prob="0.2" />
+		</placeholder>
+		
+		<placeholder name="cntShippingCrateWorkingStiffs">
+			<block name="cntShippingCrateWorkingStiffsLoot" 	prob="0.2" />
+			<block name="cntCardboardBox"						prob="0.6" />
+			<block name="palletBrownBoxesBase"					prob="0.2" />
+		</placeholder>
+		
+		<!-- Ammo, medical and food piles -->
+		<placeholder name="cntAmmoPileSmall">
+			<block name="cntAmmoPileSmallLoot" 					prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntAmmoPileMedium">
+			<block name="cntAmmoPileMediumLoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntAmmoPileLarge">
+			<block name="cntAmmoPileLargeLoot" 					prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntMedicalPileSmall">
+			<block name="cntMedicalPileSmallLoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntMedicalPileMedium">
+			<block name="cntMedicalPileMediumLoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntMedicalPileLarge">
+			<block name="cntMedicalPileLargeLoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntFoodPileSmall">
+			<block name="cntFoodPileSmallLoot" 					prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntFoodPileMedium">
+			<block name="cntFoodPileMediumLoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntFoodPileLarge">
+			<block name="cntFoodPileLargeLoot" 					prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntMedicLootPileA">
+			<block name="cntMedicLootPileALoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<placeholder name="cntMedicLootPileB">
+			<block name="cntMedicLootPileBLoot" 				prob="0.15" />
+			<block name="cntTrashPile01" 						prob="0.05" />
+			<block name="cntTrashPile02" 						prob="0.05" />
+			<block name="cntTrashPile03" 						prob="0.05" />
+			<block name="cntTrashPile04" 						prob="0.05" />
+			<block name="cntTrashPile05" 						prob="0.05" />
+			<block name="cntTrashPile06" 						prob="0.05" />
+			<block name="cntTrashPile07" 						prob="0.05" />
+			<block name="cntTrashPile08" 						prob="0.05" />
+			<block name="cntTrashPile09" 						prob="0.05" />
+			<block name="cntBackpack01" 						prob="0.05" />
+			<block name="cntBackpack03" 						prob="0.05" />
+			<block name="cntDuffle01" 							prob="0.05" />
+			<block name="cntSportsBag01" 						prob="0.05" />
+			<block name="cntSportsBag02" 						prob="0.05" />
+			<block name="cntPurse01" 							prob="0.05" />
+			<block name="air"									prob="0.1" />
+		</placeholder>
+		
+		<!-- Turn pre-existing store shelving into a new placeholder to generate lootable shelf assets in POIs -->
+		<placeholder name="storeShelving01">
+			<block name="storeShelfEmptyFM"						prob="0.6" />
+			<block name="storeShelfGeneric1FM"					prob="0.15" />
+			<block name="storeShelfGeneric2FM"					prob="0.14" />
+			<block name="storeShelfGeneric3FM"					prob="0.01" />
+			<block name="storeShelfFood1FM"						prob="0.03" />
+			<block name="storeShelfFood2FM"						prob="0.03" />
+			<block name="storeShelfMedicalFM"					prob="0.02" />
+			<block name="storeShelfToolsFM"						prob="0.02" />
+		</placeholder>
+		
+		<placeholder name="storeShelving01Top">
+			<block name="storeShelfEmptyFM"						prob="0.6" />
+			<block name="storeShelfGeneric1FM"					prob="0.15" />
+			<block name="storeShelfGeneric2FM"					prob="0.14" />
+			<block name="storeShelfGeneric3FM"					prob="0.01" />
+			<block name="storeShelfFood1FM"						prob="0.03" />
+			<block name="storeShelfFood2FM"						prob="0.03" />
+			<block name="storeShelfMedicalFM"					prob="0.02" />
+			<block name="storeShelfToolsFM"						prob="0.02" />
+		</placeholder>
+		
+		<placeholder name="storeShelving01Double">
+			<block name="storeShelfEmptyFM"						prob="0.6" />
+			<block name="storeShelfGeneric1FM"					prob="0.15" />
+			<block name="storeShelfGeneric2FM"					prob="0.14" />
+			<block name="storeShelfGeneric3FM"					prob="0.01" />
+			<block name="storeShelfFood1FM"						prob="0.03" />
+			<block name="storeShelfFood2FM"						prob="0.03" />
+			<block name="storeShelfMedicalFM"					prob="0.02" />
+			<block name="storeShelfToolsFM"						prob="0.02" />
+		</placeholder>
+		
+		<placeholder name="storeShelving01TopDouble">
+			<block name="storeShelfEmptyFM"						prob="0.6" />
+			<block name="storeShelfGeneric1FM"					prob="0.15" />
+			<block name="storeShelfGeneric2FM"					prob="0.14" />
+			<block name="storeShelfGeneric3FM"					prob="0.01" />
+			<block name="storeShelfFood1FM"						prob="0.03" />
+			<block name="storeShelfFood2FM"						prob="0.03" />
+			<block name="storeShelfMedicalFM"					prob="0.02" />
+			<block name="storeShelfToolsFM"						prob="0.02" />
+		</placeholder>
+		
+		
+		
+	</append>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</configs>

@@ -1,5 +1,15 @@
 <configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - World - Increased Zombie Spawns -->
+	</insertBefore>
 	
-	<setattribute xpath="/spawning/biome/spawn[@maxcount='1' and contains(@entitygroup, 'Zombies')]" name="maxcount">4</setattribute>
+	<!-- Increases the amount of zombies that spawn in the overworld by 200% -->
+	<setattribute xpath="//spawn[@maxcount='1' and contains(@entitygroup, 'Zombies')]" name="maxcount">2</setattribute>
 	
+	<!-- Day time zombies respawn every day -->
+	<setattribute xpath="//spawn[@time='Day' and contains(@entitygroup, 'Zombies')]" name="respawndelay">1</setattribute>
+	
+	<!-- Night time zombies respawn much more frequently -->
+	<setattribute xpath="//spawn[@time='Night' and contains(@entitygroup, 'Zombies')]" name="respawndelay">0.2</setattribute>
 </configs>

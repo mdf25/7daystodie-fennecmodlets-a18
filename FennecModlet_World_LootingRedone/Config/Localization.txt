@@ -1,0 +1,60 @@
+Key,Source,Context,Changes,English,French,German,Klingon,Spanish,Polish
+cntWeaponsBagSmallLoot,blocks,Container,New,"Weapons Bag (Small)",,,,,
+cntWeaponsBagLargeLoot,blocks,Container,New,"Weapons Bag (Large)",,,,,
+cntLootChestHeroLoot,blocks,Container,New,"Reinforced Chest",,,,,
+cntLootChestHeroInsecureLoot,blocks,Container,New,"Reinforced Chest (Insecure)",,,,,
+cntShippingCrateShamwayLoot,blocks,Container,New,"Shamway Sealed Shipping Crate",,,,,
+cntShippingCrateLabEquipmentLoot,blocks,Container,New,"Lab Equipment Sealed Shipping Crate",,,,,
+cntShippingCrateBookstoreLoot,blocks,Container,New,"Bookstore Sealed Shipping Crate",,,,,
+cntShippingCrateCarPartsLoot,blocks,Container,New,"Pass'n'Gas Sealed Shipping Crate",,,,,
+cntShippingCrateShotgunMessiahLoot,blocks,Container,New,"Shotgun Messiah Sealed Shipping Crate",,,,,
+cntShippingCrateWorkingStiffsLoot,blocks,Container,New,"Working Stiffs Sealed Shipping Crate",,,,,
+cntAmmoPileSmallLoot,blocks,Container,New,"Ammo Pile (Small)",,,,,
+cntAmmoPileMediumLoot,blocks,Container,New,"Ammo Pile (Medium)",,,,,
+cntAmmoPileLargeLoot,blocks,Container,New,"Ammo Pile (Large)",,,,,
+cntMedicalPileSmallLoot,blocks,Container,New,"Medical Pile (Small)",,,,,
+cntMedicalPileMediumLoot,blocks,Container,New,"Medical Pile (Medium)",,,,,
+cntMedicalPileLargeLoot,blocks,Container,New,"Medical Pile (Large)",,,,,
+cntFoodPileSmallLoot,blocks,Container,New,"Food Pile (Small)",,,,,
+cntFoodPileMediumLoot,blocks,Container,New,"Food Pile (Medium)",,,,,
+cntFoodPileLargeLoot,blocks,Container,New,"Food Pile (Large)",,,,,
+cntMedicLootPileALoot,blocks,Container,New,"Medical Supplies",,,,,
+cntMedicLootPileBLoot,blocks,Container,New,"Medical Supplies",,,,,
+
+storeShelfGeneric1FM,blocks,Container,New,"Generic Store Shelves",,,,,
+storeShelfGeneric2FM,blocks,Container,New,"Generic Store Shelves",,,,,
+storeShelfGeneric3FM,blocks,Container,New,"Generic Store Shelves",,,,,
+storeShelfFood1FM,blocks,Container,New,"Food Store Shelves",,,,,
+storeShelfFood2FM,blocks,Container,New,"Food Store Shelves",,,,,
+storeShelfToolsFM,blocks,Container,New,"Tool Store Shelves",,,,,
+storeShelfMedicalFM,blocks,Container,New,"Medical Store Shelves",,,,,
+
+perkScrapCollectorFMName,progression,Perk,New,"Scrap Collector",,,,,
+perkScrapCollectorFMDesc,progression,Perk,New,"Harvest more useful items from man-made sources, such as wood piles, pallets, and trash.",,,,,
+perkScrapCollectorFMRank1Desc,progression,Perk,New,"Blind Bugger",,,,,
+perkScrapCollectorFMRank2Desc,progression,Perk,New,"Chunderbox Diver",,,,,
+perkScrapCollectorFMRank3Desc,progression,Perk,New,"Trashcan Surfer",,,,,
+perkScrapCollectorFMRank4Desc,progression,Perk,New,"Resourceful Scavenger",,,,,
+perkScrapCollectorFMRank5Desc,progression,Perk,New,"Scrap Collector",,,,,
+perkScrapCollectorFMRank1LongDesc,progression,Perk,New,"Resourcefulness may not be your strong suit, but you've got a sharper eye than the average Joe. Gain 20% more resources from pallets, suitcases, bricks, wood piles and trash piles when harvesting them.",,,,,
+perkScrapCollectorFMRank2LongDesc,progression,Perk,New,"Knowing what to look for and where to look for it is starting to become second-nature. Gain 40% more resources from pallets, suitcases, bricks, wood piles and trash piles when harvesting them.",,,,,
+perkScrapCollectorFMRank3LongDesc,progression,Perk,New,"You have a knack for finding useful things in trash piles. Gain 60% more resources from pallets, suitcases, bricks, wood piles and trash piles when harvesting. You have a small chance to find magazines, leftover food and medical supplies in trash piles, tools in brick pallets, cloth and sewing kits in suitcases, engines and wheels in scrapped car parts, springs, nails and coins in couches and furniture, concrete in cinder blocks, and extra sand from white pallets. Occasionally find scrap brass and lead from destroying box pallets and forged iron when destroying scrap metal piles.",,,,,
+perkScrapCollectorFMRank4LongDesc,progression,Perk,New,"Your keen eye is never fooled. Gain 80% more resources from pallets, suitcases, bricks, wood piles and trash piles when harvesting. You have a small chance to find weapon and armour parts in trash piles and clothing in suitcases. Occasionally find forged iron and acid from destroying box pallets.",,,,,
+perkScrapCollectorFMRank5LongDesc,progression,Perk,New,"There once was a time where trinkets in trash cans would slip right past you, but no more. Gain 100% more resources from pallets, suitcases, bricks, wood piles and trash piles when harvesting. You have a small chance to find gems in trash piles. Occasionally find steel from destroying box pallets or scrap metal piles."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

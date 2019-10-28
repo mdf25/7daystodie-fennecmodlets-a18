@@ -1,0 +1,109 @@
+<configs>
+
+<!-- Adjust the loot you find from junk and other areas to be more balanced (and useful) -->
+
+<!-- JUNK -->
+<!-- Make ammo supplies more common in junk so you can craft your own from scavenging -->
+<setattribute xpath="//lootgroup[@name='junk']/item[@name='resourceGunPowder']" 	name="count">20,30</setattribute>
+<setattribute xpath="//lootgroup[@name='junk']/item[@name='resourceNail']" 			name="count">5,50</setattribute>
+<setattribute xpath="//lootgroup[@name='junk']/item[@name='resourceBulletCasing']" 	name="count">20,30</setattribute>
+<setattribute xpath="//lootgroup[@name='junk']/item[@name='resourceFeather']" 		name="count">5,10</setattribute>
+<setattribute xpath="//lootgroup[@name='junk']/item[@name='resourceScrapPolymers']" name="count">5,10</setattribute>
+<append xpath="//lootgroup[@name='junk']">
+	<item name="resourceBulletTip"		count="10,15" />
+</append>
+
+<!-- WORKING STIFFS -->
+<!-- Makes building supplies a little more plentiful in crates -->
+<setattribute xpath="//lootgroup[@name='workingStiffs']/item[@name='woodFrameBlockVariantHelper']" 	name="count">50,100</setattribute>
+<setattribute xpath="//lootgroup[@name='workingStiffs']/item[@name='rebarFrameBlockVariantHelper']" name="count">40,60</setattribute>
+<setattribute xpath="//lootgroup[@name='workingStiffs']/item[@name='resourceScrapPolymers']" name="count">20,30</setattribute>
+<setattribute xpath="//lootgroup[@name='workingStiffs']/item[@name='resourceWood']" name="count">100,500</setattribute>
+<append xpath="//lootgroup[@name='workingStiffs']">
+	<item name="resourceConcreteMix"		count="100,200" />
+	<item name="resourceCobblestones"		count="100,500" />
+</append>
+
+<!-- SHOTGUN MESSIAH -->
+<!-- Reduce the chance of finding full guns, but increase ammo amount -->
+<setattribute xpath="//lootcontainer[@id='50']/item[@group='groupAmmoRegular']" 		name="prob">2.0</setattribute>
+<setattribute xpath="//lootcontainer[@id='50']/item[@group='groupAmmoRegular']" 		name="count">1,3</setattribute>
+<setattribute xpath="//lootcontainer[@id='50']/item[@group='weaponParts']" 				name="prob">0.6</setattribute>
+<removeattribute xpath="//lootcontainer[@id='50']/item[@group='groupWeaponsScaled']/@prob" />
+<setattribute xpath="//lootcontainer[@id='50']/item[@group='groupWeaponsScaled']" 		name="loot_prob_template">probTemplate1.0</setattribute>
+<removeattribute xpath="//lootcontainer[@id='50']/item[@group='groupArmorScaled']/@prob" />
+<setattribute xpath="//lootcontainer[@id='50']/item[@group='groupArmorScaled']" 		name="loot_prob_template">probTemplate0.5</setattribute>
+
+
+<!-- Adds new loot containers for the wood burning stove and pallets -->
+<insertAfter xpath="/lootcontainers/lootcontainer[@id='124']">
+	<!-- cntWoodBurningStove -->
+	<lootcontainer id="180" count="0,2" size="5,1" sound_open="UseActions/open_mailbox" sound_close="UseActions/close_mailbox" loot_quality_template="qualBaseTemplate">
+		<item name="resourceWood" count="4,12" prob="0.5" />
+		<item name="resourceCoal" count="4,12" prob="1.2" />
+	</lootcontainer>
+	
+	<!-- pallets -->
+	<lootcontainer id="181" count="1" size="6,3" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+		<item group="junk"					count="2,3" 	prob="10" />
+		<item group="groupApparelClothes" 	count="1,2" 	prob="1" />
+		<item group="books"					prob="0.5" />
+		<item group="automotive" 			prob="0.3" />
+		<item group="dyes" 					prob="0.005" />
+		<item name="meleeToolPaintTool" 	prob="0.01" />
+		<item name="meleeToolFlashlight02"	prob="0.01" />
+		<item name="meleeToolWrench"		prob="0.005" />
+		<item group="electricalDevices" 	prob="0.7" />
+		<item group="groupAmmoRegular"		prob="0.02" />
+	</lootcontainer>
+	
+	<!-- Car door scrap -->
+	<lootcontainer id="182" size="5,1" sound_open="UseActions/open_vehicle" sound_close="UseActions/close_vehicle" open_time="4" loot_quality_template="qualBaseTemplate">
+		<item group="junk" 					count="1" 		prob="6" />
+		<item group="beverages" 			count="1" 		prob="2" />
+		<item group="perkBooks"				count="1"		prob="0.1" />
+		<item name="oldCash" 				count="2,8" 	prob="0.9" />
+		<item name="casinoCoin" 			count="1,60" 	prob="1" />
+	</lootcontainer>
+	
+	<!-- Generic store shelves -->
+	<lootcontainer id="183" count="1" size="6,3" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+		<item group="junk"					count="1,2" 	prob="8" />
+		<item group="groupApparelClothes" 			 		prob="1" />
+		<item group="books"									prob="0.5" />
+		<item group="electricalDevices" 					prob="0.48" />
+		<item group="groupAmmoRegular"						prob="0.02" />
+	</lootcontainer>
+	
+	<!-- Food store shelves -->
+	<lootcontainer id="184" count="1" size="6,3" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+		<item group="cannedfood" 							prob="3.5" />
+		<item group="rottenFood" 							prob="2" />
+		<item group="beverages" 							prob="3.5" />
+		<item name="drinkCanEmpty" 							prob="1" />
+	</lootcontainer>
+	
+	<!-- Tool store shelves -->
+	<lootcontainer id="185" count="1" size="6,3" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+		<item group="tools"									prob="5" />
+		<item group="toolParts"								prob="2" />
+		<item group="automotive"							prob="1.95" />
+		<item group="vehicleParts"							prob="0.05" />
+	</lootcontainer>
+	
+	<!-- Medical store shelves -->
+	<lootcontainer id="186" count="1" size="6,3" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+		<item group="survivalMedical"						prob="1" />
+	</lootcontainer>
+</insertAfter>
+
+
+
+
+
+
+
+
+
+
+</configs>

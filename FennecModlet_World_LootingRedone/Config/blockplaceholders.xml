@@ -1,5 +1,10 @@
 <configs>
 	
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - World - Looting Redone -->
+	</insertBefore>
+	
 	<!-- Reduces the amount of good loot crates at the end of POIs. -->
 	<setattribute xpath="/blockplaceholders/placeholder[@name='cntStoreCratesRandomLootHelper']/block[@name='cntShippingCrateShamway']" name="prob">1.5</setattribute>
 	<setattribute xpath="/blockplaceholders/placeholder[@name='cntStoreCratesRandomLootHelper']/block[@name='cntShippingCrateShotgunMessiah']" name="prob">0.5</setattribute>

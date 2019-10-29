@@ -1,0 +1,15 @@
+<configs>
+
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Skills - New: Scrap Collector -->
+	</insertBefore>
+
+	<insertAfter xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='HarvestCount'][last()]">
+		<passive_effect name="HarvestCount" operation="base_set" value="1" tags="scrapCollectorHarvest" />
+		<passive_effect name="HarvestCount" operation="base_set" value="0" tags="scrapCollectorHarvest3" />
+		<passive_effect name="HarvestCount" operation="base_set" value="0" tags="scrapCollectorHarvest4" />
+		<passive_effect name="HarvestCount" operation="base_set" value="0" tags="scrapCollectorHarvest5" />
+	</insertAfter>
+
+</configs>

@@ -1,28 +1,33 @@
 <configs>
 
-<!-- Adds car parts to the wasteland biome that can be looted or scrapped -->
-<append xpath="/worldgeneration/biomes/biome[@name='wasteland']//decorations">
-	<decoration type="block" blockname="decoCarBackBumperUpright" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarBackBumperFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarBackDoorFlat" prob="0.001" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarBackDoorFlipped" prob="0.001" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarRadiatorFlat" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarRadiatorFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarSeatUpright" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarSeatFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarFenderFlat" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarFenderFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarFrontBumperFlat" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarFrontBumperFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarFrontDoorFlat" prob="0.001" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarFrontDoorFlipped" prob="0.001" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarHoodFlat" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarHoodFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarMotorFlat" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarMotorFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarTrunkLidFlat" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarTrunkLidFlipped" prob="0.002" rotatemax="3"/>
-	<decoration type="block" blockname="decoCarPartsRamp" prob="0.002" rotatemax="3"/>
-</append>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - World - Looting Redone -->
+	</insertBefore>
+
+	<!-- Adds car parts to the wasteland biome that can be looted or scrapped -->
+	<append xpath="/worldgeneration/biomes/biome[@name='wasteland']//decorations">
+		<decoration type="block" blockname="decoCarBackBumperUpright" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarBackBumperFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarBackDoorFlat" prob="0.001" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarBackDoorFlipped" prob="0.001" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarRadiatorFlat" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarRadiatorFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarSeatUpright" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarSeatFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarFenderFlat" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarFenderFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarFrontBumperFlat" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarFrontBumperFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarFrontDoorFlat" prob="0.001" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarFrontDoorFlipped" prob="0.001" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarHoodFlat" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarHoodFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarMotorFlat" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarMotorFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarTrunkLidFlat" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarTrunkLidFlipped" prob="0.002" rotatemax="3"/>
+		<decoration type="block" blockname="decoCarPartsRamp" prob="0.002" rotatemax="3"/>
+	</append>
 
 </configs>

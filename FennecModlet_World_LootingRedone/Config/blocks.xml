@@ -150,25 +150,20 @@
 	<!-- Adds some drop events with the tag scrapCollectorHarvest to pallets, junk, etc etc. -->
 	
 	<!-- White bag pallets - get up to 100 more cement mix at level 5 scrap collector, as well as scrap polymers, sand, and concrete mix at higher levels. -->
+	<setattribute xpath="/blocks/block[starts-with(@name, 'palletWhiteBags')]/drop[@tag='allHarvest']" name="tag">scrapCollectorHarvest</setattribute>
 	<append xpath="/blocks/block[@name='palletWhiteBagsBase']">
-		<drop event="Harvest" name="resourceCement" count="2,20"  						tag="scrapCollectorHarvest" />
-		<drop event="Harvest" name="resourceWood" 	count="1" 							tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceCrushedSand" count="5,10"					tag="scrapCollectorHarvest3" />
 		<drop event="Harvest" name="resourceScrapPolymers" count="3,5"					tag="scrapCollectorHarvest4" />
 		<drop event="Harvest" name="resourceConcreteMix" count="5,10"					tag="scrapCollectorHarvest5" />
-	</append>
-	<append xpath="/blocks/block[starts-with(@name, 'palletWhiteBags') and not(@name='palletWhiteBagsBase')]/drop[@event='Harvest' and @name='resourceWood']/..">
-		<drop event="Harvest" name="resourceWood" 	count="0" 							tag="scrapCollectorHarvest" />
 	</append>
 	
 	<!-- Brown boxes pallets - gives more initial papar and polymers, then gives wood and nails at level 1, brass and lead at level 3, acid and iron at level 4 and steel at level 5. -->
 	<setattribute xpath="/blocks/block[@name='palletBrownBoxesBase']/drop[@event='Harvest' and @name='resourcePaper']" name="count">2,10</setattribute>
 	<setattribute xpath="/blocks/block[@name='palletBrownBoxesBase']/drop[@event='Harvest' and @name='resourceScrapPolymers']" name="count">2,10</setattribute>
+	<setattribute xpath="/blocks/block[starts-with(@name, 'palletBrownBoxes')]/drop[@tag='allHarvest']" name="tag">scrapCollectorHarvest</setattribute>
 	<append xpath="/blocks/block[@name='palletBrownBoxesBase']">
-		<drop event="Harvest" name="resourcePaper" 	count="0,2" 						tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceWood"	count="1,3"				prob="0.7"	tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceNail"	count="1,2"				prob="0.3"	tag="scrapCollectorHarvest" />
-		<drop event="Harvest" name="resourceScrapPolymers" count="0,2" 					tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceScrapBrass" count="1,2"			prob="0.55"	tag="scrapCollectorHarvest3" />
 		<drop event="Harvest" name="resourceScrapLead" 	count="1,2"			prob="0.55"	tag="scrapCollectorHarvest3" />
 		<drop event="Harvest" name="resourceForgedIron" count="1"			prob="0.05" tag="scrapCollectorHarvest4" />
@@ -177,9 +172,8 @@
 	</append>
 	
 	<!-- Bricks pallets: Has a chance to give tools from top pallets at levels 3 to 5 and crushed sand from levels 3 onwards. -->
+	<setattribute xpath="/blocks/block[starts-with(@name, 'palletBricks')]/drop[@tag='allHarvest']" name="tag">scrapCollectorHarvest</setattribute>
 	<append xpath="/blocks/block[@name='palletBricksBase']">	
-		<drop event="Harvest" name="resourceWood"	count="0,1"							tag="scrapCollectorHarvest" />
-		<drop event="Harvest" name="resourceRockSmall" count="10"						tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceCrushedSand" count="3,6"					tag="scrapCollectorHarvest3" />
 	</append>
 	<append xpath="/blocks/block[@name='palletBricksTop']">
@@ -190,19 +184,12 @@
 		<drop event="Destroy" name="meleeToolShovelSteel" count="1"			prob="0.02" tag="scrapCollectorHarvest4" />
 		<drop event="Destroy" name="meleeToolSledgehammerIron" count="1" 	prob="0.02" tag="scrapCollectorHarvest4" />
 		<drop event="Destroy" name="meleeToolSledgehammerSteel" count="1"	prob="0.01" tag="scrapCollectorHarvest5" />
-	</append>
-	<append xpath="/blocks/block[starts-with(@name, 'palletBricks') and not(@name='palletBricksBase')]">
-		<drop event="Harvest" name="resourceWood"	count="0"							tag="scrapCollectorHarvest" />
 	</append>	
 	
 	<!-- Blue bags: Gives more cobblestone each level, and polymers from level 3 onwards. -->
+	<setattribute xpath="/blocks/block[starts-with(@name, 'palletBlueTarp')]/drop[@tag='allHarvest']" name="tag">scrapCollectorHarvest</setattribute>
 	<append xpath="/blocks/block[@name='palletBlueTarpBase']">
-		<drop event="Harvest" name="resourceCobblestones" count="7"						tag="scrapCollectorHarvest" />
-		<drop event="Harvest" name="resourceWood" count="0,1"							tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceScrapPolymers" count="1,3"					tag="scrapCollectorHarvest3" />
-	</append>
-	<append xpath="/blocks/block[starts-with(@name, 'palletBlueTarp') and not(@name='palletBlueTarpBase')]">
-		<drop event="Harvest" name="resourceWood" count="0"								tag="scrapCollectorHarvest" />
 	</append>
 	
 	<!-- Empty pallets: Gives extra wood each level. -->
@@ -219,20 +206,20 @@
 	</append>
 	
 	<!-- Sand bags: Gives more sand and cloth on harvest -->
-	<append xpath="/blocks/block[@name='sandbagStraight01']">
+	<append xpath="/blocks/block[starts-with(@name, 'sandbag')]">
 		<drop event="Harvest" name="resourceCrushedSand" count="3"						tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceCloth" count="2"							tag="scrapCollectorHarvest" />
 	</append>
 	
 	<!-- Wood Piles: gives extra wood at higher levels -->
-	<append xpath="/blocks/block[@name='modularFireWoodStackA']">
+	<append xpath="/blocks/block[starts-with(@name, 'modularFireWoodStack')]">
 		<drop event="Harvest" name="resourceWood" count="6"								tag="scrapCollectorHarvest" />
 		<drop event="Destroy" name="meleeToolFireaxeIron" count="1"			prob="0.01" tag="scrapCollectorHarvest3" />
 		<drop event="Destroy" name="meleeToolFireaxeSteel" count="1"		prob="0.01" tag="scrapCollectorHarvest4" />
 	</append>
 	
 	<!-- Cinder blocks: gives more stone at higher levels -->
-	<append xpath="/blocks/block[@name='cinderBlocks01']">
+	<append xpath="/blocks/block[starts-with(@name, 'cinderBlocks')]">
 		<drop event="Harvest" name="resourceRockSmall" count="1"						tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceConcreteMix" count="2,3"					tag="scrapCollectorHarvest3" />
 	</append>
@@ -243,13 +230,13 @@
 	</append>
 	
 	<!-- Curtains and blinds: gives more cloth or polymers respectively -->
-	<append xpath="/blocks/block[@name='curtain_top1Sheet3']">
+	<append xpath="/blocks/block[starts-with(@name, 'curtain_')]">
 		<drop event="Harvest" name="resourceCloth" count="0,2" 							tag="scrapCollectorHarvest" />
 	</append>
-	<append xpath="/blocks/block[@name='commercialBlindsTop']">
+	<append xpath="/blocks/block[starts-with(@name, 'commercialBlinds')]">
 		<drop event="Harvest" name="resourceScrapPolymers" count="0,2" 					tag="scrapCollectorHarvest" />
 	</append>
-	<append xpath="/blocks/block[@name='miniblindTopSheet']">
+	<append xpath="/blocks/block[starts-with(@name, 'miniblind')]">
 		<drop event="Harvest" name="resourceScrapPolymers" count="0,2" 					tag="scrapCollectorHarvest" />
 	</append>
 	
@@ -261,14 +248,14 @@
 	</append>
 	
 	<!-- Sectional couches: Drops more cloth/leather and wood, and springs/nails at higher levels -->
-	<append xpath="/blocks/block[@name='sectionalPlaidCouchSofaMiddle']">
+	<append xpath="/blocks/block[starts-with(@name, 'sectionalPlaidCouchSofa')]">
 		<drop event="Harvest" name="resourceCloth" count="1"							tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceWood"  count="1"							tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceSpring" count="1"							tag="scrapCollectorHarvest3" />
 		<drop event="Harvest" name="resourceNail" count="2"								tag="scrapCollectorHarvest3" />
 		<drop event="Harvest" name="casinoCoin" count="1,3"					prob="0.05" tag="scrapCollectorHarvest3" />
 	</append>
-	<append xpath="/blocks/block[@name='sectionalLeatherCouchSofaArm']">
+	<append xpath="/blocks/block[starts-with(@name, 'sectionalLeatherCouchSofa')]">
 		<drop event="Harvest" name="resourceLeather" count="1"							tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceWood"  count="1"							tag="scrapCollectorHarvest" />
 		<drop event="Harvest" name="resourceSpring" count="1"							tag="scrapCollectorHarvest3" />

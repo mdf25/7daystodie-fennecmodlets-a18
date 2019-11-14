@@ -9,7 +9,7 @@
 	<append xpath="/items">
 
 		<!-- Workstation Removal Tool -->
-		<item name="meleeToolWorkstationRemovalToolFM"> <!-- T2 Tools -->
+		<item name="meleeToolWorkstationRemovalToolFM">
 			<property name="Tags" value="melee,light,tool,attStrength,perkMiner69r,perkMotherLode,canHaveCosmetic"/>
 			<property name="CustomIcon" value="meleeToolClawHammer"/>
 			<property name="CustomIconTint" value="a6801f" />
@@ -36,9 +36,9 @@
 				<property name="SwingAngle" value="135"/>
 				<property name="UseGrazingHits" value="true"/>
 			</property>
-			<property class="Action1"> <!-- UseAction -->
+			<property class="Action1">
 				<property name="Class" value="Repair"/>
-				<property name="Delay" value=".64"/> <!-- Repair actions still need the delay amount -->
+				<property name="Delay" value=".64"/>
 				<property name="Repair_amount" value="400"/>
 				<property name="Upgrade_hit_offset" value="0"/>
 				<property name="Sound_start" value="repair_block"/>
@@ -48,18 +48,15 @@
 			<effect_group name="meleeToolClawHammer">
 				<passive_effect name="MaxRange" operation="base_set" value="2.2"/>
 				<passive_effect name="BlockRange" operation="base_set" value="2.5"/>
-				<passive_effect name="EntityDamage" operation="base_set" value="12"/> <!-- meleeToolClawHammer -->
-				<passive_effect name="EntityDamage" operation="perc_add" value="-.15,.15"/> <!-- random rng -->
-				<passive_effect name="EntityDamage" operation="perc_add" value=".1,.5" tier="2,6"/> <!-- tier bonus -->
-
+				<passive_effect name="EntityDamage" operation="base_set" value="12"/>
+				<passive_effect name="EntityDamage" operation="perc_add" value="-.15,.15"/>
+				<passive_effect name="EntityDamage" operation="perc_add" value=".1,.5" tier="2,6"/>
 				<passive_effect name="BlockDamage" operation="base_set" value="22"/>
-				<passive_effect name="BlockDamage" operation="perc_add" value="-.15,.15"/> <!-- random BlockDmg -->
-				<passive_effect name="BlockDamage" operation="perc_add" value=".1,.5" tier="2,6"/> <!-- tier bonus -->
-
-				<passive_effect name="DegradationMax" operation="perc_add" value="-.15,.15" tags="perkMiner69r"/> <!-- random DegMax -->
-				<passive_effect name="AttacksPerMinute" operation="perc_add" value="-.05,.05"/> <!-- random APM -->
-				<passive_effect name="StaminaLoss" operation="perc_add" value="-.05,.05"/> <!-- random StamLoss -->
-
+				<passive_effect name="BlockDamage" operation="perc_add" value="-.15,.15"/>
+				<passive_effect name="BlockDamage" operation="perc_add" value=".1,.5" tier="2,6"/>
+				<passive_effect name="DegradationMax" operation="perc_add" value="-.15,.15" tags="perkMiner69r"/>
+				<passive_effect name="AttacksPerMinute" operation="perc_add" value="-.05,.05"/>
+				<passive_effect name="StaminaLoss" operation="perc_add" value="-.05,.05"/>
 				<display_value name="dBlockRepairAmount" value="400"/>
 				<passive_effect name="DamageModifier" operation="perc_add" value="-.5" tags="wood"/>
 				<passive_effect name="DamageModifier" operation="perc_add" value="-.75" tags="earth"/>
@@ -81,9 +78,9 @@
 			<property name="HoldType" value="45"/>
 			<property name="Meshfile" value="#Other/Items?Misc/sackPrefab.prefab"/>
 			<property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
-			<property name="Material" value="MresourceIronFragment"/>
+			<property name="Material" value="Mmetal"/>
 			<property name="Weight" value="25"/>
-			<property name="Stacknumber" value="5"/> <!-- STK resource -->
+			<property name="Stacknumber" value="5"/>
 			<property name="SellableToTrader" value="true"/>
 			<property name="EconomicValue" value="300"/>
 			<property name="UnlockedBy" value="perkSalvageOperations" />
@@ -102,7 +99,7 @@
 			<property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
 			<property name="Material" value="MresourceIronFragment"/>
 			<property name="Weight" value="25"/>
-			<property name="Stacknumber" value="50"/> <!-- STK resource -->
+			<property name="Stacknumber" value="50"/>
 			<property name="SellableToTrader" value="true"/>
 			<property name="EconomicValue" value="50"/>
 			<property name="Group" value="Resources"/>

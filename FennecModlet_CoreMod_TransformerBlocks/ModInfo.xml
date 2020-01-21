@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<ModInfo>
+		<Name value="FennecModlet - CoreMod - Transformer Blocks"/>
+		<Description value="Adds capability for blocks to turn one item into another."/>
+		<Author value="MaxFox Gaming"/>
+		<Version value="1.0"/>
+	</ModInfo>
+</xml>

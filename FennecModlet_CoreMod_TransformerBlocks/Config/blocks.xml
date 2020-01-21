@@ -1,0 +1,165 @@
+<configs>
+
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - CoreMod - Transformer Blocks -->
+	</insertBefore>
+	
+	<!-- 
+		WHAT IS A TRANSFORMER BLOCK?
+		- Transformer blocks allow for custom auto crafting recipes.
+		- They take one or more input and produce one or more output after a time.
+		- You can specify as many inputs and outputs as you want, but bear in mind that the inputs and
+		   outputs should not exceed the container size else the transformation will not work. 
+		   It is recommended to make your container size big enough to handle all inputs and all
+		   outputs at the same time, to avoid blockage, though you can use it as a limiter.
+		   
+		HOW TO ADD YOUR OWN 
+		- You need to specify 3 things
+			1. A loot list. This should also be added to loot.xml so it is found.
+			2. <property name="Class" value="Transformer, Mods" />
+			3. <property class="Transformations"> ... </property>
+		
+		HOW TO ADD TRANSFORMATION TIME
+		- In property class Transformations, add 
+			<property name="TransformationX_Time" value="T" />
+		  where 
+		  - X is the index of your transformation (starting from 1) 
+		  - T is the time, a whole number.
+		  
+		  Example
+			<property name="Transformation1_Time" value="4" />
+		  This transformation will take 4 seconds to complete.
+		
+		HOW TO ADD INPUTS
+		- In property class Transformations, add
+			<property name="TransformationX_InputY" value="I,C" />
+		  where 
+		  - X is the transformation index (starts from 1), 
+		  - Y is the item index (starts from 1),
+		  - I is the item name as it appears in items.xml, 
+		  - C is the count of how many are needed (optional, will be 1 if not specified).
+		  
+		  Example:
+			<property name="Transformation1_Input1" value="resourceRockSmall,3" />
+			<property name="Transformation1_Input2" value="drinkJarEmpty" />
+		  This transformation needs 3 small stones and an empty jar for its inputs - notice how we
+		  didn't specify the amount for the empty jar since it defaults to 1.
+		  
+		HOW TO ADD OUTPUTS
+		- Outputs are similar to inputs but they have one extra property.
+			<property name="TransformationX_OutputY" value="I,C,P" />
+		  where 
+		  - X is the transformation index (starts from 1), 
+		  - Y is the item index (starts from 1),
+		  - I is the item name as it appears in items.xml, 
+		  - C is the count of how many are needed (optional, will be 1 if not specified).
+		  - P is the probability between 0 and 1 that this output will generate (optional, 
+		     will be 1 if not specified).
+		
+		  Example
+		    <property name="Transformation1_Output1" value="resourceSand,2" />
+			<property name="Transformation1_Output2" value="resourceYuccaFibers,5" />
+			<property name="Transformation1_Output3" value="resourceCoal,1,0.1" />
+		  This transformation always gives out 2 sand, 5 plant fibers, and a 10% chance of coal.
+      
+    OPTIONAL PARAMETERS
+    As well as specifying what items are needed, you can specify too whether the block needs a power source, and what power sources
+    are required to power the block. Note that the power block MUST extend from tileEntityPowered so if you want to add your own 
+    relays to power blocks, you can do this. The electric wire relay is the vanilla default one.
+    EXAMPLE: Set the block to require power to work and that it must be next to an electric wire relay.
+      <property name="RequirePower" value="true" />
+      <property name="PowerSources" value="electricwirerelay" />
+    
+    You can also specify if a block requires a campfire to be underneath it for heating purposes.
+    EXAMPLE: Set the block to require heat to work and that it needs a campfire under it.
+      <property name="RequireHeat" value="true" />
+      <property name="HeatSources" value="campfire" />
+      
+    You can specify additional power or heat sources using a comma separated list of block names as they appear in XML.
+    It is recommended to use only heat or only electric to power your block, but you can do both if needed.
+	-->
+
+  <append xpath="/blocks">
+    <block name="TransformerBlockBaseExample">
+      <property name="Extends" 		value="woodMaster" />
+      <property name="Class" 			value="Transformer, Mods" />
+      <property name="LootList" 		value="300" />
+      <property class="Transformations">
+        <!-- 1 -->
+        <property name="Transformation1_Time" value="2" />
+        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <!-- 2 -->
+        <property name="Transformation2_Time" value="2" />
+        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+      </property>
+    </block>
+
+    <block name="TransformerBlockPoweredExample">
+      <property name="Extends" 		value="woodMaster" />
+      <property name="Class" 			value="Transformer, Mods" />
+      <property name="LootList" 		value="300" />
+      <property name="RequirePower" 	value="true" />
+      <property name="PowerSources"   value="electricwirerelay" />
+      <property class="Transformations">
+        <!-- 1 -->
+        <property name="Transformation1_Time" value="2" />
+        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <!-- 2 -->
+        <property name="Transformation2_Time" value="2" />
+        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+      </property>
+    </block>
+
+    <block name="TransformerBlockHeatedExample">
+      <property name="Extends" 		value="woodMaster" />
+      <property name="Class" 			value="Transformer, Mods" />
+      <property name="LootList" 		value="300" />
+      <property name="RequireHeat" 	value="true" />
+      <property name="HeatSources"  value="campfire,forge" />
+      <property class="Transformations">
+        <!-- 1 -->
+        <property name="Transformation1_Time" value="2" />
+        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <!-- 2 -->
+        <property name="Transformation2_Time" value="2" />
+        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+      </property>
+    </block>
+
+    <block name="TransformerBlockHeatAndPowerExample">
+      <property name="Extends" 		value="woodMaster" />
+      <property name="Class" 			value="Transformer, Mods" />
+      <property name="LootList" 		value="300" />
+      <property name="RequirePower" 	value="true" />
+      <property name="PowerSources"   value="electricwirerelay" />
+      <property name="RequireHeat" 	  value="true" />
+      <property name="HeatSources"    value="campfire,forge" />
+      <property class="Transformations">
+        <!-- 1 -->
+        <property name="Transformation1_Time" value="2" />
+        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <!-- 2 -->
+        <property name="Transformation2_Time" value="2" />
+        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+      </property>
+    </block>
+  </append>
+
+</configs>

@@ -1,0 +1,16 @@
+<configs>
+
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - CoreMod - Transformer Blocks -->
+	</insertBefore>
+	
+	<append xpath="/lootcontainers">
+	
+		<lootcontainer id="300" count="0" size="3,2" sound_open="UseActions/open_chest" sound_close="UseActions/close_chest" loot_quality_template="qualBaseTemplate">
+			<item name="cobweb" count="1,2"/>
+		</lootcontainer>
+		
+	</append>
+	
+</configs>

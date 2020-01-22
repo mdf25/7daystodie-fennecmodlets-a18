@@ -76,7 +76,7 @@ public class TransformationPropertyParser
         {
             return false;
         }
-        return ((int)this.GetType(_string) != ((int)TransformationPropertyParser.Type.INVALID));
+        return (this.GetType(_string) != TransformationStringType.INVALID);
     }
     
 
@@ -117,9 +117,9 @@ public class TransformationPropertyParser
     {
         switch (this.GetType(transformationString))
         {
-            case (int)TransformationPropertyParser.Type.INPUT:
+            case TransformationStringType.INPUT:
                 return this.transformMaxInputs;
-            case (int)TransformationPropertyParser.Type.OUTPUT:
+            case TransformationStringType.OUTPUT:
                 return this.transformMaxOutputs;
         }
         
@@ -131,21 +131,21 @@ public class TransformationPropertyParser
      * Gets the transformation type based on the transformation string given.
      */
 
-    protected int GetType(string transformationString)
+    protected TransformationStringType GetType(string transformationString)
     {
         if (transformationString.Contains(this.inputString))
         {
-            return (int)TransformationPropertyParser.Type.INPUT;
+            return TransformationStringType.INPUT;
         } 
         else if (transformationString.Contains(this.outputString))
         {
-            return (int)TransformationPropertyParser.Type.OUTPUT;
+            return TransformationStringType.OUTPUT;
         }
         else if (transformationString.Contains(this.timeString))
         {
-            return (int)TransformationPropertyParser.Type.TIME;
+            return TransformationStringType.TIME;
         }
-        return (int)TransformationPropertyParser.Type.INVALID;
+        return TransformationStringType.INVALID;
     }
 
     
@@ -155,30 +155,10 @@ public class TransformationPropertyParser
 
     protected void AddToListIfNew(List<int> _list, int _value)
     {
-        if (!this.ListHas(_list, _value))
+        if (!_list.Contains(_value))
         {
             _list.Add(_value);
         }
-    }
-
-
-    /**
-     * Checks if a value is found in a list or not.
-     */
-
-    protected bool ListHas(List<int> _list, int _value)
-    {
-        if (_list.Count == 0)
-            return false;
-
-        foreach (int existingValue in _list)
-        {
-            if (_value == existingValue)
-            {
-                return true;
-            }
-        }
-        return false;
     }
     
 
@@ -355,8 +335,8 @@ public class TransformationPropertyParser
     {
         foreach (int transformationIndex in this.transformationIndexes)
         {
-            this.AddToTData(tData, transformationIndex, this.transformMaxInputs[transformationIndex], (int)TransformationPropertyParser.Type.INPUT);
-            this.AddToTData(tData, transformationIndex, this.transformMaxOutputs[transformationIndex], (int)TransformationPropertyParser.Type.OUTPUT);
+            this.AddToTData(tData, transformationIndex, this.transformMaxInputs[transformationIndex], TransformationStringType.INPUT);
+            this.AddToTData(tData, transformationIndex, this.transformMaxOutputs[transformationIndex], TransformationStringType.OUTPUT);
         }
     }
 
@@ -365,16 +345,16 @@ public class TransformationPropertyParser
      * Adds an element to transformation data.
      */
 
-    protected void AddToTData(Dictionary<int, TransformationData> tData, int transformationIndex, int maxIOIndex, int type)
+    protected void AddToTData(Dictionary<int, TransformationData> tData, int transformationIndex, int maxIOIndex, TransformationStringType type)
     {
         string ioString;
 
         switch (type)
         {
-            case ((int)TransformationPropertyParser.Type.INPUT):
+            case (TransformationStringType.INPUT):
                 ioString = this.inputString;
                 break;
-            case ((int)TransformationPropertyParser.Type.OUTPUT):
+            case (TransformationStringType.OUTPUT):
                 ioString = this.outputString;
                 break;
             default:
@@ -405,8 +385,8 @@ public class TransformationPropertyParser
     {
         string itemPropData = this.transformationPropClass.Values[itemPropName];
 
-        int type = this.GetType(itemPropName);
-        if ((int)type != ((int)TransformationPropertyParser.Type.INPUT) && (int)type != ((int)TransformationPropertyParser.Type.OUTPUT))
+        TransformationStringType type = this.GetType(itemPropName);
+        if (type != TransformationStringType.INPUT && type != TransformationStringType.OUTPUT)
         {
             throw new Exception("Item property name " + itemPropName + " is not an input or output string.");
         }
@@ -430,7 +410,7 @@ public class TransformationPropertyParser
                 itemCount = this.defaultItemCount;
             }
 
-            if (type.Equals((int)TransformationPropertyParser.Type.OUTPUT))
+            if (type == TransformationStringType.OUTPUT)
             {
                 itemProb = this.defaultItemProb;
                 if (propData.GetLength(0) > 2)
@@ -452,13 +432,13 @@ public class TransformationPropertyParser
      * Returns a TransformerItemInput or TransformerItemOutput for the ITransformerItem passed in.
      */
 
-    protected ITransformerItem GetITransformerItemForType(int type, string itemName, int itemCount, double itemProb)
+    protected ITransformerItem GetITransformerItemForType(TransformationStringType type, string itemName, int itemCount, double itemProb)
     {
         switch (type)
         {
-            case ((int)TransformationPropertyParser.Type.INPUT):
+            case (TransformationStringType.INPUT):
                 return new TransformerItemInput(ItemClass.GetItem(itemName), itemCount);
-            case ((int)TransformationPropertyParser.Type.OUTPUT):
+            case (TransformationStringType.OUTPUT):
                 return new TransformerItemOutput(ItemClass.GetItem(itemName), itemCount, itemProb);
             default:
                 throw new Exception("Item property name " + itemName + " is not an input or output string.");
@@ -518,11 +498,7 @@ public class TransformationPropertyParser
         }
         else
         {
-            string[] powerSources = this.blockTransformerBlock.Block.Properties.Values[propPowerSources].Split(',');
-            for (int i = 0; i < powerSources.Length; i += 1)
-            {
-                this.powerSources.Add(powerSources[i].Trim());
-            }
+            this.powerSources = StringHelpers.WriteStringToList(this.blockTransformerBlock.Block.Properties.Values[propPowerSources]);
         }
 
         this.CheckBlocksDefined(this.powerSources);
@@ -553,11 +529,7 @@ public class TransformationPropertyParser
         }
         else
         {
-            string[] heatSources = this.blockTransformerBlock.Block.Properties.Values[propHeatSources].Split(',');
-            for (int i = 0; i < heatSources.Length; i += 1)
-            {
-                this.heatSources.Add(heatSources[i].Trim());
-            }
+            this.heatSources = StringHelpers.WriteStringToList(this.blockTransformerBlock.Block.Properties.Values[propHeatSources]);
         }
 
         this.CheckBlocksDefined(this.heatSources);
@@ -600,8 +572,6 @@ public class TransformationPropertyParser
     protected string inputString                        = "_Input";
     protected string outputString                       = "_Output";
     protected string timeString                         = "_Time";
-
-    protected enum Type { INVALID = 0, INPUT = 1, OUTPUT = 2, TIME = 3 };
 
     // Used for extracting transformation numbers from the string.
     protected string pattern                            = @"([0-9]+)";

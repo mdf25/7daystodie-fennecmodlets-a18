@@ -4,7 +4,10 @@
 		<name>FennecModlet - CoreMod - Transformer Blocks</name>
 		<description>Adds capability for blocks to turn one item into another.</description>
 		<mod_version>1.0</mod_version>
-		<game_version>18.1</game_version>
+		<game_version>18.2</game_version>
 		<launcher_version>0.7.3</launcher_version>
+		<dependencies>
+			<dependency>FennecCore</dependency>
+		</dependencies>
 	</info>
 </mod>

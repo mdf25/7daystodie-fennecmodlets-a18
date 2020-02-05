@@ -1,0 +1,598 @@
+<configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+	
+	<!-- New buffs for all the harder to make food types in the game. Food now provides some nice effects. -->
+	
+	<!-- Add new food buffs -->
+	<append xpath="/buffs">
+		
+		<!-- Apple Cider: Increases melee damage slightly and gives cold weather resistance -->
+		<!-- ui_game_symbol_applecider -->
+		<buff name="buffAppleCiderFM" name_key="buffAppleCiderFMName" description_key="buffAppleCiderFMDesc" icon="ui_game_symbol_applecider" icon_color="154,179,34">
+			<damage_type value="disease"/>
+			<stack_type value="replace"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="EntityDamage" 	operation="perc_add" value="1.5">
+					<requirement name="HoldingItemHasTags" tags="melee" />
+				</passive_effect>
+				<passive_effect name="HypothermalResist" operation="base_add" value="10">
+					<requirement name="NotHasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+				<passive_effect name="HypothermalResist" operation="base_add" value="5">
+					<requirement name="HasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" intensity="0.1" effect_name="Drunk"/>
+				<triggered_effect trigger="onSelfBuffFinish" action="ModifyScreenEffect" intensity="0" effect_name="Drunk"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Apple Juice: Gives some cold weather resistance -->
+		<!-- ui_game_symbol_applejuice -->
+		<buff name="buffAppleJuiceFM" name_key="buffAppleJuiceFMName" description_key="buffAppleJuiceFMDesc" icon="ui_game_symbol_applejuice" icon_color="154,215,34">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HypothermalResist" operation="base_add" value="10">
+					<requirement name="NotHasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+				<passive_effect name="HypothermalResist" operation="base_add" value="5">
+					<requirement name="HasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Banger: Shotguns deal extra damage. -->
+		<!-- ui_game_symbol_banger -->
+		<buff name="buffBangerFM" name_key="buffBangerFMName" description_key="buffBangerFMDesc" icon="ui_game_symbol_banger" icon_color="24,178,59">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<requirement name="HoldingItemHasTags" tags="shotgun" target="self" />
+				<passive_effect name="EntityDamage"		operation="perc_add" value="0.2" />
+				<passive_effect name="DamageModifier" 	operation="perc_add" value="0.2" tags="head" />
+			</effect_group>
+		</buff>
+		
+		<!-- Bloody Mary: Gives some damage resistance and bleeding resistance -->
+		<!-- ui_game_symbol_bloodymary -->
+		<buff name="buffBloodyMaryFM" name_key="buffBloodyMaryFMName" description_key="buffBloodyMaryFMDesc" icon="ui_game_symbol_bloodymary" icon_color="247,78,59">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<passive_effect name="PhysicalDamageResist" operation="base_add" value="10" tags="coredamageresist"/>
+				<passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryBleeding"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Blueberry Juice: Gives some hot weather resistance -->
+		<!-- ui_game_symbol_blueberryjuice -->
+		<buff name="buffBlueberryJuiceFM" name_key="buffBlueberryJuiceFMName" description_key="buffBlueberryJuiceFMDesc" icon="ui_game_symbol_blueberryjuice" icon_color="59,166,247">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HyperthermalResist" operation="base_add" value="10">
+					<requirement name="NotHasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+				<passive_effect name="HyperthermalResist" operation="base_add" value="5">
+					<requirement name="HasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Blueberry Wine: Speeds up your movement speed -->
+		<!-- ui_game_symbol_blueberrywine -->
+		<buff name="buffBlueberryWineFM" name_key="buffBlueberryWineFMName" description_key="buffBlueberryWineFMDesc" icon="ui_game_symbol_blueberrywine" icon_color="82,82,250">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<passive_effect name="RunSpeed" operation="perc_add" value=".25"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Catlike Reflexes: Make 20% less noise, jump 3 blocks high, and get 100% headshot damage whilst sneaking. -->
+		<!-- ui_game_symbol_catlikereflexes -->
+		<buff name="buffCatlikeReflexesFM" name_key="buffCatlikeReflexesFMName" description_key="buffCatlikeReflexesFMDesc" icon="ui_game_symbol_catlikereflexes" icon_color="252,248,159">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<requirement name="HasBuff" buff="buffCrouching" target="self"/>
+				<passive_effect name="NoiseMultiplier" operation="perc_subtract" value="0.2" />
+				<passive_effect name="LightMultiplier" operation="perc_subtract" value="0.2" >
+					<requirement name="CVarCompare" cvar="_lightlevel" operation="LTE" value="50"/>
+				</passive_effect>
+			</effect_group>
+			<effect_group>
+				<requirement name="HasBuff" buff="buffCrouching" target="self"/>
+				<requirement name="CVarCompare" cvar="_notAlerted" operation="NE" value="0" target="other"/>
+				<passive_effect name="DamageBonus" 	operation="base_add" value="1" /> 	
+				<passive_effect name="EntityDamage" operation="perc_add" value="1" />
+			</effect_group>
+			<effect_group>
+				<passive_effect name="JumpStrength" operation="perc_add" value=".75" />
+			</effect_group>
+		</buff>
+		
+		<!-- Doglike Aggression: Swing speed with fists is 50% faster, punches do 500% more damage and run speed is doubled whilst fist or fist weapons are equipped -->
+		<!-- ui_game_symbol_doglikeaggression -->
+		<buff name="buffDoglikeAggressionFM" name_key="buffDoglikeAggressionFMName" description_key="buffDoglikeAggressionFMDesc" icon="ui_game_symbol_doglikeaggression" icon_color="181,13,7">
+			<stack_type value="duration"/>
+			<duration value="600"/>
+			<effect_group>
+				<requirement name="HoldingItemHasTags" tags="perkBrawler" target="self" />
+				<passive_effect name="RunSpeed" 		operation="perc_add" value="1" />
+				<passive_effect name="EntityDamage" 	operation="perc_add" value="5" />
+				<passive_effect name="AttacksPerMinute" operation="perc_add" value="0.5" />
+				<passive_effect name="StaminaChangeOT"	operation="perc_add" value="0.1" />
+			</effect_group>
+		</buff>
+		
+		<!-- Gummy Power - Blue: Crafting speed increases by 10% for a while. -->
+		<!-- ui_game_symbol_gummypower -->
+		<buff name="buffGummyPowerBlueFM" name_key="buffGummyPowerBlueFMName" description_key="buffGummyPowerBlueFMDesc" icon="ui_game_symbol_gummypower" icon_color="0,0,255">
+			<stack_type value="duration"/>
+			<duration value="600"/>
+			<effect_group>
+				<passive_effect name="CraftingTime" operation="perc_subtract" value=".2" />
+			</effect_group>
+		</buff>
+		
+		<!-- Gummy Power - Black: Bartering skills are better by 10% for a while. -->
+		<!-- ui_game_symbol_gummypower -->
+		<buff name="buffGummyPowerBlackFM" name_key="buffGummyPowerBlackFMName" description_key="buffGummyPowerBlackFMDesc" icon="ui_game_symbol_gummypower" icon_color="60,60,60">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="BarteringBuying" 	operation="base_add" value="0.2" />
+				<passive_effect name="BarteringSelling" operation="base_add" value="0.1" />
+				<passive_effect name="SecretStash" 		operation="base_add" value="3000"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Gummy Power - Red: Headshots are much more deadly for a while. -->
+		<!-- ui_game_symbol_gummypower -->
+		<buff name="buffGummyPowerRedFM" name_key="buffGummyPowerRedFMName" description_key="buffGummyPowerRedFMDesc" icon="ui_game_symbol_gummypower" icon_color="255,0,0">
+			<stack_type value="duration"/>
+			<duration value="120"/>
+			<effect_group>
+				<passive_effect name="DamageModifier" 	operation="perc_add" value="1.5" tags="head" />
+				<passive_effect name="DismemberChance" 	operation="base_add" value="0.5" tags="head" />
+			</effect_group>
+		</buff>
+		
+		<!-- Health Regen: Recover health much faster for a short time (Essentially, Healing Factor 5). -->
+		<!-- ui_game_symbol_healthregen -->
+		<buff name="buffHealthRegenFM" name_key="buffHealthRegenFMName" description_key="buffHealthRegenFMDesc" icon="ui_game_symbol_healthregen" icon_color="0,214,143">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HealthChangeOT" 		operation="base_add" value="0.233" />
+				<passive_effect name="HealthMaxModifierOT" 	operation="base_set" value="0.233" />
+			</effect_group>
+		</buff>
+		
+		<!-- Health Regen 2: Recover health much faster for a short time (Better than Healing Factor 5). -->
+		<!-- ui_game_symbol_healthregen -->
+		<buff name="buffHealthRegen2FM" name_key="buffHealthRegenFMName" description_key="buffHealthRegenFMDesc" icon="ui_game_symbol_healthregen" icon_color="214,0,143">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HealthChangeOT" 		operation="base_add" value="0.466" />
+				<passive_effect name="HealthMaxModifierOT" 	operation="base_set" value="0.466" />
+			</effect_group>
+		</buff>
+		
+		<!-- Hearty Meal: Reduces food and water loss. -->
+		<!-- ui_game_symbol_heartymeal -->
+		<buff name="buffHeartyMealFM" name_key="buffHeartyMealFMName" description_key="buffHeartyMealFMDesc" icon="ui_game_symbol_heartymeal" icon_color="255,120,120">
+			<stack_type value="duration"/>
+			<duration value="600"/>
+			<effect_group>
+				<passive_effect name="StaminaLossMaxMult" 				operation="perc_subtract" 	value="0.45" />
+				<passive_effect name="WaterLossPerHealthPointGained" 	operation="perc_subtract" 	value="0.45" />
+				<passive_effect name="WaterLossPerStaminaPointGained" 	operation="perc_subtract" 	value="0.45" />
+				<passive_effect name="HealthChangeOT" 					operation="base_add" 	  	value="0.1" />
+				<passive_effect name="HealthMaxModifierOT" 				operation="base_set" 		value="0.1" />
+			</effect_group>
+		</buff>
+		
+		<!-- Hot Meal: Keeps you warmer in colder environments. -->
+		<!-- ui_game_symbol_hotmeal -->
+		<buff name="buffHotMealFM" name_key="buffHotMealFMName" description_key="buffHotMealFMDesc" icon="ui_game_symbol_hotmeal" icon_color="255,249,69">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HyperthermalResist" operation="base_add" value="15" />	
+			</effect_group>
+		</buff>
+		
+		<!-- Hunters Eye: Butchering animals gives more meat. -->
+		<!-- ui_game_symbol_hunterseye -->
+		<buff name="buffHuntersEyeFM" name_key="buffHuntersEyeFMName" description_key="buffHuntersEyeFMDesc" icon="ui_game_symbol_hunterseye" icon_color="179,218,252">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HarvestCount" operation="perc_add" value=".3" tags="butcherHarvest"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Ice Veins: Protects you from cold weather and gives you damage resistance. -->
+		<!-- ui_game_symbol_iceveins -->
+		<buff name="buffIceVeinsFM" name_key="buffIceVeinsFMName" description_key="buffIceVeinsFMDesc" icon="ui_game_symbol_iceveins" icon_color="138,239,255">
+			<stack_type value="duration"/>
+			<duration value="600"/>
+			<effect_group>
+				<passive_effect name="HypothermalResist" operation="base_add" value="25" />	
+				<passive_effect name="PhysicalDamageResist" operation="perc_add" value="0.2" />
+			</effect_group>
+		</buff>
+		
+		<!-- Junk Head: Allows the use of one additional junk turret -->
+		<!-- ui_game_symbol_junkhead -->
+		<buff name="buffJunkHeadFM" name_key="buffJunkHeadFMName" description_key="buffJunkHeadFMDesc" icon="ui_game_symbol_junkhead" icon_color="40,192,50">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="JunkTurretActiveCount" operation="base_add" value="1" />
+				<passive_effect name="JunkTurretActiveRange" operation="base_add" value="6" />
+			</effect_group>
+		</buff>
+		
+		<!-- Keen Eyes: Helps aiming with ranged weapons. -->
+		<!-- ui_game_symbol_keeneyes -->
+		<buff name="buffKeenEyesFM" name_key="buffKeenEyesFMName" description_key="buffKeenEyesFMDesc" icon="ui_game_symbol_keeneyes" icon_color="245,192,2">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<requirement 	name="HoldingItemHasTags" 			tags="ranged" />
+				<requirement 	name="HoldingItemHasTags" 			tags="shotgun" invert="true" />
+				<passive_effect name="SpreadMultiplierAiming" 		operation="perc_add" value=".2" />
+				<passive_effect name="SpreadMultiplierCrouching" 	operation="perc_add" value=".3" />
+				<passive_effect name="SpreadMultiplierWalking" 		operation="perc_add" value=".2" />
+				<passive_effect name="SpreadMultiplierRunning" 		operation="perc_add" value=".2" />
+				<passive_effect name="SpreadMultiplierHip" 			operation="perc_add" value=".2" />
+				<passive_effect name="SpreadMultiplierIdle" 		operation="perc_add" value=".3" />
+			</effect_group>
+		</buff>
+		
+		<!-- Knockdown: Sends enemies falling to the ground. -->
+		<!-- ui_game_symbol_knockdown -->
+		<buff name="buffKnockdownFM" name_key="buffKnockdownFMName" description_key="buffKnockdownFMDesc" icon="ui_game_symbol_knockdown" icon_color="255,51,0">
+			<stack_type value="duration"/>
+			<duration value="300"/><requirement name="HoldingItemHasTags" tags="perkHeavyMetal"/>
+			<effect_group>
+				<requirement name="HoldingItemHasTags" tags="melee" />
+				<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffInjuryKnockdown01">
+					<requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="50"/>
+				</triggered_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Life Steal: Bladed weapons drain enemies and heal you by 2% of your health. -->
+		<!-- ui_game_symbol_lifesteal -->
+		<buff name="buffLifeStealFM" name_key="buffLifeStealFMName" description_key="buffLifeStealFMDesc" icon="ui_game_symbol_lifesteal" icon_color="160,0,0">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<requirement name="HoldingItemHasTags" tags="knife" target="self" />
+				<triggered_effect name="onSelfAttackedOther" action="ModifyStats" stat="Health" operation="add" value="3" />
+				<triggered_effect name="onSelfAttackedOther" action="ModifyStats" stat="Stamina" operation="add" value="3" />
+			</effect_group>
+		</buff>
+		
+		<!-- Light Fingers: Increases lockpicking chances and lowers the time needed -->
+		<!-- ui_game_symbol_lightfingers -->
+		<buff name="buffLightFingersFM" name_key="buffLightFingersFMName" description_key="buffLightFingersFMDesc" icon="ui_game_symbol_lightfingers" icon_color="71,150,253">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="LockPickTime" 		operation="perc_subtract" value=".15"/>
+				<passive_effect name="LockPickBreakChance" 	operation="perc_subtract" value=".1"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Lion Heart: As health decreases, damage from all weapons increase and resistance to damage increases. -->
+		<buff name="buffLionHeartFM" name_key="buffLionHeartFMName" description_key="buffLionHeartFMDesc" icon="ui_game_symbol_lionheart" icon_color="255,0,0">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<requirements>
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="GTE" value="0.8" />
+				</requirements>
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="0.1" />
+			</effect_group>
+			<effect_group>
+				<requirements>
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="LT" value="0.8" />
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="GTE" value="0.6" />
+				</requirements>
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="0.2" />
+			</effect_group>
+			<effect_group>
+				<requirements>
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="LT" value="0.6" />
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="GTE" value="0.4" />
+				</requirements>
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="0.4" />
+				<passive_effect name="PhysicalDamageResist" operation="perc_add" value="0.2" tags="coredamageresist"/>
+			</effect_group>
+			<effect_group>
+				<requirements>
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="LT" value="0.4" />
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="GTE" value="0.2" />
+				</requirements>
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="0.7" />
+				<passive_effect name="PhysicalDamageResist" operation="perc_add" value="0.4" tags="coredamageresist"/>
+			</effect_group>
+			<effect_group>
+				<requirements>
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="LT" value="0.2" />
+					<requirement name="StatComparePercCurrentToMax" stat="Health" operation="GTE" value="0.0" />
+				</requirements>
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="1.0" />
+				<passive_effect name="PhysicalDamageResist" operation="perc_add" value="0.7" tags="coredamageresist"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Melee Speed: Increases the swing speed of ALL melee weapons, not just light ones. -->
+		<!-- ui_game_symbol_meleespeed -->
+		<buff name="buffMeleeSpeedFM" name_key="buffMeleeSpeedFMName" description_key="buffMeleeSpeedFMDesc" icon="ui_game_symbol_meleespeed" icon_color="0,38,255">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<requirement name="HoldingItemHasTags" tags="melee" />
+				<passive_effect name="AttacksPerMinute" operation="perc_add" value="0.15" />
+			</effect_group>
+		</buff>
+		
+		<!-- Milk: Adds stamina regen for 5 minutes. -->
+		<!-- ui_game_symbol_milk -->
+		<buff name="buffMilkFM" name_key="buffMilkFMName" description_key="buffMilkFMDesc" icon="ui_game_symbol_milk" icon_color="255,254,237">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="0.1">
+					<requirement name="NotHasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="0.05">
+					<requirement name="HasBuff" buff="buffHealWaterMax" />
+				</passive_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Prickly Guts: Increases how fast food and water loss occur -->
+		<!-- ui_game_symbol_pricklyguts -->
+		<buff name="buffPricklyGutsFM" name_key="buffPricklyGutsFMName" description_key="buffPricklyGutsFMDesc" icon="ui_game_symbol_pricklyguts" icon_color="140,252,120">
+			<stack_type value="duration"/>
+			<duration value="200"/>
+			<effect_group>
+				<passive_effect name="StaminaLossMaxMult" 				operation="perc_add" 	value="0.2" />
+				<passive_effect name="WaterLossPerHealthPointGained" 	operation="perc_add" 	value="0.4" />
+				<passive_effect name="WaterLossPerStaminaPointGained" 	operation="perc_add" 	value="0.6" />
+				<passive_effect name="HealthChangeOT" 					operation="base_add" 	value="-0.1" />
+				<passive_effect name="HealthMaxModifierOT" 				operation="base_set" 	value="-0.1" />
+			</effect_group>
+			<effect_group>
+				<!-- As buff updates, has a chance to trigger vomit or poop -->
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="self" buff="buffPricklyGutsPoopFM">
+					<requirement name="RandomRoll" target="self" seed_type="Random"	min_max="1,1200"	operation="LTE" value="3" />
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="self" buff="buffPricklyGutsVomitFM">
+					<requirement name="RandomRoll" target="self" seed_type="Random"	min_max="1,1200"	operation="LTE" value="2" />
+				</triggered_effect>
+				
+				<!-- As buff ends, has a larger chance to trigger vomit -->
+				<triggered_effect trigger="onSelfBuffFinish" action="AddBuff" target="self" buff="buffPricklyGutsVomitFM">
+					<requirement name="RandomRoll" target="self" seed_type="Random" min_max="1,100"		operation="LTE" value="5" />
+				</triggered_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Prickly Guts Vomit: Lose 30 food and 10 water -->
+		<buff name="buffPricklyGutsVomitFM" hidden="true">
+			<damage_type value="Disease"/>
+			<stack_type value="ignore"/>
+			<duration value="5"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Food" operation="add" value="-30" />
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Water" operation="add" value="-10" />
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Stamina" value_type="modifiedmax" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Stamina" value_type="modifiedmax" operation="add" value="3"/>
+				<triggered_effect trigger="onSelfBuffStart" action="PlaySound" sound="player#vomit"/>
+
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$foodAmountAdd" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$waterAmountAdd" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$foodAmountAdd2" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$waterAmountAdd2" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$waterStaminaRegenAmount" operation="set" value="0"/>
+
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealHealth">
+						<requirement name="CVarCompare" cvar="medicalHealthAmount" operation="LTE" value="0"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealStaminaMax"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealWaterMax"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWaterStaminaRegen"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Prickly Guts Poop: Lose 10 food and 30 water -->
+		<buff name="buffPricklyGutsPoopFM" hidden="true">
+			<damage_type value="Disease"/>
+			<stack_type value="ignore"/>
+			<duration value="5"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Food" operation="add" value="-10" />
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Water" operation="add" value="-30" />
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Stamina" value_type="modifiedmax" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Stamina" value_type="modifiedmax" operation="add" value="3"/>
+				<triggered_effect trigger="onSelfBuffStart" action="PlaySound" sound="player#vomit"/>
+
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$foodAmountAdd" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$waterAmountAdd" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$foodAmountAdd2" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$waterAmountAdd2" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$waterStaminaRegenAmount" operation="set" value="0"/>
+
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealHealth">
+						<requirement name="CVarCompare" cvar="medicalHealthAmount" operation="LTE" value="0"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealStaminaMax"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealWaterMax"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWaterStaminaRegen"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Prickly Pear Reserve: All zombies move slower when close by -->
+		<!-- ui_game_symbol_pricklypearreserve -->
+		<buff name="buffPricklyPearReserveFM" name_key="buffPricklyPearReserveFMName" description_key="buffPricklyPearReserveFMDesc" icon="ui_game_symbol_pricklypearreserve" icon_color="0,64,0">
+			<stack_type value="duration"/>
+			<duration value="60"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="10" buff="buffPricklyPearSlowdownFM">
+					<requirement name="EntityTagCompare" target="other" tags="npc,vehicle,player,turret" invert="true"/>
+				</triggered_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Prickly Pear Slowdown: Slows down the entity, triggered when player has drunk prickly pear reserve. -->
+		<buff name="buffPricklyPearSlowdownFM" hidden="true">
+			<damage_type value="heat"/>
+			<stack_type value="ignore"/>
+			<duration value="10"/>
+			<update_rate value="1.2"/>
+			<effect_group>
+				<passive_effect name="WalkSpeed" operation="perc_add" value="0.6"/>
+				<passive_effect name="RunSpeed" operation="perc_add" value="0.4"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Quick Hands: Decreases reload time for all weapons. -->
+		<!-- ui_game_symbol_quickhands -->
+		<buff name="buffQuickHandsFM" name_key="buffQuickHandsFMName" description_key="buffQuickHandsFMDesc" icon="ui_game_symbol_quickhands" icon_color="217,217,217">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<requirement 	name="HoldingItemHasTags" 		tags="ranged"/>
+				<passive_effect name="ReloadSpeedMultiplier" 	operation="perc_add" value="0.25" />
+			</effect_group>
+		</buff>
+		
+		<!-- Quick Learner: Gain 20% more XP. -->
+		<!-- ui_game_symbol_quicklearner -->
+		<buff name="buffQuickLearnerFM" name_key="buffQuickLearnerFMName" description_key="buffQuickLearnerFMDesc" icon="ui_game_symbol_quicklearner" icon_color="187,237,161">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="PlayerExpGain" operation="perc_add" value="0.2" />
+			</effect_group>
+		</buff>
+		
+		<!-- Refreshing Meal: Keeps you cooler in warmer environments. -->
+		<!-- ui_game_symbol_refreshingmeal -->
+		<buff name="buffRefreshingMealFM" name_key="buffRefreshingMealFMName" description_key="buffRefreshingMealFMDesc" icon="ui_game_symbol_refreshingmeal" icon_color="165,232,228">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="HypothermalResist" operation="base_add" value="15" />	
+			</effect_group>
+		</buff>
+		
+		<!-- Soya Milk: Adds stamina and health regen for 3 minutes -->
+		<!-- ui_game_symbol_milk -->
+		<buff name="buffSoyaMilkFM" name_key="buffSoyaMilkFMName" description_key="buffSoyaMilkFMDesc" icon="ui_game_symbol_milk" icon_color="241,255,237">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<passive_effect name="HealthChangeOT" operation="base_add" value="0.05"/>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="0.1">
+					<requirement name="NotHasBuff" buff="buffHealWaterMax"/>
+				</passive_effect>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="0.05">
+					<requirement name="HasBuff" buff="buffHealWaterMax"/>
+				</passive_effect>
+			</effect_group>
+		</buff>
+		
+		<!-- Strong Arms: Increases entity and block damage with melee weapons. -->
+		<!-- ui_game_symbol_strongarms -->
+		<buff name="buffStrongArmsFM" name_key="buffStrongArmsFMName" description_key="buffStrongArmsFMDesc" icon="ui_game_symbol_strongarms" icon_color="232,165,165">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<requirement 	name="HoldingItemHasTags" 	tags="melee" />
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="0.2" />
+				<passive_effect name="BlockDamage" 			operation="perc_add" value="0.2" />
+			</effect_group>
+		</buff>
+		
+		<!-- Strong Gut: Increases food and drink borne disease resistance by 30% (not for infections) -->
+		<!-- ui_game_symbol_stronggut -->
+		<buff name="buffStrongGutFM" name_key="buffStrongGutFMName" description_key="buffStrongGutFMDesc" icon="ui_game_symbol_stronggut" icon_color="90,204,43">
+			<stack_type value="duration"/>
+			<duration value="600"/>
+			<effect_group>
+				<passive_effect name="BuffResistance" operation="base_add" value="0.3" tags="buffIllFoodPoisoning01,buffDysenteryCatch"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Strong Joints: Increases jump height reduces stamina when jumping. -->
+		<!-- ui_game_symbol_strongjoints -->
+		<buff name="buffStrongJointsFM" name_key="buffStrongJointsFMName" description_key="buffStrongJointsFMDesc" icon="ui_game_symbol_strongjoints" icon_color="224,178,235">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="JumpStrength" operation="perc_add" 	value="0.39" />
+				<passive_effect name="StaminaLoss" 	operation="perc_add" 	value="-0.01" tags="jumping"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Vigorous Power: Removes cooldown for power attacks. -->
+		<!-- ui_game_symbol_vigorouspower -->
+		<buff name="buffVigorousPowerFM" name_key="buffVigorousPowerFMName" description_key="buffVigorousPowerFMDesc" icon="ui_game_symbol_vigorouspower" icon_color="247,244,67">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffPowerAttackStaminaStunt"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Throwing Arm: Allows spears to be thrown further. -->
+		<!-- ui_game_symbol_throwingarm -->
+		<buff name="buffThrowingArmFM" name_key="buffThrowingArmFMName" description_key="buffThrowingArmFMDesc" icon="ui_game_symbol_throwingarm" icon_color="22,244,127">
+			<stack_type value="duration"/>
+			<duration value="300"/>
+			<effect_group>
+				<requirement name="HoldingItemHasTags" tags="perkJavelinMaster"/>
+				<passive_effect name="ProjectileVelocity" operation="perc_add" value="0.2"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Tomato Juice: Gives some damage resistance. -->
+		<!-- ui_game_symbol_tomatojuice -->
+		<buff name="buffTomatoJuiceFM" name_key="buffTomatoJuiceFMName" description_key="buffTomatoJuiceFMDesc" icon="ui_game_symbol_tomatojuice" icon_color="242,99,99">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<passive_effect name="PhysicalDamageResist" operation="base_add" value="10" tags="coredamageresist"/>
+			</effect_group>
+		</buff>
+		
+		<!-- Walking Battery: Charges up stun batons faster and deals more damage with them (charge time is in items.xml config) -->
+		<!-- ui_game_symbol_walkingbattery -->
+		<buff name="buffWalkingBatteryFM" name_key="buffWalkingBatteryFMName" description_key="buffWalkingBatteryFMDesc" icon="ui_game_symbol_walkingbattery" icon_color="120,100,245">
+			<stack_type value="duration"/>
+			<duration value="180"/>
+			<effect_group>
+				<requirement 	name="HoldingItemHasTags" 	tags="perkElectrocutioner" />
+				<passive_effect name="EntityDamage" 		operation="perc_add" value="0.2" />
+				<passive_effect name="BlockDamage" 			operation="perc_add" value="0.2" />
+			</effect_group>
+		</buff>
+		
+		
+	</append>
+	
+</configs>

@@ -1,0 +1,43 @@
+<configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+	
+	
+	<!-- LIVING OFF THE LAND -->
+	<!-- Adds the tree and crop seeds to the 'Living Off The Land' perk. -->
+	<!-- Level 3: Wheat, Soybean, Tomato -->
+	<append xpath="//perk[@name='perkLivingOffTheLand']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @level='3,5']/@tags">,plantedPricklyPear1FM,plantedSoybean1FM,plantedTomato1FM,plantedWheat1FM</append>
+	
+	<!-- Level 4: Apple Tree, Pear Tree -->
+	<insertAfter xpath="//perk[@name='perkLivingOffTheLand']/effect_group/passive_effect[@name='RecipeTagUnlocked' and last()]">
+		<passive_effect name="RecipeTagUnlocked" operation="base_set" level="3,5" value="1" tags="treePlantedApple0FM,treePlantedPear0FM"/>
+	</insertAfter>
+	
+	<!-- Change description of level 4 to include trees -->
+	<setattribute xpath="//perk[@name='perkLivingOffTheLand']/effect_group/effect_description[@level='4']" name="desc_key">perkLivingOffTheLandRank4FMDesc</setattribute> 
+	<setattribute xpath="//perk[@name='perkLivingOffTheLand']/effect_group/effect_description[@level='4']" name="long_desc_key">perkLivingOffTheLandRank4FMLongDesc</setattribute>
+	
+	
+	<!-- MASTER CHEF -->
+	<!-- Adds the different food recipes into the 'Master Chef' perk. -->
+	<!-- Levels 1 to 5 -->
+	<append xpath="//perk[@name='perkMasterChef']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @level='1,5']/@tags">,foodBaconButtyFM,foodBoiledMushroomsFM,foodBoiledPotatoFM,foodBreadFM,foodBurgerBunFM,foodButterFM,foodCheeseFM,foodDoughFM,foodCanAnchoviesFM,foodFriedBaconFM,foodFriesFM,foodGrilledSausageFM,foodHotDogFM,foodJacketPotatoFM,foodScrambledEggsFM,foodSnakeStripsFM,drinkJarVegetableOilFM,foodTortillaFM,foodUmblePieFM</append>
+	<append xpath="//perk[@name='perkMasterChef']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @level='2,5']/@tags">,foodBloodSausageFM,foodCakeMixtureFM,foodBaconQuicheFM,foodApplePieFM,foodBlueberryCakeFM,foodCheeseDoughballsFM,foodChickenPieFM,foodChocolateCakeFM,foodFriedTofuFM,foodHoneyChickenKabobsFM,foodHoneyYuccaPieFM,foodMapleBaconCupcakeFM,foodPotatoPastaSaladFM,foodShepherdsPieFM,foodSmokedSalmonFM,foodSummerFruitSaladFM,foodTofuFM,foodVenisonWellingtonFM,foodWinterFruitSaladFM,foodYoghurtFM,foodYoghurtBlueberryFM,foodYoghurtMixedFruitFM,foodYoghurtYuccaFM</append>
+	<append xpath="//perk[@name='perkMasterChef']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @level='3,5']/@tags">,foodBatteredFishFM,foodBakedBeanCasseroleFM,foodBangersAndMashFM,foodAnchovyPizzaFM,foodCheesePizzaFM,foodChickenCheeseburgerFM,foodChickenMushroomPastaFM,foodHogRoastBurgerFM,foodHunterStewFM,foodGelatinFM,foodLionMeatballHeroFM,foodMacaroniCheeseFM,foodPastaShamFM,foodVenisonFeastPizzaFM,foodTofuSloppyJoeFM</append>
+	<append xpath="//perk[@name='perkMasterChef']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @level='4,5']/@tags">,drinkJarAppleCiderFM,drinkJarBloodyMaryFM,drinkJarBlueberryWineFM,foodChickenSweetcornSoupFM,foodChickenMushroomSoupFM,foodBeefStewFM,foodChickenStewFM,foodLambStewFM,foodMushroomSoupFM,foodPeaHamSoupFM,foodSnakeSoupFM,foodLionBurgerFM,foodSpicyHashFM,foodVegetableSoupFM</append>
+	<append xpath="//perk[@name='perkMasterChef']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @level='5,5']/@tags">,foodBritishBreakfastFM,foodDoggyDooFM,foodKittyCasseroleFM,drinkJarPricklyPearReserveFM,foodSpaghettiVenisonMeatballsFM,foodWolfiesMeatloafFM</append>
+	
+	<!-- Change descriptions of each level to include different foods -->
+	<setattribute xpath="//perk[@name='perkMasterChef']/effect_group/effect_description[@level='1']" name="long_desc_key">perkMasterChefRank1FMLongDesc</setattribute>
+	<setattribute xpath="//perk[@name='perkMasterChef']/effect_group/effect_description[@level='2']" name="long_desc_key">perkMasterChefRank2FMLongDesc</setattribute>
+	<setattribute xpath="//perk[@name='perkMasterChef']/effect_group/effect_description[@level='3']" name="long_desc_key">perkMasterChefRank3FMLongDesc</setattribute>
+	<setattribute xpath="//perk[@name='perkMasterChef']/effect_group/effect_description[@level='4']" name="long_desc_key">perkMasterChefRank4FMLongDesc</setattribute>
+	<setattribute xpath="//perk[@name='perkMasterChef']/effect_group/effect_description[@level='5']" name="long_desc_key">perkMasterChefRank5FMLongDesc</setattribute>
+	
+	
+	
+	
+	
+</configs>

@@ -1,0 +1,25 @@
+<configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+	
+	
+	<!-- Allows plants to spawn in the world -->
+	
+	<!-- Adds soybeans to the snow biome in areas where you find blueberries -->
+	<append xpath="//decoration[@blockname='plantedBlueberry3Harvest']/..">
+		<decoration type="block" blockname="plantedSoybean3HarvestFM" prob=".004"/>
+	</append>
+	
+	<!-- Adds tomatoes to the forest biome in areas where you find chrysanthemum -->
+	<append xpath="//decoration[@blockname='plantedChrysanthemum3Harvest']/..">
+		<decoration type="block" blockname="plantedTomato3HarvestFM" prob=".0014"/>
+	</append>
+	
+	<!-- Adds wheat to the desert biome in areas where you would find aloe -->
+	<append xpath="//decoration[@blockname='plantedAloe3Harvest']/..">
+		<decoration type="block" blockname="plantedWheat3HarvestFM" prob=".0014"/>
+	</append>
+	
+</configs>

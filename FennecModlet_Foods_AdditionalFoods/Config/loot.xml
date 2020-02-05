@@ -1,0 +1,376 @@
+<configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+
+	<!-- Grocery Bags -->
+
+	<insertBefore xpath="//lootgroup[@name='coldfood']">
+		
+		<!-- Baked and Baking Supplies -->
+		<lootgroup name="bakingSupplies">
+			<item name="foodBreadFM" 				count="1,2" 	prob="3" 	/>
+			<item name="foodBurgerBunFM"			count="6,8"		prob="1"	/>
+			<item name="foodButterFM"				count="2,5"		prob="0.8" 	/>
+			<item name="foodCheeseFM"				count="2,5"		prob="0.5" 	/>
+			<item name="foodFlourFM"				count="1,2"		prob="0.4"	/>
+			<item name="foodChocolateFM"			count="2,4"		prob="0.3"  />
+			<item name="foodCakeMixtureFM"			count="1,2"		prob="0.1" 	/>
+			<item name="resourceSaltFM"				count="5,10"	prob="0.4"	/>
+		</lootgroup>
+		
+		<!-- Milk and Soya -->
+		<lootgroup name="milkAndSoya">
+			<item name="drinkCartonMilkFM"			count="1,2"		prob="3"	/>
+			<item name="drinkCartonSoyaMilkFM"		count="1,2"		prob="1"	/>
+		</lootgroup>
+		
+		<!-- Sandwiches -->
+		<lootgroup name="sandwiches">
+			<item name="foodChickenSandwichFM"		count="1" 		prob="1" 	/>
+			<item name="foodCheeseSandwichFM"		count="1"		prob="1"	/>
+			<item name="foodEggSandwichFM"			count="1"		prob="1"	/>
+			<item name="foodShamSandwich"			count="1,2"		prob="0.5"  />
+		</lootgroup>
+		
+		<!-- Yoghurts -->
+		<lootgroup name="yoghurts">
+			<item name="foodYoghurtFM"				count="1,2"		prob="0.7"	/>
+			<item name="foodYoghurtBlueberryFM"		count="1"		prob="0.35"	/>
+			<item name="foodYoghurtMixedFruitFM"	count="1"		prob="0.1"	/>
+			<item name="foodYoghurtYuccaFM"			count="1"		prob="0.35" />
+		</lootgroup>
+		
+		<!-- Soft Drinks -->
+		<lootgroup name="softDrinks">
+			<!-- FennecMod -->
+			<item name="drinkJarAppleJuiceFM"		count="1,2"		prob="2"	/>
+			<item name="drinkJarBlueberryJuiceFM"	count="1,2"		prob="0.5"	/>
+			<item name="drinkJarPotatoJuiceFM"		count="1"		prob="0.5"	/>
+			<item name="drinkJarTomatoJuiceFM"		count="1"		prob="1"	/>
+			<!-- Vanilla -->
+			<item name="drinkCanMegaCrush" 			count="1"		prob="0.05"	/>
+			<item name="drinkJarBoiledWater" 		count="1,2" 	prob="4"	/>
+			<item name="drinkJarCoffee" 			count="1,2"		prob="1"	/>
+			<item name="drinkJarGoldenRodTea" 		count="1,2"		prob="0.5"	/>
+			<item name="drinkJarRedTea" 			count="1,2"		prob="0.5"	/>
+			<item name="drinkJarYuccaJuice" 		count="1,2"		prob="0.5"	/>
+		</lootgroup>
+		
+		<!-- Alcohols -->
+		<lootgroup name="alcohols">
+			<item name="drinkJarAppleCiderFM"		count="1"		prob="0.4" 	/>
+			<item name="drinkJarBloodyMaryFM"		count="1"		prob="0.4"	/>
+			<item name="drinkJarBlueberryWineFM"	count="1"		prob="0.2"	/>
+			<item name="drinkJarBeer" 				count="1,2"		prob="4"	/>
+		</lootgroup>
+		
+		
+		<!-- Grocery Bags Loot -->
+		<!-- Fruit, Veggies -->
+		<lootgroup name="groceryBagFruits">
+			<!-- FennecMod -->
+			<item name="foodCropAppleFM"			count="2,4"		prob="1" 	/>
+			<item name="foodCropPearFM"				count="2,4"		prob="1"	/>
+			<item name="foodCropSoybeanFM"			count="3,5"		prob="1"	/>
+			<item name="foodCropTomatoFM"			count="2,4"		prob="1"	/>
+			<!-- Vanilla -->
+			<item name="foodCropCorn"				count="1,3"		prob="1"	/>
+			<item name="foodCropPotato"				count="1,4"		prob="1"	/>
+			<item name="foodCropBlueberries"		count="5,10"	prob="1"	/>
+		</lootgroup>
+		
+		<!-- Meat Products -->
+		<lootgroup name="groceryBagMeats">
+			<!-- FennecMod -->
+			<item name="foodFreshFishFM"			count="1,2"		prob="1"	/>
+			<item name="foodFreshSalmonFM"			count="1"		prob="0.3"	/>
+			<!-- Vanilla -->
+			<item name="foodEgg" 					count="3,6"		prob="1"	/>
+			<item name="foodRawMeat" 				count="5,10"	prob="3"	/>
+		</lootgroup>
+		
+		<!-- Bread, Sandwiches, Dairy -->
+		<lootgroup name="groceryBagGrainDairy">
+			<!-- FennecMod -->
+			<item group="bakingSupplies"			count="1"		prob="4"	/>
+			<item group="milkAndSoya"				count="1"		prob="4"	/>
+			<item group="sandwiches"				count="1"		prob="1"	/>
+			<item group="yoghurts"					count="1"		prob="1"	/>
+		</lootgroup>
+		
+		<!-- Beverages -->
+		<lootgroup name="groceryBagBeverages">
+			<item group="softDrinks"				count="1"		prob="3"	/>
+			<item group="alcohols"					count="1"		prob="1"	/>
+		</lootgroup>	
+		
+		<!-- All combined grocery bag loot -->
+		<lootgroup name="groceryBagLoot"	count="all">
+			<item group="groceryBagBeverages"		count="1" />
+			<item group="groceryBagMeats"			count="1" />
+			<item group="groceryBagGrainDairy"		count="1" />
+			<item group="groceryBagFruits"			count="1,2" />
+			<item group="cannedfood"				count="1,2" />
+		</lootgroup>
+		
+		
+		<!-- Beehive loot -->
+		<lootgroup name="beehiveLoot"		count="all">
+			<item name="resourceQueenBeeFM" 		count="0,2" />
+			<item name="resourceWorkerBeeFM"		count="10,20" />
+			<item name="resourceRawHoneycombFM"		count="8,16" />
+		</lootgroup>
+		
+	</insertBefore>
+
+
+	<!-- JUNK ITEMS -->
+	<!-- Adds salt, tin foil and vegetable oil to cupboard loot -->
+	<append xpath="//lootgroup[@name='cupboard']">
+		<item name="resourceTinFoilFM"		count="4,12"		prob="0.5" />
+		<item name="drinkJarVegetableOilFM"	count="1,3"			prob="0.5" />
+		<item name="resourceSaltFM"			count="1,2"			prob="0.3" />
+	</append>
+
+	<!-- Adds empty cartons to anywhere that contains cans -->
+	<append xpath="//lootgroup/item[@name='drinkCanEmpty']/..">
+		<item name="resourceCartonEmptyFM"	count="1,3"			prob="0.5" />
+	</append>
+
+
+	<!-- COLD / CANNED FOOD -->
+	<!-- Adds canned foods to the canned food loot table -->
+	<append xpath="//lootgroup[@name='cannedfood']">
+		<item name="foodCanAnchoviesFM"	/>
+		<item name="foodCanBeansFM"	/>
+	</append>
+
+	<!-- Adds the cold food items into the cold foods loot list -->
+	<append xpath="//lootgroup[@name='coldfood']">
+		<item group="yoghurts"			count="1"	/>
+		<item group="sandwiches"		count="1"	/>
+		<item name="foodFreshFishFM"	count="1"	/>
+		<item name="foodFreshSalmonFM"	count="1"	/>
+	</append>
+
+
+	<!-- FARMING -->
+	<!-- Adds the seeds from the new FennecMod crops into the seeds loot -->
+	<append xpath="//lootgroup[@name='seeds']">
+		<item name="plantedPricklyPear1FM"  />
+		<item name="plantedSoybean1FM" 		/>
+		<item name="plantedTomato1FM" 		/>
+		<item name="plantedWheat1FM"		/>
+		<item name="treePlantedApple0FM"	/>
+		<item name="treePlantedPear0FM"		/>
+	</append>
+
+	<!-- Adds the crops from FennecMod into crops loot -->
+	<append xpath="//lootgroup[@name='farmCrops']">
+		<item name="foodCropAppleFM"		/>
+		<item name="foodCropPearFM"			/>
+		<item name="foodCropPricklyPearFM" 	/>
+		<item name="foodCropSoybeanFM"		/>
+		<item name="foodCropTomatoFM"		/>
+		<item name="foodCropWheatFM"		/>
+	</append>
+
+	<!-- Make beer rare in coolers. -->
+	<setattribute xpath="//lootgroup[@name='beverages']/item[@name='drinkJarEmpty']"	 	name="prob">4</setattribute>
+	
+	<!-- Make empty jars more common in coolers (to balance extra drinks being added later) -->
+	<setattribute xpath="//lootgroup[@name='beverages']/item[@name='drinkJarBeer']" 		name="prob">0.2</setattribute>
+	
+	<!-- Make Mega Crush slightly less rare to balance all the new drinks in the coolers -->
+	<setattribute xpath="//lootgroup[@name='beverages']/item[@name='drinkCanMegaCrush']"	name="prob">0.01</setattribute>
+	
+	<!-- Add all modded drinks (aside from Potato Juice) to the beer coolers and other loot sources -->
+	<append xpath="//lootgroup[@name='beverages']">
+		<item name="drinkCartonMilkFM"			count="1,3" prob="0.5" />
+		<item name="drinkCartonSoyaMilkFM"		count="1,2" prob="0.5" />
+		<item name="drinkJarAppleJuiceFM"		count="1"	prob="0.8" />
+		<item name="drinkJarAppleCiderFM"		count="1"	prob="0.2" />
+		<item name="drinkJarBloodyMaryFM"		count="1"	prob="0.2" />
+		<item name="drinkJarBlueberryJuiceFM"	count="1"	prob="0.8" />
+		<item name="drinkJarBlueberryWineFM"	count="1"	prob="0.2" />
+		<item name="drinkJarTomatoJuiceFM"		count="1"	prob="0.8" />
+	</append>
+	
+	
+	<!-- Adds the schematics into the cooking recipes -->
+	<append xpath="//lootgroup[@name='farmingCookingRecipes']">
+		<item name="foodAnchovyPizzaFMSchematic" 				prob="0.05" />
+		<item name="foodApplePieFMSchematic" 					prob="0.25" />
+		<item name="foodBaconButtyFMSchematic"					prob="0.80" />
+		<item name="foodBaconQuicheFMSchematic" 				prob="0.25" />
+		<item name="foodBakedBeanCasseroleFMSchematic"			prob="0.25" />
+		<item name="foodBangersAndMashFMSchematic" 				prob="0.10" />
+		<item name="foodBatteredFishFMSchematic" 				prob="0.25" />
+		<item name="foodBeefStewFMSchematic" 					prob="0.05" />
+		<item name="foodBloodSausageFMSchematic" 				prob="0.85" />
+		<item name="foodBlueberryCakeFMSchematic" 				prob="0.25" />
+		<item name="foodBoiledMushroomsFMSchematic"				prob="0.85" />
+		<item name="foodBoiledPotatoFMSchematic" 				prob="1.00" />
+		<item name="foodBreadFMSchematic" 						prob="0.65" />
+		<item name="foodBurgerBunFMSchematic" 					prob="0.65" />
+		<item name="foodButterFMSchematic" 						prob="0.65" />
+		<item name="foodBritishBreakfastFMSchematic" 			prob="0.05" />
+		<item name="foodCakeMixtureFMSchematic" 				prob="0.50" />
+		<item name="foodCanAnchoviesFMSchematic" 				prob="0.25" />
+		<item name="foodCheeseFMSchematic" 						prob="0.65" />
+		<item name="foodCheeseDoughballsFMSchematic" 			prob="0.65" />
+		<item name="foodCheesePizzaFMSchematic" 				prob="0.25" />
+		<item name="foodChickenCheeseburgerFMSchematic" 		prob="0.40" />
+		<item name="foodChickenMushroomPastaFMSchematic" 		prob="0.10" />
+		<item name="foodChickenMushroomSoupFMSchematic" 		prob="0.10" />
+		<item name="foodChickenPieFMSchematic" 					prob="0.25" />
+		<item name="foodChickenStewFMSchematic" 				prob="0.05" />
+		<item name="foodChickenSweetcornSoupFMSchematic" 		prob="0.10" />
+		<item name="foodChocolateCakeFMSchematic" 				prob="0.25" />
+		<item name="foodDoggyDooFMSchematic" 					prob="0.03" />
+		<item name="foodDoughFMSchematic" 						prob="1.00" />
+		<item name="foodFriesFMSchematic" 						prob="0.65" />
+		<item name="foodFriedBaconFMSchematic" 					prob="1.00" />
+		<item name="foodFriedTofuFMSchematic"					prob="0.25" />
+		<item name="foodGelatinFMSchematic" 					prob="0.02" />
+		<item name="foodGrilledSausageFMSchematic" 				prob="1.00" />
+		<item name="foodHogRoastBurgerFMSchematic" 				prob="0.25" />
+		<item name="foodHoneyChickenKabobsFMSchematic" 			prob="0.10" />
+		<item name="foodHoneyYuccaPieFMSchematic" 				prob="0.25" />
+		<item name="foodHotDogFMSchematic"						prob="0.55" />
+		<item name="foodHunterStewFMSchematic" 					prob="0.05" />
+		<item name="foodJacketPotatoFMSchematic"				prob="0.65" />
+		<item name="foodKittyCasseroleFMSchematic" 				prob="0.03" />
+		<item name="foodLambStewFMSchematic" 					prob="0.05" />
+		<item name="foodLionBurgerFMSchematic"					prob="0.15" />
+		<item name="foodLionMeatballHeroFMSchematic"			prob="0.35" />
+		<item name="foodMacaroniCheeseFMSchematic" 				prob="0.10" />
+		<item name="foodMapleBaconCupcakeFMSchematic"			prob="0.35" />
+		<item name="foodMushroomSoupFMSchematic" 				prob="0.10" />
+		<item name="foodPastaShamFMSchematic" 					prob="0.10" />
+		<item name="foodPotatoPastaSaladFMSchematic" 			prob="0.25" />
+		<item name="foodPeaHamSoupFMSchematic" 					prob="0.05" />
+		<item name="foodShepherdsPieFMSchematic" 				prob="0.25" />
+		<item name="foodScrambledEggsFMSchematic" 				prob="0.85" />
+		<item name="foodSmokedSalmonFMSchematic" 				prob="0.30" />
+		<item name="foodSnakeSoupFMSchematic" 					prob="0.05" />
+		<item name="foodSnakeStripsFMSchematic" 				prob="0.85" />
+		<item name="foodSpaghettiVenisonMeatballsFMSchematic" 	prob="0.10" />
+		<item name="foodSpicyHashFMSchematic" 					prob="0.10" />
+		<item name="foodSummerFruitSaladFMSchematic" 			prob="0.25" />
+		<item name="foodTofuFMSchematic"						prob="0.40" />
+		<item name="foodTofuSloppyJoeFMSchematic"				prob="0.15" />
+		<item name="foodTortillaFMSchematic" 					prob="0.85" />
+		<item name="foodUmblePieFMSchematic"					prob="0.85" />
+		<item name="foodVegetableSoupFMSchematic" 				prob="0.15" />
+		<item name="foodVenisonFeastPizzaFMSchematic" 			prob="0.05" />
+		<item name="foodVenisonWellingtonFMSchematic" 			prob="0.05" />
+		<item name="foodWinterFruitSaladFMSchematic" 			prob="0.25" />
+		<item name="foodWolfiesMeatloafFMSchematic" 			prob="0.01" />
+		<item name="foodYoghurtFMSchematic" 					prob="0.65" />
+		<item name="foodYoghurtBlueberryFMSchematic" 			prob="0.45" />
+		<item name="foodYoghurtMixedFruitFMSchematic" 			prob="0.30" />
+		<item name="foodYoghurtYuccaFMSchematic" 				prob="0.45" />
+		<item name="drinkJarAppleCiderFMSchematic" 				prob="0.10" />
+		<item name="drinkJarBloodyMaryFMSchematic" 				prob="0.10" />
+		<item name="drinkJarBlueberryWineFMSchematic" 			prob="0.10" />
+		<item name="drinkJarPricklyPearReserveFM"				prob="0.01" />
+		<item name="drinkJarVegetableOilFMSchematic" 			prob="0.65" />
+		<item name="treePlantedApple0FMSchematic" 				prob="0.50" />
+		<item name="treePlantedPear0FMSchematic" 				prob="0.50" />
+		<item name="plantedSoybean1FMSchematic" 				prob="0.65" />
+		<item name="plantedTomato1FMSchematic" 					prob="0.65" />
+		<item name="plantedWheat1FMSchematic" 					prob="0.65" />
+	</append>
+	
+
+	<!-- Adds a lootgroup for basic schematics so they are more common to find. -->
+	<insertBefore xpath="//lootgroup[@name='farmingCookingRecipes']">
+		<lootgroup name="farmingCookingRecipesBasic">
+			<!-- VANILLA -->
+			<item name="drinkJarGoldenRodTeaSchematic"				prob="0.85" />
+			<item name="drinkJarRedTeaSchematic"					prob="0.85" />
+			<item name="foodBakedPotatoSchematic"					prob="1.00" />
+			<item name="foodBoiledMeatSchematic"					prob="1.30" />
+			<item name="foodCornBreadSchematic"						prob="1.00" />
+			<item name="foodCornOnTheCobSchematic"					prob="1.30" />
+			<item name="foodGrilledMeatSchematic"					prob="0.85" />
+			<item name="plantedBlueberry1Schematic"					prob="0.65" />
+			<item name="plantedChrysanthemum1Schematic"				prob="0.65" />
+			<item name="plantedCorn1Schematic"						prob="0.65" />
+			<item name="plantedGoldenrod1Schematic"					prob="0.65" />
+			<item name="plantedMushroom1Schematic"					prob="0.65" />
+			<item name="plantedPotato1Schematic"					prob="0.65" />
+			
+			<!-- FENNECMODLET - FOODS - ADDITIONAL FOODS -->
+			<item name="foodBaconButtyFMSchematic"					prob="0.85" />
+			<item name="foodBoiledMushroomsFMSchematic"				prob="0.95" />
+			<item name="foodBoiledPotatoFMSchematic" 				prob="1.00" />
+			<item name="foodBreadFMSchematic" 						prob="0.65" />
+			<item name="foodBurgerBunFMSchematic" 					prob="0.65" />
+			<item name="foodButterFMSchematic" 						prob="0.65" />
+			<item name="foodCakeMixtureFMSchematic" 				prob="0.50" />
+			<item name="foodCheeseFMSchematic" 						prob="0.65" />
+			<item name="foodDoughFMSchematic" 						prob="1.00" />
+			<item name="foodFriesFMSchematic" 						prob="0.65" />
+			<item name="foodFriedBaconFMSchematic" 					prob="1.00" />
+			<item name="foodGrilledSausageFMSchematic" 				prob="1.00" />
+			<item name="foodHotDogFMSchematic"						prob="0.50" />
+			<item name="foodJacketPotatoFMSchematic"				prob="0.60" />
+			<item name="foodScrambledEggsFMSchematic" 				prob="0.85" />
+			<item name="foodSnakeStripsFMSchematic" 				prob="0.85" />
+			<item name="foodTortillaFMSchematic" 					prob="0.85" />
+			<item name="foodUmblePieFMSchematic"					prob="0.25" />
+			<item name="foodYoghurtFMSchematic" 					prob="0.65" />
+			<item name="plantedSoybean1FMSchematic" 				prob="0.65" />
+			<item name="plantedTomato1FMSchematic" 					prob="0.65" />
+			<item name="plantedWheat1FMSchematic" 					prob="0.65" />
+		</lootgroup>
+	</insertBefore>
+
+	<!-- Adds schematics to cupboards as rare loot -->
+	<append xpath="//lootcontainer[@id='17']">
+		<item group="farmingCookingRecipesBasic"	count="1"		prob="0.1" />
+		<item group="farmingCookingRecipes"			count="1"		prob="0.01" />
+	</append>
+	
+	<!-- GROCERY BAGS -->
+	<!-- Adds bags of groceries to cupboards (you know, some people are lazy and don't unpack groceries...) -->
+	<append xpath="//lootcontainer[@id='17']">
+		<item name="cntGroceryBagPlaceableFM"		count="1"		prob="0.03" />
+	</append>
+
+	<!-- Adds bags of groceries to cars, very rare -->
+	<append xpath="//lootcontainer[@id='19']">
+		<item name="cntGroceryBagPlaceableFM"		count="1"		prob="0.02" />
+	</append>
+
+	<!-- Adds bags of groceries and vegetable oil to shopping carts and shopping baskets -->
+	<append xpath="//lootcontainer[@id='54' or @id='58']">
+		<item name="cntGroceryBagPlaceableFM"		count="1,2"		prob="0.4" />
+		<item name="drinkJarVegetableOilFM"			count="1,2"		prob="0.7" />
+	</append>
+
+
+	<!-- LOOTCONTAINERS -->
+
+	<insertAfter xpath="//lootcontainer[last()]">
+		<!-- Adds a loot container for the grocery bags -->
+		<lootcontainer id="201" count="1" size="8,9" destroy_on_close="true" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" loot_quality_template="qualBaseTemplate">
+			<item group="groceryBagLoot" 			count="1" />
+		</lootcontainer>
+		
+		<!-- Adds a loot container for the aquarium -->
+		<lootcontainer id="202" count="1" size="8,9" destroy_on_close="true" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+			<item name="resourceBagFishFM" 			count="3,6" />
+		</lootcontainer>
+		
+		<!-- Adds a loot container for the beehives -->
+		<lootcontainer id="203" count="1" size="8,9" destroy_on_close="false" sound_open="UseActions/open_cardboard" sound_close="UseActions/close_cardboard" loot_quality_template="qualBaseTemplate">
+			<item group="beehiveLoot"				count="1" />
+		</lootcontainer>
+	</insertAfter>
+
+</configs>

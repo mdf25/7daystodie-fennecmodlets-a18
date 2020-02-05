@@ -1,0 +1,906 @@
+<configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+	
+	<!-- Alter some recipes to use different ingredients like vegetable oils etc -->
+	<!-- Bacon and Eggs - now uses bacon and vegetable oil -->
+	<setattribute xpath="/recipes/recipe[@name='foodBaconAndEggs']/ingredient[@name='foodRawMeat']" name="name">foodRawBaconFM</setattribute>
+	<append xpath="/recipes/recipe[@name='foodBaconAndEggs']">
+		<ingredient name="drinkJarVegetableOilFM"				count="1" />
+	</append>
+	
+	<set xpath="/recipes/recipe[@name='foodSteakAndPotato']/ingredient[@name='resourceAnimalFat']/@name">drinkJarVegetableOilFM</set>
+	<set xpath="/recipes/recipe[@name='foodFishTacos']/ingredient[@name='foodCornMeal']/@name">foodTortillaFM</set>
+	<set xpath="/recipes/recipe[@name='foodFishTacos']/ingredient[@name='foodTortillaFM']/@count">1</set>
+	
+	<!-- Add basic recipes for all foods, as well as alternate vanilla ones. -->
+	<append xpath="/recipes">
+		
+		<!-- Add new recipes for vanilla foods that use FennecMod Food items -->
+		<recipe name="foodBlueberryPie" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropBlueberries" 				count="5" />
+			<ingredient name="foodEgg" 							count="1" />
+			<ingredient name="foodDoughFM" 						count="1" />
+			<ingredient name="drinkJarVegetableOilFM" 			count="1" />
+		</recipe>
+	
+		<recipe name="foodChiliDog" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanChili" 					count="1" />
+			<ingredient name="foodTortillaFM"					count="1" />
+			<ingredient name="foodRawMeat" 						count="5" />
+		</recipe>
+		
+		<recipe name="foodMeatStew" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" tags="learnable,perkMasterChef">
+			<ingredient name="foodRawMeat" 						count="5" />
+			<ingredient name="foodCropPotato" 					count="2" />
+			<ingredient name="foodCropCorn" 					count="2" />
+			<ingredient name="drinkJarVegetableOilFM" 			count="1" />
+		</recipe>
+			
+		<recipe name="foodCanStock"						count="1" craft_area="campfire" craft_tool="toolCookingPot" tags="perkMasterChef">
+			<ingredient name="drinkCanEmpty"					count="1" />
+			<ingredient name="resourceAnimalFat"				count="1" />
+			<ingredient name="resourceBone"						count="5" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodCanPears"						count="1" craft_area="campfire" craft_tool="toolCookingPot" tags="perkMasterChef">
+			<ingredient name="drinkCanEmpty"					count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="foodCropPearFM"					count="3" />
+		</recipe>
+		
+		<recipe name="foodCanSalmon"					count="1" craft_area="campfire" craft_tool="toolCookingPot" tags="perkMasterChef">
+			<ingredient name="drinkCanEmpty"					count="1" />
+			<ingredient name="foodCookedSalmonFM"				count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodHoney"						count="1" craft_time="80">
+			<ingredient name="resourceRawHoneycombFM"			count="10" />
+			<ingredient name="resourceCloth"					count="3"  />
+			<ingredient name="resourceRockSmall"				count="2"  />
+			<ingredient name="drinkJarEmpty"					count="1"  />
+		</recipe>
+		
+		<recipe name="foodHoney"						count="1" craft_area="chemistryStation" craft_time="50"	tags="chemStationCrafting">
+			<ingredient name="resourceRawHoneycombFM"			count="5"  />
+			<ingredient name="drinkJarEmpty"					count="1"  />
+		</recipe>
+		
+		
+		<!-- Recipes for seeds -->
+		<recipe name="treePlantedApple0FM"				count="1" craft_time="1" tags="learnable">
+			<ingredient name="foodCropAppleFM"					count="4" />
+		</recipe>
+		
+		<recipe name="treePlantedPear0FM"				count="1" craft_time="1" tags="learnable">
+			<ingredient name="foodCropPearFM"					count="4" />
+		</recipe>
+		
+		<recipe name="plantedPricklyPear1FM"			count="1" craft_time="1" tags="learnable">
+			<ingredient name="foodCropPricklyPearFM"			count="4" />
+		</recipe>
+		
+		<recipe name="plantedSoybean1FM"				count="1" craft_time="1" tags="learnable">
+			<ingredient name="foodCropSoybeanFM"				count="4" />
+		</recipe>
+		
+		<recipe name="plantedTomato1FM"					count="1" craft_time="1" tags="learnable">
+			<ingredient name="foodCropTomatoFM"					count="4" />
+		</recipe>
+		
+		<recipe name="plantedWheat1FM"					count="1" craft_time="1" tags="learnable">
+			<ingredient name="foodCropWheatFM"					count="4" />
+		</recipe>
+		
+		
+		<!-- Hot Canned Food -->
+		<recipe name="foodCanBeansHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanBeansFM" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodCanBeefHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanBeef" 						count="1" />
+		</recipe>
+		
+		<recipe name="foodCanChickenHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanChicken" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodCanLambHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanLamb" 						count="1" />
+		</recipe>
+		
+		<recipe name="foodCanChiliHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanChili" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodCanTunaHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanTuna" 						count="1" />
+		</recipe>
+		
+		<recipe name="foodCanShamHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanSham" 						count="1" />
+		</recipe>
+		
+		<recipe name="foodCanPastaHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanPasta" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodCanSalmonHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanSalmon" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodCanMisoHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanMiso" 						count="1" />
+		</recipe>
+		
+		<recipe name="foodCanPeasHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanPeas" 						count="1" />
+		</recipe>	
+		
+		<recipe name="foodCanSoupHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanSoup" 						count="1" />
+		</recipe>
+		
+		<recipe name="foodCanStockHotFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodCanStock" 					count="1" />
+		</recipe>
+		
+		
+		<!-- FennecMod foods -->
+		<recipe name="foodAnchovyPizzaFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="60" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+			<ingredient name="foodDoughFM" 						count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+			<ingredient name="foodFreshAnchovyFM"				count="3" />
+		</recipe>
+		
+		<recipe name="foodApplePieFM" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="60" tags="learnable,perkMasterChef">
+			<ingredient name="foodFlourFM"						count="1" />
+			<ingredient name="foodDoughFM" 						count="2" />
+			<ingredient name="foodEgg"							count="2" />
+			<ingredient name="foodCropAppleFM"					count="3" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodBaconButtyFM"					count="1" craft_time="20" tags="learnable,perkMasterChef">
+			<ingredient name="foodBurgerBunFM"					count="1" />
+			<ingredient name="foodFriedBaconFM"					count="1" />
+			<ingredient name="foodButterFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodBaconQuicheFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="120" tags="learnable,perkMasterChef">
+			<ingredient name="foodFlourFM"						count="1" />
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodRawBaconFM"					count="2" />
+			<ingredient name="foodEgg"							count="2" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodBakedBeanCasseroleFM"			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="180" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanBeansFM"					count="1" />
+			<ingredient name="foodCornMeal"						count="2" />
+			<ingredient name="foodRawSausageFM"					count="3" />
+			<ingredient name="foodRawBaconFM"					count="3" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodBangersAndMashFM"				count="1" craft_time="30" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPeasHotFM"					count="1" />						
+			<ingredient name="foodGrilledSausageFM"				count="2" />
+			<ingredient name="foodBoiledPotatoFM"				count="3" />
+			<ingredient name="foodButterFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodBatteredFishFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="70" tags="learnable,perkMasterChef">
+			<ingredient name="foodFreshFishFM"   				count="1" />
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+			<ingredient name="resourceTinFoilFM"				count="2" />
+		</recipe>
+		
+		<recipe name="foodBeefStewFM" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="120" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="foodCanBeef"		    			count="1" />
+			<ingredient name="foodCropPotato"         			count="2" />
+			<ingredient name="foodCropMushrooms"				count="2" />
+			<ingredient name="foodCropCorn"						count="2" />
+		</recipe>
+		
+		<recipe name="foodBloodSausageFM"				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="70" tags="learnable,perkMasterChef">
+			<ingredient name="resourceTinFoilFM"				count="1" />
+			<ingredient name="medicalBloodBag"					count="1" />
+			<ingredient name="resourceAnimalFat"				count="2" />
+			<ingredient name="resourceSaltFM"					count="1" />
+			<ingredient name="foodAnimalGutsFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodBlueberryCakeFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="50" tags="learnable,perkMasterChef">
+			<ingredient name="foodYoghurtBlueberryFM" 			count="1" />
+			<ingredient name="foodCakeMixtureFM"				count="1" />
+			<ingredient name="foodFlourFM"						count="1" />
+			<ingredient name="foodCropBlueberries"				count="3" />
+		</recipe>
+		
+		<recipe name="foodBoiledMushroomsFM"			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="25" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropMushrooms"				count="2" />
+			<ingredient name="resourceSaltFM"					count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="foodBoiledPotatoFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="20" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropPotato" 					count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="foodBoneAndGutBrothFM"			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="40" tags="perkMasterChef">
+			<ingredient name="resourceBone"						count="4" />
+			<ingredient name="foodAnimalGutsFM"					count="1" />
+			<ingredient name="resourceAnimalFat"				count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="foodBreadFM" 						count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodDoughFM" 						count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodBreadSliceFM"					count="10" craft_time="20" tags="perkMasterChef">
+			<ingredient name="foodBreadFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodBritishBreakfastFM" 			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="180" tags="learnable,perkMasterChef">
+			<ingredient name="foodRawSausageFM"		   			count="2" />
+			<ingredient name="foodCropMushrooms"				count="3" />
+			<ingredient name="foodEgg"							count="3" />
+			<ingredient name="foodRawBaconFM"					count="3" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodButterFM" 					count="8" craft_area="campfire" craft_tool="toolCookingPot" craft_time="40" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonMilkFM" 				count="1" />
+		</recipe>
+		
+		<recipe name="foodBurgerBunFM"					count="3" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodButterFM" 					count="6" craft_area="campfire" craft_tool="toolCookingPot" craft_time="40" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonSoyaMilkFM" 			count="1" />
+		</recipe>
+		
+		<recipe name="foodCakeMixtureFM" 				count="3" craft_time="20" tags="learnable,perkMasterChef">
+			<ingredient name="foodEgg"							count="2" />
+			<ingredient name="foodFlourFM"						count="1" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="drinkCartonMilkFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodCanAnchoviesFM" 				count="1" craft_time="20" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCanEmpty"		   			count="1"/>
+			<ingredient name="foodFreshAnchovyFM"   			count="5"/>
+		</recipe>
+		
+		<recipe name="foodCharredBaconFM"				count="1" craft_area="campfire" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodRawBaconFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodCharredSausageFM"				count="1" craft_area="campfire" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodRawSausageFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodCheeseFM" 					count="5" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonMilkFM"				count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodCheeseFM" 					count="5" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonSoyaMilkFM"			count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodCheeseDoughballsFM" 			count="4" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="50" tags="learnable,perkMasterChef">
+			<ingredient name="foodCheeseFM"						count="2" />
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodCheesePizzaFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="60" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+			<ingredient name="foodDoughFM" 						count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodCheeseSandwichFM" 			count="1" craft_time="20" tags="perkMasterChef">
+			<ingredient name="foodBreadSliceFM"					count="2" />
+			<ingredient name="foodButterFM" 					count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodCheeseStuffedTomatoFM"		count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="20" tag="perkMasterChef">
+			<ingredient name="foodCropTomatoFM"					count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodCornMeal"						count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodChickenCheeseburgerFM" 		count="1" craft_time="40" tags="learnable,perkMasterChef">
+			<ingredient name="foodBurgerBunFM"					count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodEggBoiled" 					count="1" />
+			<ingredient name="foodGrilledMeat"					count="1" />
+		</recipe>
+		
+		<recipe name="foodChickenMushroomPastaFM" 		count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="180" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPasta"						count="1" />
+			<ingredient name="foodCanChicken"					count="1" />
+			<ingredient name="foodCropMushrooms"				count="4" />
+			<ingredient name="foodGroundHerbsFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodChickenMushroomSoupFM" 		count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanStock"						count="1" />
+			<ingredient name="foodCanChicken" 					count="1" />
+			<ingredient name="foodCropMushrooms"				count="4" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodChickenPieFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanChicken" 					count="1" />
+			<ingredient name="foodCanStock"						count="1" />
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodEgg"							count="1" />
+			<ingredient name="foodCropCorn"						count="1" />
+		</recipe>
+		
+		<recipe name="foodChickenSandwichFM" 			count="1" craft_time="40" tags="perkMasterChef">
+			<ingredient name="foodBreadSliceFM"					count="2" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="foodCanChicken" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodChickenStewFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanChicken"					count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="foodCropPotato"         			count="2" />
+			<ingredient name="foodCropMushrooms"				count="2" />
+			<ingredient name="foodCropCorn"						count="2" />
+		</recipe>
+		
+		<recipe name="foodChickenSweetcornSoupFM" 		count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanChicken"   				count="1" />
+			<ingredient name="foodCanSoup"      				count="1" />
+			<ingredient name="foodCropCorn"    					count="2" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodChocolateCakeFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodChocolateFM"   				count="5" />
+			<ingredient name="foodYoghurtFM"					count="1" />
+			<ingredient name="foodCakeMixtureFM"      			count="1" />
+		</recipe>
+		
+		<recipe name="foodCookedFishFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodFreshFishFM"   				count="1" />
+		</recipe>
+		
+		<recipe name="foodCookedSalmonFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodFreshSalmonFM"   				count="1" />
+		</recipe>
+		
+		<recipe name="foodDoggyDooFM" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanDogfood"       			count="1" />
+			<ingredient name="foodCanPeas"						count="1" />
+			<ingredient name="foodCropPotato"		 			count="1" />
+			<ingredient name="foodCropCorn"						count="1" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+
+		<recipe name="foodDoughFM" 						count="4" craft_time="30" tags="learnable,perkMasterChef">
+			<ingredient name="foodFlourFM"   					count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="foodEggSandwichFM" 				count="1" craft_time="40" tags="perkMasterChef">
+			<ingredient name="foodBreadSliceFM"					count="2" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="foodEggBoiled" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodFishAndChipsFM" 				count="1"  craft_time="10" tags="perkMasterChef">
+			<ingredient name="foodBatteredFishFM"				count="1" />
+			<ingredient name="foodFriesFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodFlourFM" 						count="1"  craft_time="20" tags="perkMasterChef">
+			<ingredient name="foodCropWheatFM"					count="4" />
+		</recipe>
+		
+		<recipe name="foodFriedBaconFM"					count="5" craft_area="campfire" craft_tool="toolCookingPot" craft_time="20" tags="learnable,perkMasterChef">
+			<ingredient name="foodRawBaconFM"					count="5" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodFriedTofuFM"					count="5" craft_area="campfire" craft_tool="toolCookingPot" craft_time="30" tags="learnable,perkMasterChef">
+			<ingredient name="foodTofuFM"						count="5" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodFriesFM" 						count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="45" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropPotato"       			count="2" />
+			<ingredient name="resourceSaltFM"					count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodGelatinFM"					count="2" craft_area="campfire" craft_tool="toolCookingPot" craft_time="600" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="resourceBone"						count="12" />
+		</recipe>
+		
+		<recipe name="foodGrilledCheeseFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="60" tags="perkMasterChef">
+			<ingredient name="foodBreadSliceFM"       			count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodButterFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodGrilledSausageFM" 				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="30" tags="learnable,perkMasterChef">
+			<ingredient name="foodRawSausageFM"       			count="1" />
+		</recipe>
+		
+		<recipe name="foodGroundHerbsFM"				count="1" craft_time="20" tags="perkMasterChef">
+			<ingredient name="resourceCropGoldenrodPlant"		count="1" />
+			<ingredient name="resourceCropChrysanthemumPlant"	count="1" />
+			<ingredient name="resourceRockSmall"				count="1" />
+		</recipe>
+		
+		<recipe name="foodGummyBearsBlueFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodGelatinFM"					count="1" />
+			<ingredient name="drinkJarBlueberryJuiceFM"			count="1" />
+			<ingredient name="foodCropBlueberries"				count="3" />
+		</recipe>
+		
+		<recipe name="foodGummyBearsBlackFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodGelatinFM"					count="1" />
+			<ingredient name="drinkJarRedTea"					count="1" />
+			<ingredient name="foodCropPearFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodGummyBearsRedFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="30" tags=",perkMasterChef">
+			<ingredient name="foodGelatinFM"					count="1" />
+			<ingredient name="drinkJarBlueberryJuiceFM"			count="1" />
+			<ingredient name="foodCropAppleFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodHogRoastBurgerFM" 			count="1" craft_time="45" tags="learnable,perkMasterChef">
+			<ingredient name="foodBurgerBunFM"					count="1" />
+			<ingredient name="foodGrilledMeat" 					count="1" />
+			<ingredient name="foodCharredMeat"					count="2" />
+		</recipe>
+		
+		<recipe name="foodHoneyChickenKabobsFM"			count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="50" tags="learnable,perkMasterChef">
+			<ingredient name="foodRawMeat"						count="10" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+			<ingredient name="foodHoney"						count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodHoneyYuccaPieFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="foodHoney"						count="1" />
+			<ingredient name="foodDoughFM"		 				count="1" />
+			<ingredient name="foodEgg"							count="1" />
+			<ingredient name="foodCropYuccaFruit"      			count="3" />
+		</recipe>
+		
+		<recipe name="foodHotDogFM"						count="1" craft_time="50" tags="learnable,perkMasterChef">
+			<ingredient name="foodBurgerBunFM"					count="1" />
+			<ingredient name="foodGrilledSausageFM"				count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodHunterStewFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPeas"						count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="foodCropMushrooms"				count="1" />
+			<ingredient name="foodCropCorn"						count="2" />
+			<ingredient name="foodRawMeat"						count="15" />
+		</recipe>
+		
+		<recipe name="foodJacketPotatoFM"				count="2" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropPotato"					count="2" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodCanBeansFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodKittyCasseroleFM" 			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanCatfood"       			count="1" />
+			<ingredient name="foodCanPeas"						count="1" />
+			<ingredient name="foodCropPotato"		 			count="1" />
+			<ingredient name="foodCropCorn"						count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="foodLambStewFM" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanLamb"						count="1" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="foodCropPotato"         			count="2" />
+			<ingredient name="foodCropMushrooms"				count="2" />
+			<ingredient name="foodCropCorn"						count="2" />
+		</recipe>
+		
+		<recipe name="foodLionBurgerFM"					count="1" craft_time="120" tags="learnable,perkMasterChef">
+			<ingredient name="foodBurgerBunFM"					count="1" />
+			<ingredient name="foodGrilledMeat"					count="3" />
+			<ingredient name="foodFriedBaconFM"					count="2" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodLionMeatballHeroFM"			count="1" craft_time="80" tags="learnable,perkMasterChef">
+			<ingredient name="foodBreadFM"						count="1" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="foodGrilledMeat"					count="4" />
+			<ingredient name="foodCropMushrooms"				count="2" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodMacaroniCheeseFM" 			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPasta"						count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="drinkCartonMilkFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodMapleBaconCupcakeFM"			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="35" tags="learnable,perkMasterChef">
+			<ingredient name="foodFriedBaconFM"					count="3" />
+			<ingredient name="foodCakeMixtureFM"				count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodMushroomSoupFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanStock"     				count="1" />
+			<ingredient name="foodCanMiso"	    				count="1" />
+			<ingredient name="foodCropMushrooms"    			count="5" />
+			<ingredient name="resourceSaltFM"					count="1" />
+			<ingredient name="foodBreadFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodPastaShamFM"					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPasta"						count="1" />
+			<ingredient name="foodCanSham"						count="1" />
+			<ingredient name="foodCropCorn"						count="1" />
+		</recipe>
+		
+		<recipe name="foodPotatoPastaSaladFM"			count="1" craft_time="60" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPasta"						count="1" />
+			<ingredient name="foodEggBoiled"					count="1" />
+			<ingredient name="foodCornOnTheCob"					count="1" />
+			<ingredient name="foodBoiledPotatoFM"				count="2" />
+		</recipe>
+		
+		<recipe name="foodPeaHamSoupFM"					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="180" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPeas" 						count="1" />
+			<ingredient name="foodCanSham"						count="1" />
+			<ingredient name="foodCanMiso"						count="1" />
+			<ingredient name="foodCanStock"  					count="1" />
+			<ingredient name="foodBreadFM"						count="1" />
+		</recipe>
+		
+		<recipe name="foodPricklyPearPiecesFM"			count="3" craft_time="15" tags="perkMasterChef">
+			<ingredient name="foodCropPricklyPearFM"			count="1" />
+		</recipe>
+		
+		<recipe name="foodRawBaconFM"					count="2" craft_time="40" tags="perkMasterChef">
+			<ingredient name="foodRawMeat"						count="3" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodRawSausageFM"					count="2" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodRawMeat"						count="4" />
+			<ingredient name="resourceAnimalFat"				count="1" />
+			<ingredient name="resourceSaltFM"					count="1" />
+			<ingredient name="foodGroundHerbsFM"				count="1" />
+			<ingredient name="foodAnimalGutsFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodRottingFleshCharredFM"		count="1" craft_area="campfire" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodRottingFlesh" 				count="1" />
+		</recipe>
+		
+		<recipe name="foodShamSandwichCharredFM"		count="1" craft_area="campfire" craft_time="30" tags="perkMasterChef">
+			<ingredient name="foodShamSandwich" 				count="1" />
+		</recipe>
+		
+		<recipe name="foodShepherdsPieFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="120" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanLamb"						count="1" />
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodEgg"							count="1" />
+			<ingredient name="foodBoiledPotatoFM" 				count="2" />
+		</recipe>
+		
+		<recipe name="foodScrambledEggsFM"				count="3" craft_area="campfire" craft_tool="toolCookingPot" craft_time="50" tags="learnable,perkMasterChef">
+			<ingredient name="foodEgg"							count="3" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="drinkCartonMilkFM" 				count="1" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodScrambledEggsFM"				count="2" craft_area="campfire" craft_tool="toolCookingPot" craft_time="50" tags="learnable,perkMasterChef">
+			<ingredient name="foodEgg"							count="3" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="drinkCartonSoyaMilkFM" 			count="1" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodSmokedSalmonFM"				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="foodFreshSalmonFM"				count="1" />
+			<ingredient name="resourceCoal"						count="1" />
+		</recipe>
+		
+		<recipe name="foodSnakeSoupFM"					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="115" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+			<ingredient name="foodCropMushrooms"				count="1" />
+			<ingredient name="foodGroundHerbsFM"				count="1" />
+			<ingredient name="foodRawMeat"						count="10" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodSnakeStripsFM"				count="6" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="45" tags="learnable,perkMasterChef">
+			<ingredient name="foodEgg"							count="1" />
+			<ingredient name="foodDoughFM"						count="2" />
+			<ingredient name="foodRawMeat"						count="15" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodSpaghettiVenisonMeatballsFM"	count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="120" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanPasta" 					count="1" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+			<ingredient name="foodCheeseFM" 					count="1" />
+			<ingredient name="foodRawMeat" 						count="10" />
+		</recipe>
+		
+		<recipe name="foodSpicyHashFM"					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodCanSham"         				count="1" />
+			<ingredient name="foodCanChili"	   			     	count="1" />
+			<ingredient name="foodEgg"							count="1" />
+			<ingredient name="foodCropPotato" 					count="1" />
+		</recipe>
+		
+		<recipe name="foodSummerFruitSaladFM" 			count="1" craft_time="75" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropYuccaFruit"      			count="1"/>
+			<ingredient name="foodCropAppleFM"		    		count="1"/>
+			<ingredient name="foodCropTomatoFM"					count="1"/>
+			<ingredient name="drinkJarRedTea"					count="1"/>
+		</recipe>
+		
+		<recipe name="foodToastFM"						count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="60" tags="perkMasterChef">
+			<ingredient name="foodBreadSliceFM"         		count="1" />
+			<ingredient name="foodButterFM"	   			     	count="1" />
+		</recipe>
+		
+		<recipe name="foodTofuFM"						count="6" craft_area="campfire" craft_tool="toolCookingPot" craft_time="90" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonSoyaMilkFM"			count="2" />
+			<ingredient name="resourceSaltFM"					count="2" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="foodTofuSloppyJoeFM"				count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="120" tags="learnable,perkMasterChef">
+			<ingredient name="foodBurgerBunFM"					count="1" />
+			<ingredient name="foodCropMushrooms"				count="4" />
+			<ingredient name="foodFriedTofuFM"					count="4" />
+			<ingredient name="foodCropTomatoFM"					count="2" />
+		</recipe>
+		
+		<recipe name="foodTortillaFM"					count="3" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="150" tags="learnable,perkMasterChef">
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodButterFM"						count="1" />
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodUmblePieFM"					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="80" tags="learnable,perkMasterChef">
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodRottingFlesh"					count="5" />
+			<ingredient name="foodAnimalGutsFM"					count="1" />
+			<ingredient name="foodCropBlueberries"				count="2" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />		
+		</recipe>
+		
+		<recipe name="foodVegetableSoupFM" 				count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="180" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropPotato" 					count="5"/>
+			<ingredient name="foodCropCorn" 					count="5"/>
+			<ingredient name="foodCropMushrooms" 				count="5"/>
+			<ingredient name="drinkJarBoiledWater" 				count="1"/>
+			<ingredient name="resourceSaltFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodVenisonFeastPizzaFM" 			count="1" craft_area="campfire" craft_tool="toolCookingGrill" craft_time="60" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodCheeseFM"						count="1" />
+			<ingredient name="foodCropTomatoFM"					count="1" />
+			<ingredient name="foodRawMeat"						count="10" />
+		</recipe>
+		
+		<recipe name="foodVenisonWellingtonFM" 			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="60" tags="learnable,perkMasterChef">
+			<ingredient name="foodDoughFM"						count="1" />
+			<ingredient name="foodEgg"							count="1" />
+			<ingredient name="foodCropMushrooms"				count="2" />
+			<ingredient name="foodRawMeat"						count="5" />
+			<ingredient name="foodGroundHerbsFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodWinterFruitSaladFM" 			count="1" craft_time="75" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropBlueberries"      		count="1"/>
+			<ingredient name="foodCropPearFM"		    		count="1"/>
+			<ingredient name="resourceCropSnowberryPlant"		count="1"/>
+			<ingredient name="drinkJarGoldenRodTea"				count="1"/>
+		</recipe>
+		
+		<recipe name="foodWolfiesMeatloafFM"			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="80" tags="learnable,perkMasterChef">
+			<ingredient name="foodRawMeat"						count="20" />
+			<ingredient name="foodEgg"							count="2" />
+			<ingredient name="drinkCartonMilkFM"				count="1" />
+			<ingredient name="foodGroundHerbsFM"				count="1" />
+			<ingredient name="resourceTinFoilFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodYoghurtFM" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="25" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonMilkFM"				count="1" />
+			<ingredient name="drinkJarBoiledWater" 				count="1" />
+		</recipe>
+		
+		<recipe name="foodYoghurtFM" 					count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="25" tags="learnable,perkMasterChef">
+			<ingredient name="drinkCartonMilkFM"				count="1" />
+			<ingredient name="drinkJarBoiledWater" 				count="1" />
+		</recipe>
+		
+		<recipe name="foodYoghurtBlueberryFM" 			count="1" craft_time="15" tags="learnable,perkMasterChef">
+			<ingredient name="foodYoghurtFM"					count="1" />
+			<ingredient name="foodCropBlueberries" 				count="4" />
+		</recipe>
+		
+		<recipe name="foodYoghurtMixedFruitFM" 			count="1" craft_time="15" tags="learnable,perkMasterChef">
+			<ingredient name="foodYoghurtFM"					count="1" />
+			<ingredient name="foodCropBlueberries" 				count="2" />
+			<ingredient name="foodCropYuccaFruit"				count="2" />
+			<ingredient name="foodCropAppleFM"					count="1" />
+			<ingredient name="foodCropPearFM"					count="1" />
+		</recipe>
+		
+		<recipe name="foodYoghurtYuccaFM" 				count="1" craft_time="15" tags="learnable,perkMasterChef">
+			<ingredient name="foodYoghurtFM"					count="1" />
+			<ingredient name="foodCropYuccaFruit" 				count="4" />
+		</recipe>
+		
+		
+		<!-- Bag of fish can turn into anchovies, salmon, or just regular fish for cooking -->
+		<recipe name="foodFreshAnchovyFM"				count="4"	craft_time="10">
+			<ingredient name="resourceBagFishFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodFreshFishFM"					count="3"	craft_time="10">
+			<ingredient name="resourceBagFishFM"				count="1" />
+		</recipe>
+		
+		<recipe name="foodFreshSalmonFM"				count="1"	craft_time="10">
+			<ingredient name="resourceBagFishFM"				count="1" />
+		</recipe>
+		
+		
+		<!-- Drinks -->
+		<recipe name="drinkJarAloeJuiceFM" 				count="1" craft_time="25" tags="perkMasterChef">
+			<ingredient name="resourceCropAloeLeaf"				count="5" />
+			<ingredient name="drinkJarEmpty" 					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarAppleCiderFM" 			count="1" craft_area="chemistryStation" craft_time="600" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarAloeJuiceFM"				count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarAppleJuiceFM" 			count="1" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodCropAppleFM"					count="3" />
+			<ingredient name="drinkJarEmpty" 					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarBloodyMaryFM" 			count="3" craft_time="25" tags="learnable,perkMasterChef">
+			<ingredient name="drinkJarTomatoJuiceFM"			count="2" />
+			<ingredient name="drinkJarGrainAlcohol" 			count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarBlueberryJuiceFM" 		count="1" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodCropBlueberries"				count="6" />
+			<ingredient name="drinkJarEmpty" 					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarBlueberryWineFM"	 		count="1" craft_area="chemistryStation" craft_time="600" tags="learnable,chemStationCrafting">
+			<ingredient name="drinkJarBlueberryJuiceFM"			count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarPotatoJuiceFM" 			count="1" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodCropPotato"					count="7" />
+			<ingredient name="drinkJarEmpty" 					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarPricklyPearReserveFM"		count="1" craft_area="chemistryStation" craft_time="600" tags="learnable,chemStationCrafting">
+			<ingredient name="foodPricklyPearPiecesFM"			count="12" />
+			<ingredient name="medicalBloodBag"					count="1" />
+			<ingredient name="drinkJarEmpty"					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarTomatoJuiceFM" 			count="1" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodCropTomatoFM"					count="3" />
+			<ingredient name="drinkJarEmpty" 					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarVegetableOilFM" 			count="1" craft_area="campfire" craft_tool="toolCookingPot" craft_time="25" tags="learnable,perkMasterChef">
+			<ingredient name="foodCropCorn"						count="3" />
+			<ingredient name="resourceAnimalFat"				count="1" />
+			<ingredient name="drinkJarEmpty" 					count="1" />
+		</recipe>
+		
+		<recipe name="drinkJarVegetableOilFM"			count="1" craft_area="chemistryStation" craft_time="20" tags="chemStationCrafting">
+			<ingredient name="foodCropCorn"						count="2" />
+			<ingredient name="drinkJarEmpty"					count="1" />
+		</recipe>
+		
+		<recipe name="drinkCartonSoyaMilkFM" 			count="1" craft_time="25" tags="perkMasterChef">
+			<ingredient name="foodCropSoybeanFM"				count="6" />
+			<ingredient name="resourceCartonEmptyFM" 			count="1" />
+		</recipe>
+		
+		
+		<!-- Recipes for misc resources -->
+		<recipe name="resourceSaltFM"					count="2" craft_area="campfire" craft_tool="toolCookingPot" craft_time="25">
+			<ingredient name="resourceRockSaltFM"				count="10" />
+			<ingredient name="drinkJarBoiledWater"				count="1" />
+		</recipe>
+		
+		<recipe name="resourceSaltFM"					count="5" craft_area="chemistryStation" craft_tool="toolBeaker" craft_time="15">
+			<ingredient name="resourceRockSaltFM"				count="5" />
+		</recipe>
+		
+		<recipe name="resourceFishFoodFM"				count="20" craft_time="30">
+			<ingredient name="foodFreshFishFM"					count="1" />
+			<ingredient name="foodRawMeat"						count="5" />
+			<ingredient name="foodCropCorn"						count="1" />
+			<ingredient name="drinkJarVegetableOilFM"			count="1" />
+		</recipe>
+		
+		
+		
+		<!-- Recipes for tools -->
+		<recipe name="toolBeekeepingForcepsFM"			count="1" craft_area="workbench" craft-time="60" tags="workbenchCrafting">
+			<ingredient name="resourceForgedIron"				count="2"  />
+			<ingredient name="resourceMechanicalParts"			count="1"  />
+		</recipe>
+		
+		<!-- Recipes for blocks -->
+		<recipe name="cntBeehiveFM"				    count="1" craft_area="workbench" craft_time="120" tags="workbenchCrafting">
+			<ingredient name="resourceWood"						count="50" />
+			<ingredient name="resourceMechanicalParts"			count="2"  />
+			<ingredient name="resourceScrapPolymers"			count="10" />
+			<ingredient name="resourceRawHoneycombFM"			count="5"  />
+		</recipe>
+		
+		
+	</append>
+</configs>
+
+
+
+
+
+
+
+
+
+

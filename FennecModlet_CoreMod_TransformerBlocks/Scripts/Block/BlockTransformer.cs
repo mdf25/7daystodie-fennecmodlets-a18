@@ -22,11 +22,6 @@ public class BlockTransformer : BlockLoot
         base.LateInit();
         this.transformationPropertyParser = new TransformationPropertyParser(this);
         this.transformationPropertyParser.ParseDynamicProperties();
-        this.collection     = this.transformationPropertyParser.collection;
-        this.requirePower   = this.transformationPropertyParser.requirePower;
-        this.powerSources   = this.transformationPropertyParser.powerSources;
-        this.requireHeat    = this.transformationPropertyParser.requireHeat;
-        this.heatSources    = this.transformationPropertyParser.heatSources;
     }
 
     
@@ -68,6 +63,7 @@ public class BlockTransformer : BlockLoot
 
     /**
      * This is the activation text that displays when the player looks at this block.
+     * It will display whether the block is working, and if not, what conditions need to be fulfilled to make it work.
      */
 
     public override string GetActivationText(WorldBase _world, BlockValue _blockValue, int _clrIdx, Vector3i _blockPos, EntityAlive _entityFocusing)
@@ -77,18 +73,84 @@ public class BlockTransformer : BlockLoot
         {
             return string.Empty;
         }
-        string arg = Localization.Get(Block.list[_blockValue.type].GetBlockName(), "");
+        string lBlockName = Localization.Get(Block.list[_blockValue.type].GetBlockName(), "");
         PlayerActionsLocal playerInput = ((EntityPlayerLocal)_entityFocusing).playerInput;
-        string keybindString = UIUtils.GetKeybindString(playerInput.Activate, playerInput.PermanentActions.Activate);
-        if (!tileEntityBlockTransformer.bTouched)
+        string playerKey = playerInput.Activate.GetBindingXuiMarkupString(XUiUtils.EmptyBindingStyle.EmptyString, XUiUtils.DisplayStyle.Plain) + playerInput.PermanentActions.Activate.GetBindingXuiMarkupString(XUiUtils.EmptyBindingStyle.EmptyString, XUiUtils.DisplayStyle.Plain);
+        string tooltip = "";
+
+        // If updates cannot happen we need to display this to the user and say why they can't happen yet.
+        if (!tileEntityBlockTransformer.UpdateCanHappen((World)_world))
         {
-            return string.Format(Localization.Get("lootTooltipNew", ""), keybindString, arg);
+            // If no power, display this when looking at the block.
+            if (!tileEntityBlockTransformer.IsPowered())
+            {
+                tooltip    = Localization.Get("transformerTooltipNoPower", "");
+                List<string> lPowerSources = new List<string>();
+                if (this.transformationPropertyParser.powerSources.Count > 0)
+                {
+                    foreach (string powerSource in this.transformationPropertyParser.powerSources)
+                    {
+                        lPowerSources.Add(Localization.Get(powerSource));
+                    }
+                }
+                string sources = StringHelpers.WriteListToString(lPowerSources);
+                return string.Format(tooltip, playerKey, lBlockName, sources);
+            }
+
+            // If no heat, display this when looking at the block.
+            else if (!tileEntityBlockTransformer.IsHeated())
+            {
+                tooltip = Localization.Get("transformerTooltipNoHeat", "");
+                List<string> lHeatSources = new List<string>();
+                if (this.transformationPropertyParser.heatSources.Count > 0)
+                {
+                    foreach (string heatSource in this.transformationPropertyParser.heatSources)
+                    {
+                        lHeatSources.Add(Localization.Get(heatSource));
+                    }
+                }
+                string sources = StringHelpers.WriteListToString(lHeatSources);
+                return string.Format(tooltip, playerKey, lBlockName, sources);
+            }
+
+            // Checks we have nearby blocks
+            else if (!tileEntityBlockTransformer.HasNearbyBlocks())
+            {
+                tooltip = Localization.Get("transformerTooltipNoBlocksNearby", "");
+                List<string> lNearbyBlocks = new List<string>();
+                if (this.transformationPropertyParser.nearbyBlockNames.Count > 0)
+                {
+                    foreach (string blockName in this.transformationPropertyParser.nearbyBlockNames)
+                    {
+                        lNearbyBlocks.Add(Localization.Get(blockName));
+                    }
+                }
+
+                if (this.transformationPropertyParser.nearbyBlockTags.Count > 0)
+                {
+                    foreach (string blockTag in this.transformationPropertyParser.nearbyBlockTags)
+                    {
+                        lNearbyBlocks.Add(blockTag);
+                    }
+                }
+
+                string sources = StringHelpers.WriteListToString(lNearbyBlocks);
+                string needed = this.transformationPropertyParser.nearbyBlockCount.ToString();
+
+                return string.Format(tooltip, playerKey, lBlockName, needed, sources);
+            }
+
+            // If all else fails,  the block must be empty so needs items.
+            else
+            {
+                tooltip = Localization.Get("transformerTooltipReady", "");
+                return string.Format(tooltip, playerKey, lBlockName);
+            }
         }
-        if (tileEntityBlockTransformer.IsEmpty())
-        {
-            return string.Format(Localization.Get("lootTooltipEmpty", ""), keybindString, arg);
-        }
-        return string.Format(Localization.Get("lootTooltipTouched", ""), keybindString, arg);
+
+        // Transforming here...
+        tooltip = Localization.Get("transformerTooltipWorking", "");
+        return string.Format(tooltip, playerKey, lBlockName);
     }
 
     
@@ -131,9 +193,24 @@ public class BlockTransformer : BlockLoot
         tileEntityBlockTransformer.localChunkPos = World.toBlock(_blockPos);
         tileEntityBlockTransformer.lootListIndex = (int)((ushort)this.lootList);
         tileEntityBlockTransformer.SetContainerSize(LootContainer.lootList[this.lootList].size, true);
-        tileEntityBlockTransformer.SetTransformationCollection(this.collection);
-        tileEntityBlockTransformer.SetRequirePower(this.requirePower, this.powerSources);
-        tileEntityBlockTransformer.SetRequireHeat(this.requireHeat, this.heatSources);
+        tileEntityBlockTransformer.SetTransformationCollection(this.transformationPropertyParser.collection);
+        tileEntityBlockTransformer.SetRequirePower(
+            this.transformationPropertyParser.requirePower, 
+            this.transformationPropertyParser.powerSources
+        );
+        tileEntityBlockTransformer.SetRequireHeat(
+            this.transformationPropertyParser.requireHeat, 
+            this.transformationPropertyParser.heatSources
+        );
+        tileEntityBlockTransformer.SetRequireNearbyBlocks(
+            this.transformationPropertyParser.requireNearbyBlocks,
+            this.transformationPropertyParser.nearbyBlockNames,
+            this.transformationPropertyParser.nearbyBlockTags,
+            this.transformationPropertyParser.requireAllTags,
+            this.transformationPropertyParser.nearbyBlockRange,
+            this.transformationPropertyParser.nearbyBlockCount
+        );
+        tileEntityBlockTransformer.CalculateLookupCoordinates();
         _chunk.AddTileEntity(tileEntityBlockTransformer);
     }
 
@@ -153,7 +230,7 @@ public class BlockTransformer : BlockLoot
      * entity destroyed it.
      */
 
-    public override bool OnBlockDestroyedBy(WorldBase _world, int _clrIdx, Vector3i _blockPos, BlockValue _blockValue, int _entityId, bool _bUseHarvestTool)
+    public override Block.DestroyedResult OnBlockDestroyedBy(WorldBase _world, int _clrIdx, Vector3i _blockPos, BlockValue _blockValue, int _entityId, bool _bUseHarvestTool)
     {
         TileEntityBlockTransformer tileEntityBlockTransformer = _world.GetTileEntity(_clrIdx, _blockPos) as TileEntityBlockTransformer;
         if (tileEntityBlockTransformer != null)
@@ -169,7 +246,7 @@ public class BlockTransformer : BlockLoot
         {
             _world.GetGameManager().DropContentOfLootContainerServer(_blockValue, _blockPos, tileEntityBlockTransformer.entityId);
         }
-        return true;
+        return Block.DestroyedResult.Downgrade;
     }
 
 
@@ -202,11 +279,6 @@ public class BlockTransformer : BlockLoot
     };
 
 
-    // Transformation properties to pass on.
+    // Transformation properties to pass on to the tile entity.
     private TransformationPropertyParser transformationPropertyParser;
-    private TransformationCollection collection;
-    private bool requirePower;
-    private bool requireHeat;
-    private List<string> powerSources;
-    private List<string> heatSources;
 }

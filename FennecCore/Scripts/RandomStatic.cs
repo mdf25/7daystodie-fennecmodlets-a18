@@ -8,4 +8,9 @@ static class RandomStatic
 	{
 		return random.NextDouble();
 	}
+
+    public static int Range(int lower, int upper)
+    {
+        return random.Next(lower, upper);
+    }
 }

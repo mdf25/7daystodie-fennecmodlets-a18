@@ -9,22 +9,7 @@ public class TransformerItemOutput : ITransformerItem
 	public TransformerItemOutput(ItemValue itemValue, int count, double prob = 1.0)
 	{
 		this.itemStack 	= new ItemStack(itemValue, count);
-		this.prob		= this.CheckProb(prob);
-	}
-	
-	protected double CheckProb(double prob)
-	{
-		if (prob < 0.0) 
-		{
-			return 0.0;
-		}
-		
-		if (prob > 1.0)
-		{
-			return 1.0;
-		}
-
-        return prob;
+		this.prob		= NumHelpers.CheckProb(prob);
 	}
 
 
@@ -77,6 +62,7 @@ public class TransformerItemOutput : ITransformerItem
     /**
      * Debug writeout
      */
+
     public override string ToString()
     {
         string name     = ItemClass.GetForId(itemStack.itemValue.type).GetItemName();

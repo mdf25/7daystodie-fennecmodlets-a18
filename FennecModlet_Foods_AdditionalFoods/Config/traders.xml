@@ -1,0 +1,185 @@
+<configs>
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+
+
+	<!-- Adds canned foods to the canned food loot table -->
+	<append xpath="//trader_item_group[@name='cannedfood']">
+		<item name="foodCanAnchoviesFM"	/>
+		<item name="foodCanBeansFM" />
+	</append>
+
+	<!-- Adds the new crop seeds to seeds loot -->
+	<append xpath="//trader_item_group[@name='seeds']">
+		<item name="plantedPricklyPear1FM"	/>
+		<item name="plantedSoybean1FM" 		/>
+		<item name="plantedTomato1FM" 		/>
+		<item name="plantedWheat1FM"		/>
+		<item name="treePlantedApple0FM"	/>
+		<item name="treePlantedPear0FM"		/>
+	</append>
+
+	<!-- Adds basic food to the food supply trader list. -->
+	<append xpath="//trader_item_group[@name='foodSupplies']">
+		<item name="foodBreadFM" 						count="4,10"  />
+		<item name="foodBurgerBunFM"					count="6,12"  />
+		<item name="foodButterFM"						count="4,10"  />
+		<item name="foodCheeseFM"						count="2,8"	  />
+		<item name="foodFlourFM"						count="5,12"  />
+		<item name="foodChocolateFM"					count="3,9"	  />
+		<item name="foodCakeMixtureFM"					count="2,5"	  />
+		<item name="foodCropAppleFM"					count="6,12"  />
+		<item name="foodCropPearFM"						count="6,12"  />
+		<item name="foodCropSoybeanFM"					count="12,24" />
+		<item name="foodCropTomatoFM"					count="6,12"  />
+		<item name="foodFreshFishFM"					count="3,6"	  />
+		<item name="foodFreshSalmonFM"					count="2,3"	  />
+		<item name="foodRawBaconFM"						count="5,10"  />
+		<item name="foodYoghurtFM"						count="1,4"	  />
+		<item name="foodYoghurtYuccaFM"					count="1,2"	  />
+		<item name="foodYoghurtBlueberryFM"				count="1,2"	  />
+		<item name="foodYoghurtMixedFruitFM"			count="1"	  />
+		<item name="drinkJarVegetableOilFM"				count="6,12"  />
+	</append>
+
+	<!-- Adds some (but not all) prepared foods to the trader inventory. -->
+	<append xpath="//trader_item_group[@name='preparedFood']">
+		<item name="foodApplePieFM"						count="1,3"	  />
+		<item name="foodBaconQuicheFM"					count="1,2"   />
+		<item name="foodBatteredFishFM"					count="1,2"	  />
+		<item name="foodBlueberryCakeFM"				count="1,3"	  />
+		<item name="foodCheesePizzaFM"					count="1,2"	  />
+		<item name="foodCheeseSandwichFM"				count="2,6"	  />
+		<item name="foodChickenCheeseburgerFM"			count="1,3"	  />
+		<item name="foodChickenPieFM"					count="1,3"	  />
+		<item name="foodChickenSandwichFM"				count="2,6"	  />
+		<item name="foodChocolateCakeFM"				count="1,2"	  />
+		<item name="foodCookedFishFM"					count="1,3"   />
+		<item name="foodCookedSalmonFM"					count="1,2"	  />
+		<item name="foodEggSandwichFM"					count="2,6"   />
+		<item name="foodMacaroniCheeseFM"				count="2,4"	  />
+		<item name="foodScrambledEggsFM"				count="2,8"	  />
+		<item name="foodShepherdsPieFM"					count="1,3"	  />
+		<item name="foodSpaghettiVenisonMeatballsFM" 	count="1,3"	  />
+	</append>
+
+	<!-- Adds prepared drinks to the trader inventory -->
+	<append xpath="//trader_item_group[@name='preparedDrink']">
+		<item name="drinkJarAppleCiderFM"				count="1,2"	  />
+		<item name="drinkJarAppleJuiceFM"				count="1,5"	  />
+		<item name="drinkJarBlueberryJuiceFM"			count="1,5"   />
+		<item name="drinkJarTomatoJuiceFM"				count="1,5"	  />
+		<item name="drinkCartonMilkFM"					count="1,6"	  />
+		<item name="drinkCartonSoyaMilkFM"				count="1,6"	  />
+	</append>
+
+	<!-- Adds schematics for food to the trader inventory -->
+	<append xpath="//trader_item_group[@name='farmingCookingRecipes']">
+		<item name="foodAnchovyPizzaFMSchematic" />
+		<item name="foodApplePieFMSchematic" />
+		<item name="foodBaconButtyFMSchematic" />
+		<item name="foodBaconQuicheFMSchematic" />
+		<item name="foodBakedBeanCasseroleFMSchematic" />
+		<item name="foodBangersAndMashFMSchematic" />
+		<item name="foodBatteredFishFMSchematic" />
+		<item name="foodBeefStewFMSchematic" />
+		<item name="foodBloodSausageFMSchematic" />
+		<item name="foodBlueberryCakeFMSchematic" />
+		<item name="foodBoiledMushroomsFMSchematic" />
+		<item name="foodBoiledPotatoFMSchematic" />
+		<item name="foodBreadFMSchematic" />
+		<item name="foodBurgerBunFMSchematic" />
+		<item name="foodButterFMSchematic" />
+		<item name="foodBritishBreakfastFMSchematic" />
+		<item name="foodCakeMixtureFMSchematic" />
+		<item name="foodCanAnchoviesFMSchematic" />
+		<item name="foodCheeseFMSchematic" />
+		<item name="foodCheeseDoughballsFMSchematic" />
+		<item name="foodCheesePizzaFMSchematic" />
+		<item name="foodChickenCheeseburgerFMSchematic" />
+		<item name="foodChickenMushroomPastaFMSchematic" />
+		<item name="foodChickenMushroomSoupFMSchematic" />
+		<item name="foodChickenPieFMSchematic" />
+		<item name="foodChickenStewFMSchematic" />
+		<item name="foodChickenSweetcornSoupFMSchematic" />
+		<item name="foodChocolateCakeFMSchematic" />
+		<item name="foodDoggyDooFMSchematic" />
+		<item name="foodDoughFMSchematic" />
+		<item name="foodFriedBaconFMSchematic" />
+		<item name="foodFriedTofuFMSchematic" />
+		<item name="foodFriesFMSchematic" />
+		<item name="foodGelatinFMSchematic" />
+		<item name="foodGrilledSausageFMSchematic" />
+		<item name="foodHogRoastBurgerFMSchematic" />
+		<item name="foodHoneyChickenKabobsFMSchematic" />
+		<item name="foodHoneyYuccaPieFMSchematic" />
+		<item name="foodHunterStewFMSchematic" />
+		<item name="foodJacketPotatoFMSchematic" />
+		<item name="foodKittyCasseroleFMSchematic" />
+		<item name="foodLambStewFMSchematic" />
+		<item name="foodLionBurgerFMSchematic" />
+		<item name="foodLionMeatballHeroFMSchematic" />
+		<item name="foodMacaroniCheeseFMSchematic" />
+		<item name="foodMapleBaconCupcakeFMSchematic" />
+		<item name="foodMushroomSoupFMSchematic" />
+		<item name="foodPastaShamFMSchematic" />
+		<item name="foodPotatoPastaSaladFMSchematic" />
+		<item name="foodPeaHamSoupFMSchematic" />
+		<item name="foodShepherdsPieFMSchematic" />
+		<item name="foodScrambledEggsFMSchematic" />
+		<item name="foodSmokedSalmonFMSchematic" />
+		<item name="foodSnakeSoupFMSchematic" />
+		<item name="foodSnakeStripsFMSchematic" />
+		<item name="foodSpaghettiVenisonMeatballsFMSchematic" />
+		<item name="foodSpicyHashFMSchematic" />
+		<item name="foodSummerFruitSaladFMSchematic" />
+		<item name="foodTofuFMSchematic" />
+		<item name="foodTofuSloppyJoeFMSchematic" />
+		<item name="foodTortillaFMSchematic" />
+		<item name="foodUmblePieFMSchematic" />
+		<item name="foodVegetableSoupFMSchematic" />
+		<item name="foodVenisonFeastPizzaFMSchematic" />
+		<item name="foodVenisonWellingtonFMSchematic" />
+		<item name="foodWinterFruitSaladFMSchematic" />
+		<item name="foodWolfiesMeatloafFMSchematic" />
+		<item name="foodYoghurtFMSchematic" />
+		<item name="foodYoghurtBlueberryFMSchematic" />
+		<item name="foodYoghurtMixedFruitFMSchematic" />
+		<item name="foodYoghurtYuccaFMSchematic" />
+		<item name="drinkJarAppleCiderFMSchematic" />
+		<item name="drinkJarBloodyMaryFMSchematic" />
+		<item name="drinkJarBlueberryWineFMSchematic" />
+		<item name="drinkJarPricklyPearReserveFM" />
+		<item name="drinkJarVegetableOilFMSchematic" />
+		<item name="treePlantedApple0FMSchematic" />
+		<item name="treePlantedPear0FMSchematic" />
+		<item name="plantedSoybean1FMSchematic" />
+		<item name="plantedTomato1FMSchematic" />
+		<item name="plantedWheat1FMSchematic" />
+	</append>
+	
+	<!-- Adds bags of fish and aquariums to the trader's secret stash, level 3 required. -->
+	<insertAfter xpath="//trader_item_group[last()]">
+		<trader_item_group name="aquariumFish" count="all">
+			<item name="cntAquariumEmptyFM" 			count="1" 	  />
+			<item name="resourceBagFishFM" 				count="1,2"   />
+			<item name="toolFishingNetFM"				count="1" 	  />
+		</trader_item_group>
+	</insertAfter>
+
+	<append xpath="//tier_items[@level='3000,3999']">
+		<item group="aquariumFish"	count="1" />
+	</append>
+
+	<append xpath="//tier_items[@level='4000,4999']">
+		<item group="aquariumFish"	count="1,2" />
+	</append>
+
+	<append xpath="//tier_items[@level='5000,-1']">
+		<item group="aquariumFish"	count="2,3" />
+	</append>
+
+
+</configs>

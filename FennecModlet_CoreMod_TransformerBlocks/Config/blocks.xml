@@ -7,18 +7,21 @@
 	
 	<!-- 
 		WHAT IS A TRANSFORMER BLOCK?
-		- Transformer blocks allow for custom auto crafting recipes.
-		- They take one or more input and produce one or more output after a time.
+		- Transformer blocks allow for custom auto crafting recipes based on the existence of zero or more
+       external conditions.
+		- They take one or more inputs and produce one or more outputs after a predefined time.
 		- You can specify as many inputs and outputs as you want, but bear in mind that the inputs and
 		   outputs should not exceed the container size else the transformation will not work. 
-		   It is recommended to make your container size big enough to handle all inputs and all
-		   outputs at the same time, to avoid blockage, though you can use it as a limiter.
+		- It is recommended to make your container size big enough to handle all inputs and all
+		   outputs at the same time, to avoid blockage, though you can use it as a limiter too.
 		   
 		HOW TO ADD YOUR OWN 
-		- You need to specify 3 things
-			1. A loot list. This should also be added to loot.xml so it is found.
+		- You need to specify 3 things by default.
+			1. <property name="LootList" value="#someInteger#" />. In loot.xml, also add the lootcontainer.
 			2. <property name="Class" value="Transformer, Mods" />
-			3. <property class="Transformations"> ... </property>
+			3. <property class="Transformations"> 
+           ... 
+         </property>
 		
 		HOW TO ADD TRANSFORMATION TIME
 		- In property class Transformations, add 
@@ -31,135 +34,234 @@
 			<property name="Transformation1_Time" value="4" />
 		  This transformation will take 4 seconds to complete.
 		
-		HOW TO ADD INPUTS
+		HOW TO ADD INPUTS AND OUTPUTS
 		- In property class Transformations, add
-			<property name="TransformationX_InputY" value="I,C" />
+			<property name="TransformationX_InputY" value="I,C,P" />
+      <property name="TransformationX_OutputY" value="I,C,P" />
 		  where 
 		  - X is the transformation index (starts from 1), 
 		  - Y is the item index (starts from 1),
 		  - I is the item name as it appears in items.xml, 
 		  - C is the count of how many are needed (optional, will be 1 if not specified).
-		  
+		  - P is the probability (between 0 and 1) and:
+          + if this is an input, the probability that the item will be consumed
+          + if this is an output, the probability that the item will be given
+      
 		  Example:
 			<property name="Transformation1_Input1" value="resourceRockSmall,3" />
 			<property name="Transformation1_Input2" value="drinkJarEmpty" />
-		  This transformation needs 3 small stones and an empty jar for its inputs - notice how we
-		  didn't specify the amount for the empty jar since it defaults to 1.
-		  
-		HOW TO ADD OUTPUTS
-		- Outputs are similar to inputs but they have one extra property.
-			<property name="TransformationX_OutputY" value="I,C,P" />
-		  where 
-		  - X is the transformation index (starts from 1), 
-		  - Y is the item index (starts from 1),
-		  - I is the item name as it appears in items.xml, 
-		  - C is the count of how many are needed (optional, will be 1 if not specified).
-		  - P is the probability between 0 and 1 that this output will generate (optional, 
-		     will be 1 if not specified).
-		
-		  Example
-		    <property name="Transformation1_Output1" value="resourceSand,2" />
+      <property name="Transformation1_Input3" value="foodRottingFlesh,2,0.35" /> 
+		  <property name="Transformation1_Output1" value="resourceSand,2" />
 			<property name="Transformation1_Output2" value="resourceYuccaFibers,5" />
 			<property name="Transformation1_Output3" value="resourceCoal,1,0.1" />
-		  This transformation always gives out 2 sand, 5 plant fibers, and a 10% chance of coal.
+      
+      Let's break this down a bit...
+      
+      Inputs:
+        This transformation needs 3 small stones, an empty jar and rotting flesh for its inputs. Both the small stones and
+         the jar will be consumed upon transformation, however, the rotting flrsh only has a 35% chance to be consumed.
+		  
+      Outputs:
+		    This transformation always gives out 2 sand, 5 plant fibers, and a 10% chance of coal.
       
     OPTIONAL PARAMETERS
-    As well as specifying what items are needed, you can specify too whether the block needs a power source, and what power sources
-    are required to power the block. Note that the power block MUST extend from tileEntityPowered so if you want to add your own 
-    relays to power blocks, you can do this. The electric wire relay is the vanilla default one.
+    You can specify whether the block needs a power source, and what power sources are required to power the block. 
+    Note that the power block MUST extend from tileEntityPowered so if you want to add your own relays to power blocks, 
+    you can do this. The electric wire relay is the vanilla default one that will be assigned if none are specified 
+    by the modder.
+    
+    If you want to make your own electric relays to use with this, it's recommended to extend the vanilla wire relay.
     EXAMPLE: Set the block to require power to work and that it must be next to an electric wire relay.
       <property name="RequirePower" value="true" />
       <property name="PowerSources" value="electricwirerelay" />
     
-    You can also specify if a block requires a campfire to be underneath it for heating purposes.
+    You can also specify if a block requires a heat source to be underneath it for heating purposes. In order for a source
+    to qualify, it needs to be a TileEntityWorkstation that uses fuel. So the forge, campfire and chem station are examples
+    of ones that will work, and the workbench, sawbench and cement mixers are examples of ones that won't work. If none are
+    specified by the modder, the campfire and forge are the default ones.
+    
+    If you have your own custom workstations, you can specify these too. Just make sure that your workstation requires some
+    form of fuel to run it.
     EXAMPLE: Set the block to require heat to work and that it needs a campfire under it.
       <property name="RequireHeat" value="true" />
       <property name="HeatSources" value="campfire" />
       
     You can specify additional power or heat sources using a comma separated list of block names as they appear in XML.
-    It is recommended to use only heat or only electric to power your block, but you can do both if needed.
+    It is recommended to use only heat or only electric to power your block, but you can do both if needed and it works fine.
+    
+    
+    REQUIRING BLOCKS IN A RANGE
+    Sometimes, you may not need blocks to require heat or power, but instead, need them to require other blocks to be around 
+    the transformer block. Let's take a beehive for example. In order for bees to live and colonise successfully, they need a
+    good supply of nectar to feed. So, having your beehive block require flowers around it will be necessary. This is possible
+    too. You can use block names, but you can also use filter tags too if you don't want to name each block individually...
+    
+    EXAMPLE:
+      <property name="RequireNearbyBlocks" value="true" />
+      <property name="NearbyBlockRange" value="3,3,3" />
+      <property name="NearbyBlockTags" value="fcrops" />
+      <property name="RequireAllTags" value="false" />
+      <property name="NearbyBlockCount" value="10" />    
+      
+    This will look for any blocks with the tag 'fcrops' within a radius of 3 around the block in x y z respecively. If, within
+    that range, at least 10 of these blocks are found, transformations will be allowed to occur. Since all vanilla crops have
+    this property, you can have all crops working.
+    
+    Another use would be for a fishing net block. You'd want to make sure that the fishing net is placed underwater, where no
+    players have placed water themselves (to stop players from creating their own water sources and getting free fish from the
+    safety of their base, says MadMole). So, this will work...
+    
+    EXAMPLE:
+      <property name="RequireNearbyBlocks" value="true" />
+      <property name="NearbyBlockRange" value="2, 5, 2" />
+      <property name="NearbyBlockNames" value="water,waterMoving,waterPOI" />
+      <property name="RequireAllTags" value="false" />
+      <property name="NearbyBlockCount" value="60" />
+      
+    This will look for any water and moving water blocks within a 5x11x5 cuboid around the block in x, y, z (since the range is
+    a radius, you get range = (2 x radius) + 1 in each direction. If 60 or more water blocks are found, the block will be able 
+    to work. You could then specify bait and fish items that the block can transform into.
+    
+    Note that 'NearbyBlockCount' should not exceed the following:
+    ((2 * rangeX + 1) * (2 * rangeY + 1) * (2 * rangeZ + 1) - 1)
+    eg. If your ranges are 1, 1, 1, then your count should not exceed
+    ((2 * 1 + 1) * (2 * 1 + 1) * (2 * 1 + 1) - 1) = 26
+    otherwise, the having enough blocks requirement will never be fulfilled.
+    
+    
+    LAG REDUCTION
+    Note that the transformer blocks themselves could be quite heavy on a system. The best way I have found to reduce the lag on
+    a machine is to limit the amount of times that the blocks can update. As a consequence of this, the non-base example blocks 
+    may need a few seconds to both start up and turn off respectively. 
+    
+    
+    PLANNED FEATURES:
+    - Allow blocks to display a particle effect when they are active, configurable in XML
+    - Allow blocks to transform in a priority list instead of all at once, if desired. Configurable in XML.
 	-->
 
   <append xpath="/blocks">
+    <!-- Example of a base transformer block. No special requirements here, put items in, get items out. -->
     <block name="TransformerBlockBaseExample">
-      <property name="Extends" 		value="woodMaster" />
-      <property name="Class" 			value="Transformer, Mods" />
+      <property name="Extends" 		  value="woodMaster" />
+      <property name="CreativeMode" value="Dev" />
+      <property name="Class" 			  value="Transformer, Mods" />
       <property name="LootList" 		value="300" />
       <property class="Transformations">
         <!-- 1 -->
-        <property name="Transformation1_Time" value="2" />
-        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
-        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
-        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <property name="Transformation1_Time"     value="2" />
+        <property name="Transformation1_Input1"   value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1"  value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2"  value="foodRawMeat,1,0.2" />
         <!-- 2 -->
-        <property name="Transformation2_Time" value="2" />
-        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
-        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
-        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+        <property name="Transformation2_Time"     value="2" />
+        <property name="Transformation2_Input1"   value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2"   value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1"  value="resourceRockSmall,1" />
       </property>
     </block>
 
-    <block name="TransformerBlockPoweredExample">
-      <property name="Extends" 		value="woodMaster" />
-      <property name="Class" 			value="Transformer, Mods" />
+    <!-- Example of a base transformer block with input probability. No special requirements here, put items in, get items out. -->
+    <block name="TransformerBlockInputProbExample">
+      <property name="Extends" 		  value="woodMaster" />
+      <property name="CreativeMode" value="Dev" />
+      <property name="Class" 			  value="Transformer, Mods" />
       <property name="LootList" 		value="300" />
+      <property class="Transformations">
+        <!-- 1 -->
+        <property name="Transformation1_Time"     value="2" />
+        <property name="Transformation1_Input1"   value="resourceRockSmall,5,0.1" />
+        <property name="Transformation1_Output1"  value="drinkJarEmpty,1" />
+      </property>
+    </block>
+
+    <!-- This block requires to be next to a power relay to run. -->
+    <block name="TransformerBlockPoweredExample">
+      <property name="Extends" 		    value="woodMaster" />
+      <property name="CreativeMode"   value="Dev" />
+      <property name="Class" 			    value="Transformer, Mods" />
+      <property name="LootList" 		  value="300" />
       <property name="RequirePower" 	value="true" />
       <property name="PowerSources"   value="electricwirerelay" />
       <property class="Transformations">
         <!-- 1 -->
-        <property name="Transformation1_Time" value="2" />
-        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
-        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
-        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <property name="Transformation1_Time"     value="2" />
+        <property name="Transformation1_Input1"   value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1"  value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2"  value="foodRawMeat,1,0.2" />
         <!-- 2 -->
-        <property name="Transformation2_Time" value="2" />
-        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
-        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
-        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+        <property name="Transformation2_Time"     value="2" />
+        <property name="Transformation2_Input1"   value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2"   value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1"  value="resourceRockSmall,1" />
       </property>
     </block>
 
+    <!-- This block needs to be above a heat source to run. A campfire or forge are specified here. -->
     <block name="TransformerBlockHeatedExample">
-      <property name="Extends" 		value="woodMaster" />
-      <property name="Class" 			value="Transformer, Mods" />
-      <property name="LootList" 		value="300" />
-      <property name="RequireHeat" 	value="true" />
-      <property name="HeatSources"  value="campfire,forge" />
+      <property name="Extends" 		    value="woodMaster" />
+      <property name="CreativeMode"   value="Dev" />
+      <property name="Class" 			    value="Transformer, Mods" />
+      <property name="LootList" 		  value="300" />
+      <property name="RequireHeat" 	  value="true" />
+      <property name="HeatSources"    value="campfire,forge" />
       <property class="Transformations">
         <!-- 1 -->
-        <property name="Transformation1_Time" value="2" />
-        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
-        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
-        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <property name="Transformation1_Time"     value="2" />
+        <property name="Transformation1_Input1"   value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1"  value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2"  value="foodRawMeat,1,0.2" />
         <!-- 2 -->
-        <property name="Transformation2_Time" value="2" />
-        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
-        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
-        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+        <property name="Transformation2_Time"     value="2" />
+        <property name="Transformation2_Input1"   value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2"   value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1"  value="resourceRockSmall,1" />
       </property>
     </block>
 
+    <!-- This block needs both a power relay next to it and a heat source underneath it to work. -->
     <block name="TransformerBlockHeatAndPowerExample">
-      <property name="Extends" 		value="woodMaster" />
-      <property name="Class" 			value="Transformer, Mods" />
-      <property name="LootList" 		value="300" />
+      <property name="Extends" 		    value="woodMaster" />
+      <property name="CreativeMode"   value="Dev" />
+      <property name="Class" 			    value="Transformer, Mods" />
+      <property name="LootList" 		  value="300" />
       <property name="RequirePower" 	value="true" />
       <property name="PowerSources"   value="electricwirerelay" />
       <property name="RequireHeat" 	  value="true" />
       <property name="HeatSources"    value="campfire,forge" />
       <property class="Transformations">
         <!-- 1 -->
-        <property name="Transformation1_Time" value="2" />
-        <property name="Transformation1_Input1" value="resourceRockSmall,5" />
-        <property name="Transformation1_Output1" value="drinkJarEmpty,1" />
-        <property name="Transformation1_Output2" value="foodRawMeat,1,0.2" />
+        <property name="Transformation1_Time"     value="2" />
+        <property name="Transformation1_Input1"   value="resourceRockSmall,5" />
+        <property name="Transformation1_Output1"  value="drinkJarEmpty,1" />
+        <property name="Transformation1_Output2"  value="foodRawMeat,1,0.2" />
         <!-- 2 -->
-        <property name="Transformation2_Time" value="2" />
-        <property name="Transformation2_Input1" value="drinkJarEmpty,2" />
-        <property name="Transformation2_Input2" value="resourceYuccaFibers,3" />
-        <property name="Transformation2_Output1" value="resourceRockSmall,1" />
+        <property name="Transformation2_Time"     value="2" />
+        <property name="Transformation2_Input1"   value="drinkJarEmpty,2" />
+        <property name="Transformation2_Input2"   value="resourceYuccaFibers,3" />
+        <property name="Transformation2_Output1"  value="resourceRockSmall,1" />
       </property>
     </block>
+
+    <!-- This block needs to be in water to work. Player water does not work though, only world and POI water will work. -->
+    <block name="TransformerBlockNearbyBlocksExample">
+      <property name="Extends" 		          value="woodMaster" />
+      <property name="CreativeMode"         value="Dev" />
+      <property name="Class" 			          value="Transformer, Mods" />
+      <property name="LootList" 		        value="300" />
+      <property name="RequireNearbyBlocks"  value="true" />
+      <property name="NearbyBlockRange"     value="2, 5, 2" />
+      <property name="NearbyBlockNames"     value="water,waterMoving,waterPOI" />
+      <property name="NearbyBlockCount"     value="30" />
+      <property class="Transformations">
+        <!-- 1 -->
+        <property name="Transformation1_Time"     value="2" />
+        <property name="Transformation1_Input1"   value="foodRawMeat,1,1" />
+        <property name="Transformation1_Output1"  value="foodCanSalmon,1,1" />
+      </property>
+    </block>
+
+
   </append>
 
 </configs>

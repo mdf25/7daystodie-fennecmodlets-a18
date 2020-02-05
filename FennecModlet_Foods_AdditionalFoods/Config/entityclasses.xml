@@ -1,0 +1,14 @@
+<configs>
+	
+	<!-- Adds a dependency tag to the start of the XML -->
+	<insertBefore xpath="/*/*[1]">
+		<!-- DEPENDENCY: FennecModlet - Foods - Additional Foods -->
+	</insertBefore>
+	
+	<!-- Allows guts to be harvested from animals -->
+	<insertAfter xpath="//entity_class[starts-with(@name, 'animal') and not(contains(@name, 'Zombie'))]/drop[last()]">
+		<drop event="Harvest"		name="foodAnimalGutsFM"		tag="butcherHarvest" 				count="0,2" />
+		<drop event="Harvest" 		name="foodAnimalGutsFM"  	tag="WasteTreasuresCompleteHarvest" count="2" />
+	</insertAfter>
+
+</configs>

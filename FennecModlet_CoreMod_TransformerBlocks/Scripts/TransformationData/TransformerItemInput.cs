@@ -5,11 +5,14 @@ using System.Text.RegularExpressions;
 public class TransformerItemInput : ITransformerItem
 {
 	public ItemStack itemStack;
+    public double prob;
 	
-	public TransformerItemInput(ItemValue itemValue, int count)
-	{
-		this.itemStack = new ItemStack(itemValue, count);
-	}
+	public TransformerItemInput(ItemValue itemValue, int count, double prob = 1.0)
+    {
+        this.itemStack = new ItemStack(itemValue, count);
+        this.prob = NumHelpers.CheckProb(prob);
+    }
+
 
 
     /**
@@ -38,7 +41,13 @@ public class TransformerItemInput : ITransformerItem
             throw new Exception("The item count could not be parsed as an integer.");
         }
 
-        return new TransformerItemInput(new ItemValue(itemId), itemCount);
+        double itemProb;
+        if (!double.TryParse(inputData.Split(',')[2], out itemProb))
+        {
+            throw new Exception("The item prob could not be parsed as a double.");
+        }
+
+        return new TransformerItemInput(new ItemValue(itemId), itemCount, itemProb);
     }
 
 
@@ -48,7 +57,7 @@ public class TransformerItemInput : ITransformerItem
 
     public string Write()
     {
-        return "#tI#" + itemStack.itemValue.type.ToString() + "," + itemStack.count.ToString() + "#_tI#";
+        return "#tI#" + itemStack.itemValue.type.ToString() + "," + itemStack.count.ToString() + "," + prob.ToString() + "#_tI#";
     }
 
 
@@ -59,7 +68,8 @@ public class TransformerItemInput : ITransformerItem
     {
         string name = ItemClass.GetForId(itemStack.itemValue.type).GetItemName();
         string count = this.itemStack.count.ToString();
+        string prob = this.prob.ToString();
 
-        return "Transformer Input: " + name + " (" + count + ")";
+        return "Transformer Input: " + name + " (" + count + ") with probability " + prob;
     }
 }

@@ -100,21 +100,47 @@ public class TransformationData
 	 *	Retrieves all inputs from the item collection.
 	 */
 	
-	public List<ItemStack> GetAllInputs()
+	public Dictionary<ItemStack, double> GetAllInputs()
 	{
-		List<ItemStack> list = new List<ItemStack>();
+        Dictionary<ItemStack, double> inputTable = new Dictionary<ItemStack, double>();
+        if (!this.HasInputs())
+        {
+            return inputTable;
+        }
+
+        foreach (TransformerItemInput transformerItemInput in this.inputsOutputs[this.inputs])
+        {
+            inputTable.Add(transformerItemInput.itemStack, transformerItemInput.prob);
+        }
+
+        return inputTable;
+    }
+
+
+    /**
+     * Returns a list of all inputs after probability calculations.
+     */
+
+    public List<ItemStack> GetAllInputsAfterProbabilityCalculation()
+    {
+        List<ItemStack> list = new List<ItemStack>();
         if (!this.HasInputs())
         {
             return list;
         }
 
-		foreach (TransformerItemInput transformerItemInput in this.inputsOutputs[this.inputs])
-		{
-			list.Add(transformerItemInput.itemStack);
-		}
+        foreach (TransformerItemInput transformerItemInput in this.inputsOutputs[this.inputs])
+        {
+            double randomDouble = RandomStatic.Next();
+            if (randomDouble <= transformerItemInput.prob)
+            {
+                list.Add(transformerItemInput.itemStack);
+            }
+        }
 
-		return list;
-	}
+        return list;
+    }
+
 	
     
     /**
@@ -183,11 +209,18 @@ public class TransformationData
             return false;
         }
 
-		List<ItemStack> inputs = this.GetAllInputs();
+        // First check we have all inputs, before probability calculation.
+		Dictionary<ItemStack, double> inputs = this.GetAllInputs();
+        List<ItemStack> inputsToTake = this.GetAllInputsAfterProbabilityCalculation();
 		int stacksToMatch = inputs.Count;
 		int matches = 0;
 
-		foreach (ItemStack input in inputs)
+        if (inputs.Count == 0)
+        {
+            return true;
+        }
+
+		foreach (KeyValuePair<ItemStack, double> entry in inputs)
 		{
 			for (int i = 0; i < itemStacks.Length; i += 1)
 			{
@@ -206,15 +239,19 @@ public class TransformationData
                     continue;
                 }
                 
-				if (itemStacks[i].itemValue.type != input.itemValue.type)
+				if (itemStacks[i].itemValue.type != entry.Key.itemValue.type)
 				{
 					continue;
 				}
 
-                if (itemStacks[i].count >= input.count)
+                if (itemStacks[i].count >= entry.Key.count)
 				{
                     matches += 1;
-                    foundSoFar.Add(new Tuple<int, ItemStack>(i, input));
+                    // If, after probability calc, we have this input, add the location.
+                    if (inputsToTake.Contains(entry.Key))
+                    {
+                        foundSoFar.Add(new Tuple<int, ItemStack>(i, entry.Key));
+                    }
 				}
 			}
 		}
@@ -411,10 +448,8 @@ public class TransformationData
 
     public static TransformationData GetTransformationDataWithHash(string hash)
     {
-        Log.Out("The data contains " + TransformationData.hashmap.Count.ToString() + " entries.");
         if (TransformationData.hashmap.ContainsKey(hash))
         {
-            Log.Out("Fonnd hash. Returning data.");
             return TransformationData.hashmap[hash];
         }
         return null;

@@ -1,1 +1,6 @@
-Key,Source,Context,Changes,English,French,German,Klingon,Spanish,Polish
+Key,File,Type,UsedInMainMenu,NoTranslate,english
+transformerTooltipNoPower,UI,Use Prompt,,,"<{0}> Open {1}\n[FF3333]WARNING: No power.[FFFFFF] Requires a power source next to it. [00FF33]Accepted power sources: {2}[FFFFFF]" 
+transformerTooltipNoHeat,UI,Use Prompt,,,"<{0}> Open {1}\n[FF3333]WARNING: No heat.[FFFFFF] Requires a heat source under it. [00FF33]Accepted heat sources: {2}[FFFFFF]" 
+transformerTooltipNoBlocksNearby,UI,Use Prompt,,,"<{0}> Open {1}\n[FF3333]WARNING: Not enough blocks nearby. [FFFFFF]Requires {2} nearby blocks to work. [00FF33]Accepted blocks / tags: {3}[FFFFFF]"
+transformerTooltipReady,UI,Use Prompt,,,"<{0}> Open {1}\n[00FF00]READY[FFFFFF]"
+transformerTooltipWorking,UI,Use Prompt,,,"<{0}> Open {1}\n[00FF00]WORKING[FFFFFF]"

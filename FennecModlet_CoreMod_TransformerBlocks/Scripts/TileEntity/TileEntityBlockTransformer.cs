@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+
 
 /**
  *  Tile entity class for block transformer. Takes input items and changes them into output items. 
@@ -14,15 +14,12 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
 
     public TileEntityBlockTransformer(Chunk _chunk) : base(_chunk)
     {
-        this.tQueue  = new TransformationQueue();
-        this.useHash = true;
-        Log.Out("Tile Entity created.");
-        foreach (KeyValuePair<string, TransformationData> entry in TransformationData.hashmap)
-        {
-            Log.Out("Hash: " + entry.Key);
-            Log.Out("Data: " + entry.Value.ToString());
-        }
-        Log.Out("All hashes read.");
+        this.tQueue             = new TransformationQueue();
+        this.useHash            = true;
+        this.hasPower           = false;
+        this.hasHeat            = false;
+        this.hasNearbyBlocks    = false;
+        this.random             = RandomStatic.Range(0, 5);
     }
 
 
@@ -32,21 +29,32 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
 
     private TileEntityBlockTransformer(TileEntityBlockTransformer _other) : base(null)
     {
-        this.lootListIndex      = _other.lootListIndex;
-        this.containerSize      = _other.containerSize;
-        this.items              = ItemStack.Clone(_other.items);
-        this.bTouched           = _other.bTouched;
-        this.worldTimeTouched   = _other.worldTimeTouched;
-        this.bPlayerBackpack    = _other.bPlayerBackpack;
-        this.bPlayerStorage     = _other.bPlayerStorage;
-        this.bUserAccessing     = _other.bUserAccessing;
-        this.collection         = _other.collection;
-        this.tQueue             = _other.tQueue;
-        this.useHash            = _other.useHash;
-        this.requiresPower      = _other.requiresPower;
-        this.requiresHeat       = _other.requiresHeat;
-        this.powerSources       = _other.powerSources;
-        this.heatSources        = _other.heatSources;
+        this.lootListIndex              = _other.lootListIndex;
+        this.containerSize              = _other.containerSize;
+        this.items                      = ItemStack.Clone(_other.items);
+        this.bTouched                   = _other.bTouched;
+        this.worldTimeTouched           = _other.worldTimeTouched;
+        this.bPlayerBackpack            = _other.bPlayerBackpack;
+        this.bPlayerStorage             = _other.bPlayerStorage;
+        this.bUserAccessing             = _other.bUserAccessing;
+        this.collection                 = _other.collection;
+        this.tQueue                     = _other.tQueue;
+        this.useHash                    = _other.useHash;
+        this.requiresPower              = _other.requiresPower;
+        this.requiresHeat               = _other.requiresHeat;
+        this.powerSources               = _other.powerSources;
+        this.heatSources                = _other.heatSources;
+        this.requiresNearbyBlocks       = _other.requiresNearbyBlocks;
+        this.nearbyBlockNames           = _other.nearbyBlockNames;
+        this.nearbyBlockTags            = _other.nearbyBlockTags;
+        this.nearbyBlockRequireAllTags  = _other.nearbyBlockRequireAllTags;
+        this.nearbyBlockRange           = _other.nearbyBlockRange;
+        this.nearbyBlocksNeeded         = _other.nearbyBlocksNeeded;
+        this.hasPower                   = false;
+        this.hasHeat                    = false;
+        this.hasNearbyBlocks            = false;
+        this.CalculateLookupCoordinates();
+        this.random = RandomStatic.Range(0, 5);
     }
 
 
@@ -66,21 +74,32 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
 
     public void CopyLootContainerDataFromOther(TileEntityBlockTransformer _other)
     {
-        this.lootListIndex      = _other.lootListIndex;
-        this.containerSize      = _other.containerSize;
-        this.items              = ItemStack.Clone(_other.items);
-        this.bTouched           = _other.bTouched;
-        this.worldTimeTouched   = _other.worldTimeTouched;
-        this.bPlayerBackpack    = _other.bPlayerBackpack;
-        this.bPlayerStorage     = _other.bPlayerStorage;
-        this.bUserAccessing     = _other.bUserAccessing;
-        this.collection         = _other.collection;
-        this.tQueue             = _other.tQueue;
-        this.useHash            = _other.useHash;
-        this.requiresPower      = _other.requiresPower;
-        this.requiresHeat       = _other.requiresHeat;
-        this.powerSources       = _other.powerSources;
-        this.heatSources        = _other.heatSources;
+        this.lootListIndex              = _other.lootListIndex;
+        this.containerSize              = _other.containerSize;
+        this.items                      = ItemStack.Clone(_other.items);
+        this.bTouched                   = _other.bTouched;
+        this.worldTimeTouched           = _other.worldTimeTouched;
+        this.bPlayerBackpack            = _other.bPlayerBackpack;
+        this.bPlayerStorage             = _other.bPlayerStorage;
+        this.bUserAccessing             = _other.bUserAccessing;
+        this.collection                 = _other.collection;
+        this.tQueue                     = _other.tQueue;
+        this.useHash                    = _other.useHash;
+        this.requiresPower              = _other.requiresPower;
+        this.requiresHeat               = _other.requiresHeat;
+        this.powerSources               = _other.powerSources;
+        this.heatSources                = _other.heatSources;
+        this.requiresNearbyBlocks       = _other.requiresNearbyBlocks;
+        this.nearbyBlockNames           = _other.nearbyBlockNames;
+        this.nearbyBlockTags            = _other.nearbyBlockTags;
+        this.nearbyBlockRequireAllTags  = _other.nearbyBlockRequireAllTags;
+        this.nearbyBlockRange           = _other.nearbyBlockRange;
+        this.nearbyBlocksNeeded         = _other.nearbyBlocksNeeded;
+        this.hasPower                   = false;
+        this.hasHeat                    = false;
+        this.hasNearbyBlocks            = false;
+        this.CalculateLookupCoordinates();
+        this.random = RandomStatic.Range(0, 5);
     }
 
 
@@ -94,7 +113,7 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
         {
             return;
         }
-
+        
         this.HandleAddingToQueue();
         this.HandleProcessingQueue();
     }
@@ -104,39 +123,41 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
      * Checks that an update can happen.
      */
 
-    private bool UpdateCanHappen(World world)
+    public bool UpdateCanHappen(World world)
     {
-        return (this.IsPowered() & this.IsHeated() & (this.tQueue.QueueDefinedAndNotEmpty() | !this.IsEmpty()));
+        return (this.IsPowered() & this.IsHeated() & this.HasNearbyBlocks() & (this.tQueue.QueueDefinedAndNotEmpty() | !this.IsEmpty()));
     }
 
 
     /**
-     * Checks if block is powered. It is required to be next to an electric wire relay.
+     * Checks if block is powered. It is required to be next to a TileEntityPowered type of block in any cardinal direction.
      */
 
-    private bool IsPowered()
+    public bool IsPowered()
     {
+        if (!this.CanTick())
+        {
+            return this.hasPower;
+        }
+
         if (!this.requiresPower)
         {
-            return true;
+            return this.hasPower = true;
+        }
+
+        if (this.poweredBlockCoords.Count == 0)
+        {
+            return this.hasPower = false;
         }
 
         World world = GameManager.Instance.World;
-        Vector3i tileEntityPos = this.ToWorldPos();
-        List<Vector3i> nearby = CoordinateHelper.GetCoOrdinatesAround(tileEntityPos, true, 1, 1, 1);
-
-        if (nearby.Count == 0)
-        {
-            return false;
-        }
-
-        Dictionary<Vector3i, TileEntity> tileEntitiesNearby = CoordinateHelper.GetTileEntitiesInCoordinates(world, nearby, TileEntityType.Powered);
+        Dictionary<Vector3i, TileEntity> tileEntitiesNearby = CoordinateHelper.GetTileEntitiesInCoordinatesWithType(world, this.poweredBlockCoords, TileEntityType.Powered);
 
         if (tileEntitiesNearby.Count == 0)
         {
-            return false;
+            return this.hasPower = false;
         }
-
+        
         foreach (KeyValuePair<Vector3i, TileEntity> entry in tileEntitiesNearby)
         {
             TileEntityPowered otherTileEntity = entry.Value as TileEntityPowered;
@@ -152,11 +173,11 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
 
                 if (otherTileEntity.IsPowered)
                 {
-                    return true;
+                    return this.hasPower = true;
                 }
             }
         }
-        return false;
+        return this.hasPower = false;
     }
 
 
@@ -164,28 +185,31 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
      * Returns true if a heat source is under the block
      */
 
-    private bool IsHeated()
+    public bool IsHeated()
     {
+        if (!this.CanTick())
+        {
+            return this.hasHeat;
+        }
+
         if (!this.requiresHeat)
         {
-            return true;
+            return this.hasHeat = true;
         }
 
         World world = GameManager.Instance.World;
-        Vector3i tileEntityPos = this.ToWorldPos();
-        Vector3i posUnderTE = CoordinateHelper.GetCoordinateBelow(tileEntityPos);
 
         // If TE is on very bottom of world this will prevent out of boundary shenanigans.
-        if (tileEntityPos == posUnderTE)
+        if (this.ToWorldPos() == this.heatedBlockCoords[0])
         {
-            return false;
+            return this.hasHeat = false;
         }
 
-        Dictionary<Vector3i, TileEntity> tileEntitiesUnderneath = CoordinateHelper.GetTileEntitiesInCoordinates(world, new List<Vector3i>() { posUnderTE }, TileEntityType.Workstation);
+        Dictionary<Vector3i, TileEntity> tileEntitiesUnderneath = CoordinateHelper.GetTileEntitiesInCoordinatesWithType(world, this.heatedBlockCoords, TileEntityType.Workstation);
 
         if (tileEntitiesUnderneath.Count == 0)
         {
-            return false;
+            return this.hasHeat = false;
         }
 
         foreach (KeyValuePair<Vector3i, TileEntity> entry in tileEntitiesUnderneath)
@@ -207,13 +231,58 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
                     {
                         if (otherTileEntity.IsActive(world))
                         {
-                            return true;
+                            return this.hasHeat = true;
                         }
                     }
                 }
             }
         }
-        return false;
+        return this.hasHeat = false;
+    }
+
+
+    /**
+     * Checks whether nearby blocks are needed.
+     */
+
+    public bool HasNearbyBlocks()
+    {
+        if (!this.CanTick())
+        {
+            return this.hasNearbyBlocks;
+        }
+
+        if (!this.requiresNearbyBlocks)
+        {
+            return this.hasNearbyBlocks = true;
+        }
+
+        World world = GameManager.Instance.World;
+
+        bool namesFound = true;
+        bool tagsFound = true;
+
+        if (this.nearbyBlockNames.Count > 0)
+        {
+            namesFound = CoordinateHelper.EnoughBlocksInCoordinatesThatAre(world, this.nearbyBlockCoords, this.nearbyBlockNames, this.nearbyBlocksNeeded);
+        }
+
+        if (this.nearbyBlockTags.Count > 0)
+        {
+            tagsFound = CoordinateHelper.EnoughBlocksInCoordinatesThatHaveTags(world, this.nearbyBlockCoords, this.nearbyBlockTags, this.nearbyBlocksNeeded, this.nearbyBlockRequireAllTags);
+        }
+
+        return this.hasNearbyBlocks = (tagsFound & namesFound);
+    }
+
+
+    /**
+     * Checks whether the game object can tick or not. Random value is also applied so that multiple tile entities won't all try and tick at once causing tons of lag.
+     */
+
+    private bool CanTick()
+    {
+        return ((GameManager.Instance.World.GetWorldTime() + (ulong)this.random) % 4 == 0);
     }
 
 
@@ -223,6 +292,7 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
 
     public void HandleAddingToQueue()
     {
+        // This could be async?
         foreach (TransformationData tData in this.collection.collection)
         {
             ulong transformationTime;
@@ -260,6 +330,7 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
             return;
         }
 
+        // This part could be async?
         List<TransformationJob> jobs = this.tQueue.GetNextTransformations();
         foreach (TransformationJob job in jobs)
         {
@@ -299,7 +370,14 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
 
     private bool StoreReadyItems(List<Tuple<int, ItemStack>> locations, out ItemStack[] previousState)
     {
-        previousState   = (ItemStack[])this.items.Clone();
+        previousState = (ItemStack[])this.items.Clone();
+
+        // If there are no inputs after probability calculation, then congrats, nothing to do, success.
+        if (locations.Count == 0)
+        {
+            return true;
+        }
+
         foreach (Tuple<int, ItemStack> entry in locations)
         {
             if (!InventoryHelper.RemoveItemsInSlot(this.items, entry.Item1, entry.Item2.count))
@@ -395,9 +473,21 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
         this.powerSources = StringHelpers.WriteStringToList(_br.ReadString());
         this.requiresHeat = _br.ReadBoolean();
         this.heatSources = StringHelpers.WriteStringToList(_br.ReadString());
+        this.requiresNearbyBlocks = _br.ReadBoolean();
+        this.nearbyBlockTags = StringHelpers.WriteStringToList(_br.ReadString());
+        this.nearbyBlockRequireAllTags = _br.ReadBoolean();
+        this.nearbyBlockNames = StringHelpers.WriteStringToList(_br.ReadString());
+        this.nearbyBlocksNeeded = _br.ReadInt32();
+        this.nearbyBlockRange = StringHelpers.WriteStringToVector3i(_br.ReadString());
+
+        // After read:
+        this.hasPower = false;
+        this.hasHeat = false;
+        this.hasNearbyBlocks = false;
+        this.CalculateLookupCoordinates();
+        this.random = RandomStatic.Range(0, 20);
     }
-
-
+    
     /**
      * Saves tile entity data to the strem.
      */
@@ -411,6 +501,12 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
         _bw.Write(StringHelpers.WriteListToString(this.powerSources));
         _bw.Write(this.requiresHeat);
         _bw.Write(StringHelpers.WriteListToString(this.heatSources));
+        _bw.Write(this.requiresNearbyBlocks);
+        _bw.Write(StringHelpers.WriteListToString(this.nearbyBlockTags));
+        _bw.Write(this.nearbyBlockRequireAllTags);
+        _bw.Write(StringHelpers.WriteListToString(this.nearbyBlockNames));
+        _bw.Write(this.nearbyBlocksNeeded);
+        _bw.Write(StringHelpers.WriteVector3iToString(this.nearbyBlockRange));
         
     }
 
@@ -493,15 +589,69 @@ public class TileEntityBlockTransformer : TileEntityLootContainer
         this.heatSources = heatSourceBlocks;
     }
 
+
+    /**
+     * Sets the nearby block properties.
+     */
+
+    public void SetRequireNearbyBlocks(bool requireNearbyBlocks, List<string> nearbyBlockNames, List<string> nearbyBlockTags, bool nearbyBlockRequireAllTags, Vector3i nearbyBlockRange, int nearbyBlocksNeeded)
+    {
+        this.requiresNearbyBlocks       = requireNearbyBlocks;
+        this.nearbyBlockNames           = nearbyBlockNames;
+        this.nearbyBlockTags            = nearbyBlockTags;
+        this.nearbyBlockRequireAllTags  = nearbyBlockRequireAllTags;
+        this.nearbyBlockRange           = nearbyBlockRange;
+        this.nearbyBlocksNeeded         = nearbyBlocksNeeded;
+    }
+
+
+    /**
+     * Calculates the lookup coordinates.
+     */
+    
+    public void CalculateLookupCoordinates()
+    {
+        this.poweredBlockCoords = new List<Vector3i>();
+        this.heatedBlockCoords = new List<Vector3i>();
+        this.nearbyBlockCoords = new List<Vector3i>();
+
+        World world = GameManager.Instance.World;
+        Vector3i tileEntityPos = this.ToWorldPos();
+
+        this.poweredBlockCoords = CoordinateHelper.GetCoOrdinatesAround(tileEntityPos, true, 1, 1, 1);
+        this.heatedBlockCoords.Add(CoordinateHelper.GetCoordinateBelow(tileEntityPos));
+        this.nearbyBlockCoords = CoordinateHelper.GetCoOrdinatesAround(tileEntityPos, this.nearbyBlockRange);
+    }
+
+
+
+    // Saved variables that are called on Write() and Read() methods.
     private bool useHash;
     private bool bDisableModifiedCheck;
     private bool requiresPower;
     private bool requiresHeat;
+    private bool requiresNearbyBlocks;
     private List<string> powerSources;
     private List<string> heatSources;
+    private List<string> nearbyBlockNames;
+    private List<string> nearbyBlockTags;
+    private bool nearbyBlockRequireAllTags;
+    private Vector3i nearbyBlockRange;
+    private int nearbyBlocksNeeded;
     private Vector2i containerSize;
     private ItemStack[] itemsArr;
     private List<Entity> entList;
     private TransformationCollection collection;
     private TransformationQueue tQueue;
+
+    // These are calculated on reading and writing to save extra work.
+    private List<Vector3i> poweredBlockCoords;
+    private List<Vector3i> heatedBlockCoords;
+    private List<Vector3i> nearbyBlockCoords;
+
+    // These store whether the block is powered, heated and has nearby blocks, to reduce amount of calls to check.
+    private bool hasPower;
+    private bool hasHeat;
+    private bool hasNearbyBlocks;
+    private int random;
 }

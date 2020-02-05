@@ -55,6 +55,8 @@ public class TransformationPropertyParser
         }
 
         this.transformationPropClass = this.blockTransformerBlock.Block.Properties.Classes[propClassTransformations];
+        this.transformationBlockProps = this.blockTransformerBlock.Block.Properties;
+
         foreach (KeyValuePair<string, object> entry in this.transformationPropClass.Values.Dict.Dict)
         {
             if (!this.PropStringFormattedCorrectly(entry.Key))
@@ -186,6 +188,11 @@ public class TransformationPropertyParser
 
     protected void CheckAllItemsExist()
     {
+        if (this.transformationIndexes.Count == 0)
+        {
+            throw new Exception("No indexes were found.");
+        }
+
         foreach (int transformationIndex in this.transformationIndexes)
         {
             int maxInputs   = this.transformMaxInputs[transformationIndex];
@@ -205,9 +212,10 @@ public class TransformationPropertyParser
                 // If there are commas, we need to split out just to get the item value.
                 string itemName = (propValue.Contains(",") ? propValue.Split(',')[0] : propValue).Trim();
                 ItemValue item = ItemClass.GetItem(itemName, false);
+                
 
                 // Add the item to the dictionary if it was defined.
-                this.InsertIfNew(this.itemCheck, item, (item.type != 0));
+                this.InsertIfNew(this.itemCheck, item, (item.type > 0));
             }
 
             for (int j = 1; j <= maxOutputs; j += 1)
@@ -226,7 +234,7 @@ public class TransformationPropertyParser
                 ItemValue item = ItemClass.GetItem(itemName, false);
 
                 // Add the item to the dictionary if it was defined.
-                this.InsertIfNew(this.itemCheck, item, (item.type != 0));
+                this.InsertIfNew(this.itemCheck, item, (item.type > 0));
             }
         }
 
@@ -234,8 +242,10 @@ public class TransformationPropertyParser
         List<string> missingItems = new List<string>();
         foreach (KeyValuePair<ItemValue, bool> entry in this.itemCheck)
         {
+            Log.Warning("Checking id " + entry.Key.GetItemId());
             if (entry.Value == false)
             {
+                Log.Warning("Not found.");
                 missingItems.Add(entry.Key.ItemClass.GetItemName());
             }
         }
@@ -244,7 +254,7 @@ public class TransformationPropertyParser
         if (!this.allItemsValid)
         {
             string missingItemsToPrint = String.Join(", ", missingItems);
-            throw new Exception("The following transformation items for " + this.blockName + " do not exist in items.xml: " + missingItems);
+            throw new Exception("The following transformation items for " + this.blockName + " do not exist in items.xml: " + missingItemsToPrint);
         }
     }
     
@@ -398,7 +408,6 @@ public class TransformationPropertyParser
         if (!itemPropData.Contains(","))
         {
             itemName    = itemPropData.Trim();
-            itemCount   = this.defaultItemCount;
         }
         else
         {
@@ -410,18 +419,16 @@ public class TransformationPropertyParser
                 itemCount = this.defaultItemCount;
             }
 
-            if (type == TransformationStringType.OUTPUT)
+            itemProb = this.defaultItemProb;
+            if (propData.Length > 2)
             {
-                itemProb = this.defaultItemProb;
-                if (propData.GetLength(0) > 2)
+                if (!double.TryParse(propData[2].Trim(), out itemProb))
                 {
-                    if (!double.TryParse(propData[2].Trim(), out itemProb))
-                    {
-                        Log.Warning("Could not parse " + propData[2] + " as a probability double.");
-                        itemProb = this.defaultItemProb;
-                    }
+                    Log.Warning("Could not parse " + propData[2] + " as a probability double.");
+                    itemProb = this.defaultItemProb;
                 }
             }
+          
         }
         
         return this.GetITransformerItemForType(type, itemName, itemCount, itemProb);
@@ -437,7 +444,7 @@ public class TransformationPropertyParser
         switch (type)
         {
             case (TransformationStringType.INPUT):
-                return new TransformerItemInput(ItemClass.GetItem(itemName), itemCount);
+                return new TransformerItemInput(ItemClass.GetItem(itemName), itemCount, itemProb);
             case (TransformationStringType.OUTPUT):
                 return new TransformerItemOutput(ItemClass.GetItem(itemName), itemCount, itemProb);
             default:
@@ -480,28 +487,29 @@ public class TransformationPropertyParser
 
     protected void CheckRequiresPower()
     {
-        if (!this.blockTransformerBlock.Block.Properties.Values.ContainsKey(propRequirePower))
+        this.requirePower = false;
+        this.powerSources = new List<string>() { "electricwirerelay" };
+
+        string requirePowerValue;
+        if (!this.PropExists(propRequirePower, out requirePowerValue))
         {
-            this.requirePower = false;
-            this.powerSources = new List<string>() { "electricwirerelay" };
             return;
         }
-
-        string requirePowerValue = blockTransformerBlock.Block.Properties.Values[propRequirePower].ToString();
-        bool requirePower;
-        this.requirePower = (StringParsers.TryParseBool(requirePowerValue, out requirePower) ? requirePower : false);
-
+        
+        if (!StringParsers.TryParseBool(requirePowerValue, out this.requirePower))
+        {
+            throw new Exception("Require power could noot be parsed as a boolean value.");
+        }
+        
         this.powerSources = new List<string>();
-        if (!this.blockTransformerBlock.Block.Properties.Values.ContainsKey(propPowerSources))
+        string powerSources;
+        if (this.PropExists(propPowerSources, out powerSources))
         {
-            this.powerSources.Add("electricwirerelay");
+            this.powerSources = StringHelpers.WriteStringToList(powerSources);
+            this.CheckBlocksDefined(this.powerSources);
+            return;
         }
-        else
-        {
-            this.powerSources = StringHelpers.WriteStringToList(this.blockTransformerBlock.Block.Properties.Values[propPowerSources]);
-        }
-
-        this.CheckBlocksDefined(this.powerSources);
+        this.powerSources.Add("electricwirerelay");
     }
 
 
@@ -511,28 +519,133 @@ public class TransformationPropertyParser
 
     protected void CheckRequiresHeat()
     {
-        if (!this.blockTransformerBlock.Block.Properties.Values.ContainsKey(propRequireHeat))
+        this.requireHeat = false;
+        this.heatSources = new List<string>() { "campfire" };
+
+        string requireHeatValue;
+        if (!this.PropExists(propRequireHeat, out requireHeatValue))
         {
-            this.requireHeat = false;
-            this.heatSources = new List<string>() { "campfire" };
             return;
         }
 
-        string requireHeatValue = blockTransformerBlock.Block.Properties.Values[propRequireHeat].ToString();
-        bool requireHeat;
-        this.requireHeat = (StringParsers.TryParseBool(requireHeatValue, out requireHeat) ? requireHeat : false);
+        if (!StringParsers.TryParseBool(requireHeatValue, out this.requireHeat))
+        {
+            throw new Exception("Could not parse require heat parameter as a boolean.");
+        }
 
         this.heatSources = new List<string>();
-        if (!this.blockTransformerBlock.Block.Properties.Values.ContainsKey(propHeatSources))
+        string heatSources;
+        if (this.PropExists(propHeatSources, out heatSources))
         {
-            this.heatSources.Add("canpfire");
+            this.heatSources = StringHelpers.WriteStringToList(heatSources);
+            this.CheckBlocksDefined(this.heatSources);
         }
-        else
+        this.heatSources.Add("campfire");
+    }
+
+
+    /**
+     * Checks whether nearby blocks are required and parses the nearby block sources.
+     */
+
+    protected void CheckRequireBlocksNearby()
+    {
+        this.requireNearbyBlocks = false;
+        this.nearbyBlockRange = new Vector3i(1, 1, 1);
+        this.nearbyBlockCount = 0;
+        this.nearbyBlockNames = new List<string>();
+        this.nearbyBlockTags = new List<string>();
+        this.requireAllTags = false;
+
+        // Checks whether we need nearby blocks or not. If not, just exit out as we no longer need to specify additional data.
+        string requireNearbyBlocks;
+        if (!this.PropExists(propRequireNearbyBlocks, out requireNearbyBlocks))
         {
-            this.heatSources = StringHelpers.WriteStringToList(this.blockTransformerBlock.Block.Properties.Values[propHeatSources]);
+            return;
+        }
+        
+        if (!StringParsers.TryParseBool(requireNearbyBlocks, out this.requireNearbyBlocks))
+        {
+            throw new Exception("Require nearby blocks property needs to be true or false.");
         }
 
-        this.CheckBlocksDefined(this.heatSources);
+        // Check whether we have a range specified. If so, we need to parse it.
+        string nearbyBlockRange;
+        if (this.PropExists(propNearbyBlockRange, out nearbyBlockRange))
+        {   
+            List<string> blockRanges = StringHelpers.WriteStringToList(nearbyBlockRange);
+            switch (blockRanges.Count)
+            {
+                case 1: // Clone the first value twice to make it a list of 3 values.
+                    blockRanges.Add(blockRanges[0]);
+                    blockRanges.Add(blockRanges[0]);
+                    break;
+                case 3:
+                    break;
+                default:
+                    throw new Exception("Block range must either be a single integer or a comma separated list of 3 integers.");
+            }
+
+            int rangeX, rangeY, rangeZ;
+            if (!int.TryParse(blockRanges[0], out rangeX))
+            {
+                throw new Exception("Could not parse X range as an int.");
+            }
+            if (!int.TryParse(blockRanges[1], out rangeY))
+            {
+                throw new Exception("Could not parse Y range as an int.");
+            }
+            if (!int.TryParse(blockRanges[2], out rangeZ))
+            {
+                throw new Exception("Could not parse Z range as an int.");
+            }
+
+            if (rangeX < 0 | rangeY < 0 | rangeZ < 0)
+            {
+                throw new Exception("Ranges for the block to search must be non-negative.");
+            }
+
+            this.nearbyBlockRange = new Vector3i(rangeX, rangeY, rangeZ);
+        }
+
+        // Check whether we have a count of nearby blocks.
+        string nearbyBlocks;
+        if (this.PropExists(propNearbyBlockCount, out nearbyBlocks))
+        { 
+            if (!int.TryParse(nearbyBlocks, out this.nearbyBlockCount))
+            {
+                throw new Exception("Could not parse nearby block count as integer value.");
+            }
+            if (this.nearbyBlockCount < 0)
+            {
+                throw new Exception("Nearby block count needs to be non-negative.");
+            }
+        }
+
+        // Checks whether the blocks specified exist for block names.
+        string nearbyBlockNames;
+        if (this.PropExists(propNearbyBlockNames, out nearbyBlockNames))
+        {
+            this.nearbyBlockNames = StringHelpers.WriteStringToList(nearbyBlockNames);
+            this.CheckBlocksDefined(this.nearbyBlockNames);
+        }
+
+        // Checks block tags.
+        string nearbyBlockTags;
+        if (this.PropExists(propNearbyBlockTags, out nearbyBlockTags))
+        {
+            this.nearbyBlockTags = StringHelpers.WriteStringToList(nearbyBlockTags);
+        }
+
+        // Checks require all tags.
+        string requireAllTags;
+        if (this.PropExists(propRequireAllTags, out requireAllTags))
+        {
+            if (!StringParsers.TryParseBool(requireAllTags, out this.requireAllTags))
+            {
+                throw new Exception("Could not parse require all tags parameter as a boolean value.");
+            }
+        }
     }
 
 
@@ -554,20 +667,44 @@ public class TransformationPropertyParser
     }
 
 
+    /**
+     * Checks whether a property is defined, and returns it as a string if so.
+     */
+
+    protected bool PropExists(string key, out string value)
+    {
+        value = "";
+        if (this.transformationBlockProps.Values.ContainsKey(key))
+        {
+            value = this.transformationBlockProps.Values[key].ToString();
+            return true;
+        }
+        return false;
+    }
+
+
+
     // Block input data
     protected BlockTransformer blockTransformer;
     protected string blockName;
     protected BlockValue blockTransformerBlock;
     protected DynamicProperties transformationPropClass;
+    protected DynamicProperties transformationBlockProps;
 
-    // The name of the transformations class and properties
+    // The name of the transformations class and properties to parse.
     protected string propClassTransformations           = "Transformations";
     protected string propValueTransformation            = "Transformation";
     protected string propRequirePower                   = "RequirePower";
     protected string propPowerSources                   = "PowerSources";
     protected string propRequireHeat                    = "RequireHeat";
     protected string propHeatSources                    = "HeatSources";
-
+    protected string propRequireNearbyBlocks            = "RequireNearbyBlocks";
+    protected string propNearbyBlockRange               = "NearbyBlockRange";
+    protected string propNearbyBlockCount               = "NearbyBlockCount";
+    protected string propNearbyBlockNames               = "NearbyBlockNames";
+    protected string propNearbyBlockTags                = "NearbyBlockTags";
+    protected string propRequireAllTags                 = "RequireAllTags";
+    
     // Used to detect inputs, outputs, and time strings
     protected string inputString                        = "_Input";
     protected string outputString                       = "_Output";
@@ -600,4 +737,10 @@ public class TransformationPropertyParser
     public List<string> powerSources;
     public bool requireHeat;
     public List<string> heatSources;
+    public bool requireNearbyBlocks;
+    public Vector3i nearbyBlockRange;
+    public int nearbyBlockCount;
+    public List<string> nearbyBlockNames;
+    public List<string> nearbyBlockTags;
+    public bool requireAllTags;
 }
